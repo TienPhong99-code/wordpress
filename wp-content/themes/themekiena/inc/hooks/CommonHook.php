@@ -36,203 +36,44 @@ add_action('wp_enqueue_scripts', function () {
    if (is_404()) {
       wp_enqueue_style('mona-404', MONA_THEME_PATH_URI . '/assets/css/404.css');
    }
-   wp_enqueue_style('mona-reset', MONA_THEME_PATH_URI . '/assets/css/reset.css', [], MONA_THEME_VERSION);
-   // Tailwind - CDN cho dev, build cho production
-   if (WP_DEBUG) {
-      // Team dùng CDN khi dev — load as script tag qua wp_head
-   } else {
-      // Build file khi production
-      wp_enqueue_style('mona-tailwind', MONA_THEME_PATH_URI . '/assets/css/tailwind.output.css', [], MONA_THEME_VERSION);
-   }
-   wp_enqueue_style('mona-style', MONA_THEME_PATH_URI . '/assets/css/style.css', [], MONA_THEME_VERSION);
-   wp_enqueue_style('mona-backdoor', MONA_THEME_PATH_URI . '/assets/css/backdoor.css', [], MONA_THEME_VERSION);
-   wp_enqueue_style('mona-main-style', get_stylesheet_uri());
-   wp_enqueue_style('mona-custom', MONA_THEME_PATH_URI . '/assets/css/mona-custom.css', [], filemtime(MONA_THEME_PATH . '/assets/css/mona-custom.css'));
-   wp_enqueue_style('mona-notification', MONA_THEME_PATH_URI . '/assets/css/notification.css');
+   wp_enqueue_style('mona-tailwind', MONA_THEME_PATH_URI . '/assets/css/tailwind.output.css', [], filemtime(MONA_THEME_PATH . '/assets/css/tailwind.output.css'));
+   wp_enqueue_style('mona-main-style', get_stylesheet_uri(), [], filemtime(MONA_THEME_PATH . '/style.css'));
+   wp_enqueue_style('mona-style', MONA_THEME_PATH_URI . '/assets/css/style.css', [], filemtime(MONA_THEME_PATH . '/assets/css/style.css'));
+   wp_enqueue_style('mona-notification', MONA_THEME_PATH_URI . '/assets/css/notification.css', [], filemtime(MONA_THEME_PATH . '/assets/css/notification.css'));
 }, 10);
 
 // Register js
 add_action('wp_enqueue_scripts', function () {
    wp_add_inline_script('jquery-core', 'window.$=jQuery');
-   wp_enqueue_script(
-      'mona-swiper',
-      MONA_THEME_PATH_URI . '/assets/library/swiper/swiper-bundle.min.js',
-      array('jquery'),
-      MONA_THEME_VERSION,
-      array(
-         'in_footer' => true,
-      )
-   );
 
-   wp_enqueue_script(
-      'mona-aos',
-      MONA_THEME_PATH_URI . '/assets/library/aos/aos.js',
-      array('jquery'),
-      MONA_THEME_VERSION,
-      array(
-         'in_footer' => true,
-      )
-   );
+   // Mở lại khi cần — uncomment từng dòng
+   // wp_enqueue_script('mona-swiper',           MONA_THEME_PATH_URI . '/assets/library/swiper/swiper-bundle.min.js',                    array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   // wp_enqueue_script('mona-aos',              MONA_THEME_PATH_URI . '/assets/library/aos/aos.js',                                     array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   // wp_enqueue_script('mona-select2',          MONA_THEME_PATH_URI . '/assets/library/select2/select2.min.js',                         array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   // wp_enqueue_script('mona-flatpickr',        MONA_THEME_PATH_URI . '/assets/library/flatpickr/flatpickr.js',                         array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   // wp_enqueue_script('mona-SmoothScroll',     MONA_THEME_PATH_URI . '/assets/library/smoothscroll/SmoothScroll.min.js',                array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   // wp_enqueue_script('mona-splitting',        MONA_THEME_PATH_URI . '/assets/library/splitting/splitting.min.js',                     array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   // wp_enqueue_script('mona-fancybox',         MONA_THEME_PATH_URI . '/assets/library/fancybox/fancybox.umd.js',                       array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   // wp_enqueue_script('mona-gsap',             MONA_THEME_PATH_URI . '/assets/library/gsap/gsap.min.js',                               array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   // wp_enqueue_script('mona-ScrollTrigger',    MONA_THEME_PATH_URI . '/assets/library/gsap/ScrollTrigger.min.js',                      array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   // wp_enqueue_script('mona-ukiyo',            MONA_THEME_PATH_URI . '/assets/library/ukiyo/ukiyo.min.js',                             array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   // wp_enqueue_script('mona-splide',           MONA_THEME_PATH_URI . '/assets/library/splide/splide.min.js',                           array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   // wp_enqueue_script('mona-splide-extension', MONA_THEME_PATH_URI . '/assets/library/splide/splide-extension-auto-scroll.min.js',     array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   // wp_enqueue_script('mona-vanilla',          MONA_THEME_PATH_URI . '/assets/library/vanilatilt/vanilla-tilt.min.js',                 array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   // wp_enqueue_script('mona-jquery.ripples',   MONA_THEME_PATH_URI . '/assets/library/ripples/jquery.ripples-min.js',                  array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   // wp_enqueue_script('mona-main',             MONA_THEME_PATH_URI . '/assets/scripts/main.js',                                        array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   // wp_enqueue_script('mona-backend',          MONA_THEME_PATH_URI . '/assets/scripts/mona-frontend.js',                               array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
 
-   wp_enqueue_script(
-      'mona-select2',
-      MONA_THEME_PATH_URI . '/assets/library/select2/select2.min.js',
-      array('jquery'),
-      MONA_THEME_VERSION,
-      array(
-         'in_footer' => true,
-      )
-   );
+   // $params = apply_filters('mona_ajax_params', [
+   //    'siteURL'   => get_site_url(),
+   //    'ajaxURL'   => admin_url('admin-ajax.php'),
+   //    'ajaxNonce' => wp_create_nonce('mona-ajax-security'),
+   // ]);
+   // wp_localize_script('mona-backend', 'mona_params', $params);
 
-   wp_enqueue_script(
-      'mona-flatpickr',
-      MONA_THEME_PATH_URI . '/assets/library/flatpickr/flatpickr.js',
-      array('jquery'),
-      MONA_THEME_VERSION,
-      array(
-         'in_footer' => true,
-      )
-   );
-
-   wp_enqueue_script(
-      'mona-SmoothScroll',
-      MONA_THEME_PATH_URI . '/assets/library/smoothscroll/SmoothScroll.min.js',
-      array('jquery'),
-      MONA_THEME_VERSION,
-      array(
-         'in_footer' => true,
-      )
-   );
-
-   wp_enqueue_script(
-      'mona-splitting',
-      MONA_THEME_PATH_URI . '/assets/library/splitting/splitting.min.js',
-      array('jquery'),
-      MONA_THEME_VERSION,
-      array(
-         'in_footer' => true,
-      )
-   );
-
-   wp_enqueue_script(
-      'mona-fancybox',
-      MONA_THEME_PATH_URI . '/assets/library/fancybox/fancybox.umd.js',
-      array('jquery'),
-      MONA_THEME_VERSION,
-      array(
-         'in_footer' => true,
-      )
-   );
-
-   wp_enqueue_script(
-      'mona-gsap',
-      MONA_THEME_PATH_URI . '/assets/library/gsap/gsap.min.js',
-      array('jquery'),
-      MONA_THEME_VERSION,
-      array(
-         'in_footer' => true,
-      )
-   );
-
-   wp_enqueue_script(
-      'mona-ScrollTrigger',
-      MONA_THEME_PATH_URI . '/assets/library/gsap/ScrollTrigger.min.js',
-      array('jquery'),
-      MONA_THEME_VERSION,
-      array(
-         'in_footer' => true,
-      )
-   );
-
-   wp_enqueue_script(
-      'mona-ukiyo',
-      MONA_THEME_PATH_URI . '/assets/library/ukiyo/ukiyo.min.js',
-      array('jquery'),
-      MONA_THEME_VERSION,
-      array(
-         'in_footer' => true,
-      )
-   );
-
-   wp_enqueue_script(
-      'mona-splide',
-      MONA_THEME_PATH_URI . '/assets/library/splide/splide.min.js',
-      array('jquery'),
-      MONA_THEME_VERSION,
-      array(
-         'in_footer' => true,
-      )
-   );
-
-   wp_enqueue_script(
-      'mona-splide-extension',
-      MONA_THEME_PATH_URI . '/assets/library/splide/splide-extension-auto-scroll.min.js',
-      array('jquery'),
-      MONA_THEME_VERSION,
-      array(
-         'in_footer' => true,
-      )
-   );
-
-   wp_enqueue_script(
-      'mona-vanilla',
-      MONA_THEME_PATH_URI . '/assets/library/vanilatilt/vanilla-tilt.min.js',
-      array('jquery'),
-      MONA_THEME_VERSION,
-      array(
-         'in_footer' => true,
-      )
-   );
-
-   wp_enqueue_script(
-      'mona-jquery.ripples',
-      MONA_THEME_PATH_URI . '/assets/library/ripples/jquery.ripples-min.js',
-      array('jquery'),
-      MONA_THEME_VERSION,
-      array(
-         'in_footer' => true,
-      )
-   );
-
-   wp_enqueue_script(
-      'mona-main',
-      MONA_THEME_PATH_URI . '/assets/scripts/main.js',
-      array('jquery'),
-      MONA_THEME_VERSION,
-      array(
-         'in_footer' => true,
-      )
-   );
-
-   wp_enqueue_script(
-      'mona-backend',
-      MONA_THEME_PATH_URI . '/assets/scripts/mona-frontend.js',
-      array('jquery'),
-      MONA_THEME_VERSION,
-      array(
-         'in_footer' => true,
-      )
-   );
-
-   $params = apply_filters('mona_ajax_params', [
-      'siteURL'   => get_site_url(),
-      'ajaxURL'   => admin_url('admin-ajax.php'),
-      'ajaxNonce' => wp_create_nonce('mona-ajax-security'),
-   ]);
-
-   wp_localize_script('mona-backend', 'mona_params', $params);
-
-   if (is_front_page()) {
-      wp_enqueue_script(
-         'mona-home',
-         MONA_THEME_PATH_URI . '/assets/scripts/home.js',
-         array('jquery'),
-         MONA_THEME_VERSION,
-         array(
-            'in_footer' => true,
-         )
-      );
-   }
+   // if (is_front_page()) {
+   //    wp_enqueue_script('mona-home', MONA_THEME_PATH_URI . '/assets/scripts/home.js', array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   // }
 }, 10);
 
 // Change script type to module
@@ -250,11 +91,9 @@ add_filter('script_loader_tag', function ($tag, $handle) {
    return $tag;
 }, 10, 2);
 
-// Tailwind CDN — chỉ dùng khi WP_DEBUG (môi trường dev)
+// Tailwind CDN — load cùng tailwind.output.css
 add_action('wp_head', function () {
-   if (WP_DEBUG) {
-      echo '<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>' . "\n";
-   }
+   echo '<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>' . "\n";
 }, 1);
 
 // Preconnect google font
@@ -264,6 +103,68 @@ add_action('wp_head', function () {
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <?php
 }, 1);
+
+// Dequeue plugin JS không dùng — mở lại khi cần
+add_action('wp_enqueue_scripts', function () {
+   // WooCommerce
+   wp_dequeue_script('wc-jquery-blockui');
+   wp_deregister_script('wc-jquery-blockui');
+   wp_dequeue_script('wc-add-to-cart');
+   wp_deregister_script('wc-add-to-cart');
+   wp_dequeue_script('wc-js-cookie');
+   wp_deregister_script('wc-js-cookie');
+   wp_dequeue_script('woocommerce');
+   wp_deregister_script('woocommerce');
+   wp_dequeue_script('sourcebuster-js');
+   wp_deregister_script('sourcebuster-js');
+   wp_dequeue_script('wc-order-attribution');
+   wp_deregister_script('wc-order-attribution');
+
+   // Contact Form 7
+   wp_dequeue_script('swv');
+   wp_deregister_script('swv');
+   wp_dequeue_script('contact-form-7');
+   wp_deregister_script('contact-form-7');
+
+   // DevVN Image Hotspot
+   wp_dequeue_script('powertip');
+   wp_deregister_script('powertip');
+   wp_dequeue_script('maps-points');
+   wp_deregister_script('maps-points');
+
+   // A3 Lazy Load
+   wp_dequeue_script('jquery-lazyloadxt');
+   wp_deregister_script('jquery-lazyloadxt');
+   wp_dequeue_script('jquery-lazyloadxt-srcset');
+   wp_deregister_script('jquery-lazyloadxt-srcset');
+   wp_dequeue_script('jquery-lazyloadxt-extend');
+   wp_deregister_script('jquery-lazyloadxt-extend');
+}, 99);
+
+// Dequeue plugin CSS không dùng — mở lại khi cần
+add_action('wp_enqueue_scripts', function () {
+   // Contact Form 7
+   wp_dequeue_style('contact-form-7');
+
+   // DevVN Image Hotspot
+   wp_dequeue_style('powertip');
+   wp_dequeue_style('maps-points');
+
+   // A3 Lazy Load
+   wp_dequeue_style('jquery-lazyloadxt-spinner-css');
+
+   // WooCommerce
+   wp_dequeue_style('woocommerce-layout');
+   wp_deregister_style('woocommerce-layout');
+   wp_dequeue_style('woocommerce-smallscreen');
+   wp_deregister_style('woocommerce-smallscreen');
+   wp_dequeue_style('woocommerce-general');
+   wp_deregister_style('woocommerce-general');
+   wp_dequeue_style('wc-blocks-style');
+   wp_deregister_style('wc-blocks-style');
+   wp_dequeue_style('woocommerce-inline');
+   wp_deregister_style('woocommerce-inline');
+}, 99);
 
 // Override query posts
 add_action('pre_get_posts', function (WP_Query $query) {
@@ -302,3 +203,12 @@ add_action('template_redirect', function () {
 
    $mona_current_permalink = mona_get_current_permalink();
 });
+
+// Tắt WordPress Emoji JS
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_print_styles', 'print_emoji_styles');
+remove_action('admin_print_scripts', 'print_emoji_detection_script');
+remove_action('admin_print_styles', 'print_emoji_styles');
+remove_filter('the_content_feed', 'wp_staticize_emoji');
+remove_filter('comment_text_rss', 'wp_staticize_emoji');
+remove_filter('wp_mail', 'wp_staticize_emoji_for_email');

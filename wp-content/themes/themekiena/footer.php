@@ -187,18 +187,6 @@ $sticky_buttons = get_field('sticky_buttons', 'option');
     </footer>
 <?php endif; ?>
 
-<div class="back-to-top backToTop">
-    <svg id="totop-btn" viewBox="0 0 100 100" height="100" width="100">
-        <circle class="progress-background" fill="#fff" stroke-width="10" stroke="#F1EAE2" r="45" cy="50" cx="50">
-        </circle>
-        <circle class="progress-bar" stroke-dashoffset="282.743" stroke-dasharray="282.743" fill="none"
-            stroke-width="10" stroke="#E8313D" r="45" cy="50" cx="50"></circle>
-    </svg>
-    <div class="triangle">
-        <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/ic-double-arrow.svg" alt="image" loading="lazy" />
-    </div>
-</div>
-
 <?php if (! empty($sticky_buttons)
     && is_array($sticky_buttons)) : ?>
     <div class="sidefix">

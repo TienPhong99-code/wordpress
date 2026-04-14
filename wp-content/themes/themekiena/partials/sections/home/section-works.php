@@ -35,7 +35,7 @@ $sample = [
                 <?php foreach ($sample as $item) : ?>
                     <div class="col col-6">
                         <div class="flex flex-col gap-4 items-center">
-                            <div class="w-full aspect-[600/389] bg-[#283377] rounded-[8px] overflow-hidden">
+                            <div class="w-full aspect-600/389 rounded-lg overflow-hidden">
                                 <img
                                     src="<?php echo esc_url($item['image']); ?>"
                                     alt="<?php echo esc_attr($item['title']); ?>"

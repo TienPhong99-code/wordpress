@@ -18,12 +18,11 @@ $section_news = get_field('section_news', $page_id) ?? null;
 
 get_header();
 
-the_title('<h1 class="hide-sitename">', '</h1>');
+// the_title('<h1 class="hide-sitename">', '</h1>');
 ?>
 <div class="custom-cursor"></div>
 
 <?php ?>
-<h1 class="text-red-500 text-4xl">Test Tailwind</h1>
 <?php ?>
 
 <?php get_template_part('partials/sections/home/section', 'works'); ?>

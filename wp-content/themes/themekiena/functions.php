@@ -17,6 +17,7 @@ define( 'MONA_THEME_PATH_URI', get_template_directory_uri() );
 define( 'MONA_THEME_INC_PATH', MONA_THEME_PATH . '/inc' );
 define( 'MONA_THEME_CONFIG_PATH', MONA_THEME_PATH . '/configs' );
 define( 'MONA_SITE_URL', get_option( 'siteurl' ) );
+define( 'MONA_SITE_TEMPLATE_URL', MONA_SITE_URL . '/template' );
 
 // Define theme page
 define( 'MONA_PAGE_HOME', get_option( 'page_on_front', true ) );

@@ -1,26 +1,27 @@
-@charset "UTF-8";
-@import url("../assets/font/SVN_Brown/stylesheet.css");
-@import url("../assets/library/fontawesome/css/all.css");
-@import url("../assets/library/fontawesome/fontawesome/fontawesome.css");
 :root {
-  --size-hd: 8rem;
-  --color-pri: #56a3f7;
-  --color-sec: #e4862c;
-  --color-tt: #333333;
-  --color-text: #1a2c50;
-  --color-txt: #1a2c50;
-  --color-black: #000;
+  /* Colors — KienA System Design */
+  --color-pri: #283377;
+  --color-sec: #ed1c24;
+  --color-text: #283377;
   --color-white: #fff;
-  --cl-border: #ddd;
-  --cl-ielts: #e31738;
-  --rs: 1.6rem;
-  --pd-sc: 10rem;
+  --color-black: #000;
+  --cl-border: #d9d9d9;
+
+  /* Layout */
+  --size-hd: 80px;
+  --pd-sc: 100px;
+  --rs: 16px;
+}
+
+@theme {
+  --color-pri: #283377;
+  --color-sec: #ed1c24;
 }
 @media (max-width: 1200px) {
   :root {
-    --pd-sc: 4rem;
-    --size-hd: 6rem;
-    --rs: 0.8rem;
+    --pd-sc: 40px;
+    --size-hd: 60px;
+    --rs: 8px;
   }
 }
 
@@ -30,12 +31,11 @@
 }
 
 html {
-  font-size: 62.5%;
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: "Brown", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 16px;
   line-height: 1.55;
   font-weight: 300;
@@ -79,10 +79,9 @@ textarea {
 
 .container {
   width: 100%;
-  max-width: 123rem;
-  height: 100%;
+  max-width: 1230px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 15px;
 }
 
 .no-scroll {
@@ -111,17 +110,17 @@ form .wpcf7-not-valid-tip::before {
   position: absolute;
   width: 0;
   height: 0;
-  border-left: 0.5rem solid transparent;
-  border-right: 0.5rem solid transparent;
-  border-bottom: 0.5rem solid #bb0000;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #bb0000;
   bottom: 100%;
-  right: 1.6rem;
+  right: 16px;
 }
 
 form .wpcf7-not-valid-tip {
-  font-size: 1rem !important;
-  padding: 0.6rem;
-  border-radius: 0.4rem;
+  font-size: 10px !important;
+  padding: 6px;
+  border-radius: 4px;
   background-color: #bb0000;
   color: #fff;
   width: -webkit-fit-content;
@@ -129,28 +128,28 @@ form .wpcf7-not-valid-tip {
   width: fit-content;
   position: absolute;
   bottom: -35px;
-  right: 1.6rem;
+  right: 16px;
   z-index: 10;
   font-weight: 600;
 }
 
 .wpcf7 form .wpcf7-response-output {
-  padding: 0.2rem 0.4rem;
-  font-size: 1.4rem;
+  padding: 2px 4px;
+  font-size: 14px;
   text-align: center;
   background: #fff;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   margin: 0 auto;
-  margin-top: 1.2rem;
+  margin-top: 12px;
 }
 
 .wpcf7 form.sent .wpcf7-response-output {
   color: #46b450;
-  font-size: 1.6rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 0.8rem;
+  font-size: 16px;
+  padding: 4px 8px;
+  border-radius: 8px;
 }
 
 .wpcf7 form.invalid .wpcf7-response-output {
@@ -158,8 +157,8 @@ form .wpcf7-not-valid-tip {
 }
 
 .row {
-  --cg: 2.4rem;
-  --rg: 2.4rem;
+  --cg: 24px;
+  --rg: 24px;
   display: -moz-flex;
   display: -ms-flex;
   display: -o-flex;
@@ -172,20 +171,20 @@ form .wpcf7-not-valid-tip {
 }
 @media screen and (max-width: 1200px) {
   .row {
-    --cg: 1.2rem;
-    --rg: 1.2rem;
+    --cg: 12px;
+    --rg: 12px;
   }
 }
 
 .rows {
-  --cg: 2.4rem;
-  --rg: 2.4rem;
+  --cg: 24px;
+  --rg: 24px;
   margin: 0 calc(var(--cg) * -0.5);
 }
 @media screen and (max-width: 1200px) {
   .rows {
-    --cg: 1.2rem;
-    --rg: 1.2rem;
+    --cg: 12px;
+    --rg: 12px;
   }
 }
 
@@ -272,7 +271,7 @@ form .wpcf7-not-valid-tip {
 }
 .mona-content p {
   margin-top: 0.4em;
-  font-size: 1.4rem;
+  font-size: 14px;
 }
 .mona-content ul,
 .mona-content ol {
@@ -309,7 +308,7 @@ form .wpcf7-not-valid-tip {
   border-left: 10px solid #ccc;
   margin: 1em 0;
   padding: 1em;
-  quotes: "“" "”" "‘" "’";
+  quotes: "\201C" "\201D" "\2018" "\2019";
 }
 .mona-content blockquote::before {
   color: #ccc;
@@ -349,4 +348,75 @@ form .wpcf7-not-valid-tip {
 }
 .mona-content .mona-table-wrap {
   overflow: auto;
+}
+
+/* =============================================
+   TITLE MAIN — dùng chung toàn site
+   Figma: H3 / Montserrat Black 48px / uppercase
+   <h2 class="title-main">Lĩnh vực <span>HOẠT ĐỘNG</span></h2>
+============================================= */
+.title-main {
+  font-family: "Montserrat", sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 1.5;
+  color: var(--color-pri);
+  text-transform: uppercase;
+  letter-spacing: -1.92px;
+}
+
+.title-main span {
+  color: var(--color-sec);
+}
+
+/* =============================================
+   BUTTON — dùng chung toàn site
+   Figma: Montserrat Bold 16px / padding 10px 20px / radius 8px
+============================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.64px;
+  cursor: pointer;
+  transition: all 0.3s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+/* Button trên nền sáng — bg primary, text trắng */
+.btn-pri {
+  padding: 10px 20px;
+  border: 1px solid var(--color-pri);
+  border-radius: 8px;
+  background-color: var(--color-pri);
+  color: #fff;
+}
+.btn-pri:hover {
+  background-color: #fff;
+  color: var(--color-pri);
+}
+
+/* Button trên nền tối — border trắng, text trắng */
+.btn-outline-white {
+  padding: 10px 20px;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  color: #fff;
+}
+.btn-outline-white:hover {
+  background-color: #fff;
+  color: var(--color-pri);
+}
+
+/* Link button — không border, không bg */
+.btn-link {
+  color: var(--color-pri);
+}
+.btn-link:hover {
+  color: var(--color-sec);
 }
