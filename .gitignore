@@ -1,0 +1,34 @@
+# WordPress core
+wp-admin/
+wp-includes/
+wp-*.php
+index.php
+xmlrpc.php
+license.txt
+readme.html
+
+# Uploads
+wp-content/uploads/
+
+# Plugins (không track, cài qua composer hoặc thủ công)
+wp-content/plugins/
+
+# Các theme không phải của mình
+wp-content/themes/twentytwenty*/
+wp-content/themes/monatheme/
+
+# Vendor & node_modules
+wp-content/themes/themekiena/vendor/
+wp-content/themes/themekiena/node_modules/
+
+# Build output
+wp-content/themes/themekiena/assets/css/tailwind.output.css
+
+# Config thật (chứa password DB)
+wp-config.php
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+*.log
