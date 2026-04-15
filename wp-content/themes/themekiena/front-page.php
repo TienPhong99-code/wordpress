@@ -20,12 +20,15 @@ get_header();
 
 // the_title('<h1 class="hide-sitename">', '</h1>');
 ?>
-<div class="custom-cursor"></div>
 
 <?php ?>
 <?php ?>
-
+<?php get_template_part('partials/sections/home/section', 'banner'); ?>
+<?php get_template_part('partials/sections/home/section', 'abouts'); ?>
 <?php get_template_part('partials/sections/home/section', 'works'); ?>
+<?php get_template_part('partials/sections/home/section', 'project'); ?>
+<?php get_template_part('partials/sections/home/section', 'news'); ?>
+<?php get_template_part('partials/sections/home/section', 'partner'); ?>
 <?php get_template_part('partials/sections/section', 'support'); ?>
 <?php
 get_footer();

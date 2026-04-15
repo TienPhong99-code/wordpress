@@ -33,6 +33,10 @@ add_filter('admin_url', function ($url, $path, $blog_id) {
 
 // Register css
 add_action('wp_enqueue_scripts', function () {
+   // CSS thư viện — nằm trên để theme CSS đè lại
+   wp_enqueue_style('mona-swiper', MONA_THEME_PATH_URI . '/assets/library/swiper/swiper-bundle.min.css', [], MONA_THEME_VERSION);
+
+   // CSS theme
    if (is_404()) {
       wp_enqueue_style('mona-404', MONA_THEME_PATH_URI . '/assets/css/404.css');
    }
@@ -47,7 +51,8 @@ add_action('wp_enqueue_scripts', function () {
    wp_add_inline_script('jquery-core', 'window.$=jQuery');
 
    // Mở lại khi cần — uncomment từng dòng
-   // wp_enqueue_script('mona-swiper',           MONA_THEME_PATH_URI . '/assets/library/swiper/swiper-bundle.min.js',                    array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   wp_enqueue_script('mona-lenis',            MONA_THEME_PATH_URI . '/assets/library/lenis/lenis.min.js',                             array(), filemtime(MONA_THEME_PATH . '/assets/library/lenis/lenis.min.js'), array('in_footer' => true));
+   wp_enqueue_script('mona-swiper',           MONA_THEME_PATH_URI . '/assets/library/swiper/swiper-bundle.min.js',                    array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
    // wp_enqueue_script('mona-aos',              MONA_THEME_PATH_URI . '/assets/library/aos/aos.js',                                     array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
    // wp_enqueue_script('mona-select2',          MONA_THEME_PATH_URI . '/assets/library/select2/select2.min.js',                         array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
    // wp_enqueue_script('mona-flatpickr',        MONA_THEME_PATH_URI . '/assets/library/flatpickr/flatpickr.js',                         array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
@@ -71,9 +76,11 @@ add_action('wp_enqueue_scripts', function () {
    // ]);
    // wp_localize_script('mona-backend', 'mona_params', $params);
 
-   // if (is_front_page()) {
-   //    wp_enqueue_script('mona-home', MONA_THEME_PATH_URI . '/assets/scripts/home.js', array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
-   // }
+   wp_enqueue_script('mona-main', MONA_THEME_PATH_URI . '/assets/scripts/main.js', array('jquery', 'mona-swiper', 'mona-lenis'), filemtime(MONA_THEME_PATH . '/assets/scripts/main.js'), array('in_footer' => true));
+
+   if (is_front_page()) {
+      wp_enqueue_script('mona-home', MONA_THEME_PATH_URI . '/assets/scripts/home.js', array('jquery', 'mona-swiper', 'mona-main'), filemtime(MONA_THEME_PATH . '/assets/scripts/home.js'), array('in_footer' => true));
+   }
 }, 10);
 
 // Change script type to module
@@ -95,6 +102,16 @@ add_filter('script_loader_tag', function ($tag, $handle) {
 add_action('wp_head', function () {
    echo '<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>' . "\n";
 }, 1);
+
+// Tailwind @theme — khai báo inline để CDN nhận custom token (text-pri, text-sec, bg-pri...)
+add_action('wp_head', function () {
+   echo '<style type="text/tailwindcss">
+@theme {
+  --color-pri: #283377;
+  --color-sec: #ed1c24;
+}
+</style>' . "\n";
+}, 2);
 
 // Preconnect google font
 add_action('wp_head', function () {

@@ -9,7 +9,7 @@
 
   /* Layout */
   --size-hd: 80px;
-  --pd-sc: 100px;
+  --pd-sc: 80px;
   --rs: 16px;
 }
 
@@ -30,10 +30,6 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
@@ -43,32 +39,6 @@ body {
   overflow: hidden auto;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-button,
-select {
-  border: none;
-  outline: none;
-  cursor: pointer;
-  -webkit-appearance: none;
-  cursor: pointer;
-}
-
-button {
-  padding: 0;
-  background-color: transparent;
-}
-
-input,
-textarea {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
 .main {
   min-height: 68vh;
   position: relative;
@@ -76,7 +46,9 @@ textarea {
   padding-top: var(--size-hd);
   overflow: hidden;
 }
-
+.main.page-home {
+  padding-top: 0;
+}
 .container {
   width: 100%;
   max-width: 1230px;
@@ -96,11 +68,134 @@ iframe {
   vertical-align: middle;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+/* =============================================
+   HEADER + NAV OVERLAY
+   ============================================= */
+
+/* Nav overlay — ẩn mặc định */
+.hd-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease,
+    visibility 0.4s ease;
 }
 
+.hd-nav.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Menu items — animation xuất hiện */
+.hd-nav-item {
+  transform: translateY(28px);
+  opacity: 0;
+  transition:
+    transform 0.5s ease,
+    opacity 0.5s ease;
+}
+
+.hd-nav.is-open .hd-nav-item {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Stagger delay cho từng item */
+.hd-nav.is-open .hd-nav-item:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.hd-nav.is-open .hd-nav-item:nth-child(2) {
+  transition-delay: 0.12s;
+}
+.hd-nav.is-open .hd-nav-item:nth-child(3) {
+  transition-delay: 0.19s;
+}
+.hd-nav.is-open .hd-nav-item:nth-child(4) {
+  transition-delay: 0.26s;
+}
+.hd-nav.is-open .hd-nav-item:nth-child(5) {
+  transition-delay: 0.33s;
+}
+.hd-nav.is-open .hd-nav-item:nth-child(6) {
+  transition-delay: 0.4s;
+}
+.hd-nav.is-open .hd-nav-item:nth-child(7) {
+  transition-delay: 0.47s;
+}
+.hd-nav.is-open .hd-nav-item:nth-child(8) {
+  transition-delay: 0.54s;
+}
+.hd {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  height: var(--size-hd);
+  transition: all 0.3s;
+  border-bottom: 1px solid transparent;
+}
+.hd-home:not(.hd-sticky):before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 26, 26, 0.6) 0%,
+    rgba(26, 26, 26, 0) 100%
+  );
+  z-index: -1;
+  transition: all 0.3s;
+}
+.hd-logo {
+  width: 160px;
+}
+.hd.hd-sticky {
+  background-color: #fff;
+  border-color: #f0f0f0;
+}
+.hd-lang {
+  color: #bcc0d5;
+}
+.hd-lang .lang-active {
+  color: var(--color-pri);
+}
+.hd-menu {
+  color: var(--color-pri);
+  transition: all 0.3s;
+}
+.hd-home:not(.hd-sticky) .hd-lang .lang-active {
+  color: var(--color-white);
+}
+.hd-home:not(.hd-sticky) .hd-lang {
+  color: #b3b4b9;
+}
+.hd-menu:not(.hd-sticky) .hd-burger {
+  background-color: var(--color-pri);
+}
+.hd-home:not(.hd-sticky) .hd-menu img {
+  filter: brightness(0) invert(1);
+}
+.hd-home:not(.hd-sticky) .hd-menu {
+  color: #fff;
+}
+.hd-home:not(.hd-sticky) .hd-menu .hd-burger {
+  background-color: #fff;
+}
+.hd-home:not(.hd-sticky) .hd-logo {
+  filter: brightness(0) invert(1);
+}
+.section-pd {
+  padding: var(--pd-sc) 0;
+}
 .wpcf7-spinner {
   position: absolute !important;
 }
@@ -156,6 +251,78 @@ form .wpcf7-not-valid-tip {
   color: red;
 }
 
+/* =============================================
+   Section Project — custom pagination
+   ============================================= */
+.section-project .swiper-pagination {
+  position: static;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  width: auto;
+}
+
+.section-project .swiper-pagination-bullet {
+  width: 60px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.35);
+  opacity: 1;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.section-project .swiper-pagination-bullet-active {
+  background: #fff;
+  width: 80px;
+}
+
+/* =============================================
+   Custom pagination — nền sáng (bullets primary)
+   Dùng cho các section có nền trắng/sáng
+   ============================================= */
+.pagination-pri .swiper-pagination {
+  position: static;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  width: auto;
+}
+
+.pagination-pri .swiper-pagination-bullet {
+  width: 60px;
+  height: 8px;
+  border: 1px solid #cbd3dd;
+  background: transparent;
+  border-radius: unset;
+  opacity: 1;
+  margin: 0;
+  flex-shrink: 0;
+  transform: skewX(320deg);
+}
+
+.pagination-pri .swiper-pagination-bullet-active {
+  background: #ffffff;
+  border-color: #fff;
+}
+
+@media (max-width: 1200px) {
+  .pagination-pri .swiper-pagination-bullet {
+    width: 40px;
+    height: 6px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pagination-pri .swiper-pagination-bullet {
+    width: 30px;
+    height: 4px;
+  }
+  .pagination-pri .swiper-pagination {
+    gap: 4px;
+  }
+}
+
 .row {
   --cg: 24px;
   --rg: 24px;
@@ -169,7 +336,11 @@ form .wpcf7-not-valid-tip {
   flex-wrap: wrap;
   margin: 0 calc(var(--cg) * -0.5) calc(var(--rg) * -1);
 }
+
 @media screen and (max-width: 1200px) {
+  .hd-logo {
+    width: 100px;
+  }
   .row {
     --cg: 12px;
     --rg: 12px;
@@ -187,7 +358,9 @@ form .wpcf7-not-valid-tip {
     --rg: 12px;
   }
 }
-
+.rows .col {
+  margin-bottom: 0;
+}
 .col {
   width: 100%;
   padding: 0 calc(var(--cg) / 2);
@@ -369,6 +542,20 @@ form .wpcf7-not-valid-tip {
   color: var(--color-sec);
 }
 
+@media (max-width: 1200px) {
+  .title-main {
+    font-size: 36px;
+    letter-spacing: -1.44px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title-main {
+    font-size: 28px;
+    letter-spacing: -1.12px;
+  }
+}
+
 /* =============================================
    BUTTON — dùng chung toàn site
    Figma: Montserrat Bold 16px / padding 10px 20px / radius 8px
@@ -400,7 +587,20 @@ form .wpcf7-not-valid-tip {
   background-color: #fff;
   color: var(--color-pri);
 }
-
+.btn-white {
+  padding: 10px 20px;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  background-color: #fff;
+  color: var(--color-pri);
+}
+.btn-white:hover {
+  background-color: var(--color-pri);
+  color: #fff;
+}
+.btn-white:hover img {
+  filter: brightness(0) invert(100%);
+}
 /* Button trên nền tối — border trắng, text trắng */
 .btn-outline-white {
   padding: 10px 20px;
@@ -419,4 +619,28 @@ form .wpcf7-not-valid-tip {
 }
 .btn-link:hover {
   color: var(--color-sec);
+}
+
+@media (max-width: 1200px) {
+  .btn {
+    font-size: 14px;
+    gap: 6px;
+  }
+  .btn-pri,
+  .btn-white,
+  .btn-outline-white {
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .btn {
+    font-size: 13px;
+    gap: 5px;
+  }
+  .btn-pri,
+  .btn-white,
+  .btn-outline-white {
+    padding: 7px 14px;
+  }
 }
