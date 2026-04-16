@@ -1,19 +1,9 @@
 <?php
 defined('ABSPATH') || exit;
 
-// =============================================
-// SAMPLE DATA — dev tự kết nối ACF sau
-// =============================================
-$sample = [
-   'items' => [
-      ['image' => 'home/banner-img6.jpg', 'alt' => 'ALILA BAI OM RESORT 2'],
-      ['image' => 'home/banner-img1.jpg', 'alt' => 'Khu đô thị Cát Lái'],
-      ['image' => 'home/banner-img2.jpg', 'alt' => 'Khu nghỉ dưỡng Cam Ranh'],
-      ['image' => 'home/banner-img3.jpg', 'alt' => 'Khu đô thị Nam Sài Gòn (LAVILA NSG Township)'],
-      ['image' => 'home/banner-img4.jpg', 'alt' => 'Khu đô thị Tuy Hoà (Citi Ville)']
-   ],
-];
-$data = $sample;
+$items = get_field('banners') ?: [];
+
+if (empty($items)) return;
 ?>
 
 <section class="section-banner">
@@ -23,11 +13,11 @@ $data = $sample;
 
          <div class="swiper rows">
             <div class="swiper-wrapper">
-               <?php foreach ($data['items'] as $item) : ?>
+               <?php foreach ($items as $item) : ?>
                   <div class="swiper-slide col col-12">
-                     <div class="h-screen w-full relative">
-                        <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/<?php echo esc_attr($item['image']); ?>"
-                           class="block w-full h-full object-cover" alt="<?php echo esc_attr($item['alt']); ?>">
+                     <div class="h-screen w-full relative max-md:h-[60vh]">
+                        <span class="bg-[radial-gradient(50%_50%_at_50%_50%,_rgba(26,26,26,0)_70%,_rgba(26,26,26,0.4)_100%)] absolute inset-0 z-1"></span>
+                        <?php echo mona_get_image_by_id($item['image'], 'full', false, ['class' => 'block w-full h-full object-cover', 'alt' => esc_attr($item['alt'])]); ?>
                      </div>
                   </div>
                <?php endforeach; ?>
@@ -35,9 +25,27 @@ $data = $sample;
          </div>
 
          <!-- Pagination — centered bottom -->
-         <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+         <div class="absolute bottom-[9%] left-1/2 -translate-x-1/2 z-10">
             <div class="swiper-pagination"></div>
          </div>
+
+         <!-- Prev: Dự án trước -->
+         <button type="button" class="max-sm:hidden swiper-prev absolute left-8 max-xl:left-4 max-md:left-2 top-1/2 -translate-y-1/2 z-10 flex items-center gap-2 max-md:gap-1 text-[16px] max-md:text-[13px] font-bold text-white hover:text-[#cbd3dd] transition-colors">
+            <div class="w-4 h-4 max-md:w-3 max-md:h-3 shrink-0">
+               <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/icons/ic-arrow-left-white.svg"
+                  class="block w-full h-full object-contain" alt="">
+            </div>
+            <span>Dự án trước</span>
+         </button>
+
+         <!-- Next: Dự án tiếp theo -->
+         <button type="button" class="max-sm:hidden swiper-next absolute right-8 max-xl:right-4 max-md:right-2 top-1/2 -translate-y-1/2 z-10 flex items-center gap-2 max-md:gap-1 text-[16px] max-md:text-[13px] font-bold text-white hover:text-[#cbd3dd] transition-colors">
+            <span>Dự án tiếp theo</span>
+            <div class="w-4 h-4 max-md:w-3 max-md:h-3 shrink-0">
+               <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/icons/ic-arrow-right-project.svg"
+                  class="block w-full h-full object-contain" alt="">
+            </div>
+         </button>
 
       </div>
    </div>

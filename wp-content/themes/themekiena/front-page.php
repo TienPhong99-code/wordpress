@@ -23,8 +23,10 @@ get_header();
 
 <?php ?>
 <?php ?>
-<?php get_template_part('partials/sections/home/section', 'banner'); ?>
-<?php get_template_part('partials/sections/home/section', 'abouts'); ?>
+<div class="banner-abouts-group">
+   <?php get_template_part('partials/sections/home/section', 'banner'); ?>
+   <?php get_template_part('partials/sections/home/section', 'abouts'); ?>
+</div>
 <?php get_template_part('partials/sections/home/section', 'works'); ?>
 <?php get_template_part('partials/sections/home/section', 'project'); ?>
 <?php get_template_part('partials/sections/home/section', 'news'); ?>

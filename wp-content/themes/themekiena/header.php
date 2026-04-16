@@ -24,7 +24,7 @@ $menu_pc_items = ! empty($nav_locations['header-menu-pc'])
 $menu_tree = [];
 if (! empty($menu_pc_items)) {
     $menu_pc_items = wp_get_nav_menu_items($menu_pc_items->term_id, ['no_found_rows' => true,]);
-    
+
     if ($menu_pc_items) {
         foreach ($menu_pc_items as $item) {
             if (!$item->menu_item_parent) {
@@ -69,7 +69,7 @@ $header_top_settings = get_field('header_top', 'option');
 </head>
 
 <body <?php body_class($body); ?>>
- 
+
 
     <?php get_template_part('partials/components/header-main'); ?>
 

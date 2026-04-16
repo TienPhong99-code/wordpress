@@ -7,6 +7,11 @@ const lenis = new Lenis({
    smooth: true,
 });
 
+gsap.registerPlugin(ScrollTrigger);
+
+// Sync Lenis với ScrollTrigger
+lenis.on('scroll', ScrollTrigger.update);
+
 function raf(time) {
    lenis.raf(time);
    requestAnimationFrame(raf);
@@ -14,38 +19,32 @@ function raf(time) {
 requestAnimationFrame(raf);
 
 $(document).ready(function () {
-   // =============================================
-   // Header nav toggle
-   // =============================================
-   const $nav = $('#hd-nav');
+   initTitleMainAnim();
 
-   // Mở menu
-   $(document).on('click', '.js-nav-open', function () {
+   // =============================================
+   // Mobile nav drawer
+   // =============================================
+   const $nav      = $('#hd-nav');
+   const $backdrop = $('<div class="hd-nav-backdrop"></div>').appendTo('body');
+
+   function openNav() {
       $nav.addClass('is-open').attr('aria-hidden', 'false');
+      $backdrop.addClass('is-open');
       $('body').addClass('no-scroll');
-   });
-
-   // Đóng menu
-   $(document).on('click', '.js-nav-close', function () {
+   }
+   function closeNav() {
       $nav.removeClass('is-open').attr('aria-hidden', 'true');
+      $backdrop.removeClass('is-open');
       $('body').removeClass('no-scroll');
-   });
+   }
 
-   // Đóng khi click backdrop (click ngoài nav items)
-   $nav.on('click', function (e) {
-      if ($(e.target).is($nav)) {
-         $nav.removeClass('is-open').attr('aria-hidden', 'true');
-         $('body').removeClass('no-scroll');
-      }
-   });
-
-   // Đóng khi nhấn Escape
+   $(document).on('click', '.js-nav-open', openNav);
+   $(document).on('click', '.js-nav-close', closeNav);
+   $backdrop.on('click', closeNav);
    $(document).on('keydown', function (e) {
-      if (e.key === 'Escape' && $nav.hasClass('is-open')) {
-         $nav.removeClass('is-open').attr('aria-hidden', 'true');
-         $('body').removeClass('no-scroll');
-      }
+      if (e.key === 'Escape') closeNav();
    });
+
    // =============================================
    // Header sticky on scroll
    // =============================================
@@ -75,6 +74,34 @@ $(document).ready(function () {
   },
    });
 });
+
+// =============================================
+// Title main — hiệu ứng scroll cho .title-main
+// =============================================
+function initTitleMainAnim() {
+   gsap.utils.toArray('.title-main').forEach(function (title) {
+      const span = title.querySelector('span');
+
+      if (!span) return;
+
+      // Span trượt từ phải vào + highlight màu đỏ, title đứng yên
+      gsap.fromTo(span, {
+         x: 50,
+         opacity: 0,
+      }, {
+         x: 0,
+         opacity: 1,
+         color: '#ed1c24',
+         duration: 0.7,
+         ease: 'power3.out',
+         scrollTrigger: {
+            trigger: title,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+         },
+      });
+   });
+}
 
 /**
  * Khởi tạo Swiper cho tất cả element khớp với selector.

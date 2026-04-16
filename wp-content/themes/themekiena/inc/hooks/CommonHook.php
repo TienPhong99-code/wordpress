@@ -6,12 +6,11 @@ if (! defined('ABSPATH')) {
 // After setup theme
 add_action('after_setup_theme', function () {
    // regsiter menu
-   register_nav_menus(
-      [
-         'header-menu-pc' => __('Header Menu PC', 'monamedia'),
-         'header-menu-mb' => __('Header Menu Mobile', 'monamedia'),
-      ]
-   );
+   register_nav_menus([
+      'header-menu-pc'  => __('Header Menu PC', 'monamedia'),
+      'header-menu-mb'  => __('Header Menu Mobile', 'monamedia'),
+      'footer-menu'     => __('Footer Menu', 'monamedia'),
+   ]);
 });
 
 /**
@@ -59,8 +58,8 @@ add_action('wp_enqueue_scripts', function () {
    // wp_enqueue_script('mona-SmoothScroll',     MONA_THEME_PATH_URI . '/assets/library/smoothscroll/SmoothScroll.min.js',                array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
    // wp_enqueue_script('mona-splitting',        MONA_THEME_PATH_URI . '/assets/library/splitting/splitting.min.js',                     array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
    // wp_enqueue_script('mona-fancybox',         MONA_THEME_PATH_URI . '/assets/library/fancybox/fancybox.umd.js',                       array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
-   // wp_enqueue_script('mona-gsap',             MONA_THEME_PATH_URI . '/assets/library/gsap/gsap.min.js',                               array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
-   // wp_enqueue_script('mona-ScrollTrigger',    MONA_THEME_PATH_URI . '/assets/library/gsap/ScrollTrigger.min.js',                      array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   wp_enqueue_script('mona-gsap',             MONA_THEME_PATH_URI . '/assets/library/gsap/gsap.min.js',                               array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+   wp_enqueue_script('mona-ScrollTrigger',    MONA_THEME_PATH_URI . '/assets/library/gsap/ScrollTrigger.min.js',                      array('mona-gsap'), MONA_THEME_VERSION, array('in_footer' => true));
    // wp_enqueue_script('mona-ukiyo',            MONA_THEME_PATH_URI . '/assets/library/ukiyo/ukiyo.min.js',                             array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
    // wp_enqueue_script('mona-splide',           MONA_THEME_PATH_URI . '/assets/library/splide/splide.min.js',                           array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
    // wp_enqueue_script('mona-splide-extension', MONA_THEME_PATH_URI . '/assets/library/splide/splide-extension-auto-scroll.min.js',     array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
