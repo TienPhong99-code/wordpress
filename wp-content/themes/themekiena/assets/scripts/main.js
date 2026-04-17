@@ -6,11 +6,13 @@ const lenis = new Lenis({
    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
    smooth: true,
 });
+window.lenis = lenis;
 
 gsap.registerPlugin(ScrollTrigger);
 
 // Sync Lenis với ScrollTrigger
 lenis.on('scroll', ScrollTrigger.update);
+lenis.on('scroll', function () { $(window).trigger('scroll'); });
 
 function raf(time) {
    lenis.raf(time);

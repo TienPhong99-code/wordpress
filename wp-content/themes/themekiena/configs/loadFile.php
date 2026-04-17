@@ -32,6 +32,9 @@ return [
     // Ajax
     MONA_THEME_INC_PATH . '/ajax/PostAjax.php',
 
+    // CPT
+    MONA_THEME_INC_PATH . '/cpt/DuAnCPT.php',
+
     // ACF
     MONA_THEME_INC_PATH . '/acf/FooterACF.php',
     MONA_THEME_INC_PATH . '/acf/GeneralACF.php',
@@ -41,4 +44,6 @@ return [
     MONA_THEME_INC_PATH . '/acf/AboutACF.php',
     MONA_THEME_INC_PATH . '/acf/BlogACF.php',
     MONA_THEME_INC_PATH . '/acf/HomeACF.php',
+    MONA_THEME_INC_PATH . '/acf/DuAnACF.php',
+    MONA_THEME_INC_PATH . '/acf/HoatDongCongDongACF.php',
 ];

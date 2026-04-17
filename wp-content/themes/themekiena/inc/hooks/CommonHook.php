@@ -80,6 +80,16 @@ add_action('wp_enqueue_scripts', function () {
    if (is_front_page()) {
       wp_enqueue_script('mona-home', MONA_THEME_PATH_URI . '/assets/scripts/home.js', array('jquery', 'mona-swiper', 'mona-main'), filemtime(MONA_THEME_PATH . '/assets/scripts/home.js'), array('in_footer' => true));
    }
+
+   if (is_singular('post')) {
+      wp_enqueue_script('mona-single', MONA_THEME_PATH_URI . '/assets/scripts/single.js', array('jquery', 'mona-main'), filemtime(MONA_THEME_PATH . '/assets/scripts/single.js'), array('in_footer' => true));
+   }
+
+   if (is_page_template('page-template/template-hoat-dong-cong-dong.php')) {
+      wp_enqueue_style('mona-fancybox', MONA_THEME_PATH_URI . '/assets/library/fancybox/fancybox.css', [], MONA_THEME_VERSION);
+      wp_enqueue_script('mona-fancybox', MONA_THEME_PATH_URI . '/assets/library/fancybox/fancybox.umd.js', array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
+      wp_enqueue_script('mona-hoat-dong-cong-dong', MONA_THEME_PATH_URI . '/assets/scripts/hoat-dong-cong-dong.js', array('jquery', 'mona-main', 'mona-fancybox'), filemtime(MONA_THEME_PATH . '/assets/scripts/hoat-dong-cong-dong.js'), array('in_footer' => true));
+   }
 }, 10);
 
 // Change script type to module

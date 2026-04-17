@@ -1,3 +1,6 @@
+/* ── Montserrat self-hosted ── */
+@import url("../fonts/Monsterrat/stylesheet.css");
+
 :root {
   /* Colors — KienA System Design */
   --color-pri: #283377;
@@ -50,7 +53,7 @@ body {
 }
 .container {
   width: 100%;
-  max-width: 1230px;
+  max-width: 1245px;
   margin: 0 auto;
   padding: 0 15px;
 }
@@ -74,10 +77,13 @@ iframe {
     border-color 0.3s;
   border-bottom: 1px solid transparent;
 }
+.hd:not(.hd-home) {
+  background-color: #fff;
+}
 .hd.hd-sticky {
   border-color: #f0f0f0;
 }
-.hd:not(.hd-sticky):before {
+.hd-home:not(.hd-sticky):before {
   content: "";
   position: absolute;
   top: 0;
@@ -114,7 +120,7 @@ iframe {
   background-color: #fff;
   border-color: #f0f0f0;
 }
-.hd:not(.hd-sticky) .hd-logo {
+.hd-home:not(.hd-sticky) .hd-logo {
   filter: brightness(0) invert(1);
 }
 /* Mobile nav drawer */
@@ -159,7 +165,7 @@ iframe {
 .hd-lang .lang-active {
   color: var(--color-pri);
 }
-.hd:not(.hd-sticky) .hd-lang .lang-active {
+.hd-home:not(.hd-sticky) .hd-lang .lang-active {
   color: #fff;
 }
 .section-pd {
@@ -311,7 +317,10 @@ form .wpcf7-not-valid-tip {
   flex-wrap: wrap;
   margin: 0 calc(var(--cg) * -0.5) calc(var(--rg) * -1);
 }
-
+.row.small {
+  --cg: 16px;
+  --rg: 16px;
+}
 @media screen and (max-width: 1200px) {
   .hd-logo {
     width: 100px;
@@ -327,6 +336,7 @@ form .wpcf7-not-valid-tip {
   --rg: 24px;
   margin: 0 calc(var(--cg) * -0.5);
 }
+
 @media screen and (max-width: 1200px) {
   .rows {
     --cg: 12px;
@@ -613,6 +623,9 @@ form .wpcf7-not-valid-tip {
   .btn-outline-white {
     padding: 8px 16px;
   }
+  .container-second {
+    padding: 0 15px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -645,4 +658,133 @@ form .wpcf7-not-valid-tip {
 .section-banner {
   position: sticky;
   top: 0;
+}
+.project-desc .text-sec {
+  font-weight: 700;
+}
+.container-second {
+  width: calc((100vw - (100vw - 1230px) / 2));
+  max-width: 100%;
+}
+
+/* ── Pagination tin tức ── */
+.pagination-tin-tuc .page-numbers {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pagination-tin-tuc .page-numbers li {
+  list-style: none;
+}
+.pagination-tin-tuc .page-numbers li a,
+.pagination-tin-tuc .page-numbers li span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-pri);
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+  text-decoration: none;
+}
+.pagination-tin-tuc .page-numbers li a:hover {
+  background-color: var(--color-pri);
+  color: #fff;
+}
+.pagination-tin-tuc .page-numbers li span.current {
+  background-color: var(--color-pri);
+  color: #fff;
+}
+.pagination-tin-tuc .page-numbers li .prev,
+.pagination-tin-tuc .page-numbers li .next {
+  color: var(--color-pri);
+}
+
+/* ── Single post: article content ── */
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content h5 {
+  color: #121214;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+.article-content h2 {
+  font-size: 28px;
+}
+.article-content h3 {
+  font-size: 22px;
+}
+.article-content h4 {
+  font-size: 18px;
+}
+.article-content p {
+  margin-bottom: 16px;
+  color: #121214;
+}
+.article-content img {
+  border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+  margin: 16px 0;
+}
+.article-content figcaption,
+.article-content .wp-caption-text {
+  font-size: 12px;
+  font-style: italic;
+  color: #121214;
+  text-align: center;
+  margin-top: 8px;
+}
+.article-content a {
+  color: var(--color-sec);
+  text-decoration: underline;
+}
+
+/* ── Easy TOC: ẩn TOC inline trong bài, chỉ dùng ở sidebar ── */
+.article-content #ez-toc-container {
+  display: none !important;
+}
+.mona-content #ez-toc-container {
+  display: none !important;
+}
+#ez-toc-container {
+  padding: 0;
+  background: unset;
+  border: unset;
+}
+div#ez-toc-container .ez-toc-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-pri);
+  margin-bottom: 16px;
+  display: block;
+}
+div#ez-toc-container ul li,
+div#ez-toc-container ul li a {
+  font-size: 16px;
+  font-weight: 700;
+  color: #818181;
+}
+div#ez-toc-container ul li:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+/* ── Easy TOC: active item highlight ── */
+#ez-toc-container .ez-toc-list li.active > a,
+#ez-toc-container .ez-toc-list li.active a {
+  color: var(--color-pri);
+  font-weight: 700;
+  border-left: 3px solid var(--color-pri);
+  padding-left: 8px;
 }
