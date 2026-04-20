@@ -12,6 +12,7 @@ get_header();
 ?>
 
 <?php get_template_part('partials/sections/tuyen-dung/section-tuyen-dung-info'); ?>
+<?php get_template_part('partials/sections/tuyen-dung/section-tuyen-dung-list'); ?>
 
 <?php
 get_footer();

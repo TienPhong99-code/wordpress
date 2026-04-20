@@ -3,6 +3,18 @@ if (! defined('ABSPATH')) {
    die;
 }
 
+// Inject link_class + active class vào <a> của wp_nav_menu()
+add_filter('nav_menu_link_attributes', function ($atts, $item, $args, $depth) {
+   if (! empty($args->link_class)) {
+      $classes   = [$args->link_class];
+      if ($item->current || $item->current_item_ancestor) {
+         $classes[] = $args->link_class . '--active';
+      }
+      $atts['class'] = implode(' ', $classes);
+   }
+   return $atts;
+}, 10, 4);
+
 // After setup theme
 add_action('after_setup_theme', function () {
    // regsiter menu
@@ -75,7 +87,8 @@ add_action('wp_enqueue_scripts', function () {
    // ]);
    // wp_localize_script('mona-backend', 'mona_params', $params);
 
-   wp_enqueue_script('mona-main', MONA_THEME_PATH_URI . '/assets/scripts/main.js', array('jquery', 'mona-swiper', 'mona-lenis'), filemtime(MONA_THEME_PATH . '/assets/scripts/main.js'), array('in_footer' => true));
+   wp_enqueue_script('mona-modal', MONA_THEME_PATH_URI . '/assets/scripts/modules/common/modal.js', array(), filemtime(MONA_THEME_PATH . '/assets/scripts/modules/common/modal.js'), array('in_footer' => true));
+   wp_enqueue_script('mona-main', MONA_THEME_PATH_URI . '/assets/scripts/main.js', array('jquery', 'mona-swiper', 'mona-lenis', 'mona-modal'), filemtime(MONA_THEME_PATH . '/assets/scripts/main.js'), array('in_footer' => true));
 
    if (is_front_page()) {
       wp_enqueue_script('mona-home', MONA_THEME_PATH_URI . '/assets/scripts/home.js', array('jquery', 'mona-swiper', 'mona-main'), filemtime(MONA_THEME_PATH . '/assets/scripts/home.js'), array('in_footer' => true));
@@ -146,11 +159,16 @@ add_action('wp_enqueue_scripts', function () {
    wp_dequeue_script('wc-order-attribution');
    wp_deregister_script('wc-order-attribution');
 
-   // Contact Form 7
-   wp_dequeue_script('swv');
-   wp_deregister_script('swv');
-   wp_dequeue_script('contact-form-7');
-   wp_deregister_script('contact-form-7');
+   // Contact Form 7 — tắt toàn site, bật lại ở trang cần
+   $need_cf7 = is_singular('tuyen_dung')
+      || is_page_template('page-template/template-tuyen-dung.php')
+      || is_page_template('page-template/template-contact.php');
+   if (! $need_cf7) {
+      wp_dequeue_script('swv');
+      wp_deregister_script('swv');
+      wp_dequeue_script('contact-form-7');
+      wp_deregister_script('contact-form-7');
+   }
 
    // DevVN Image Hotspot
    wp_dequeue_script('powertip');

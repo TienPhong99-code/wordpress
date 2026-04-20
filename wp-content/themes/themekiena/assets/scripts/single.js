@@ -1,6 +1,7 @@
 $(document).ready(function () {
     initTocScroll();
     initTocScrollspy();
+
 });
 
 function initTocScroll() {

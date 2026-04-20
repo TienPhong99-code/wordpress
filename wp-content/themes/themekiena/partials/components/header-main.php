@@ -7,27 +7,6 @@
 
 defined('ABSPATH') || exit;
 
-// =============================================
-// GET MENU từ WordPress — location: header-menu-pc
-// =============================================
-$nav_items    = [];
-$nav_locations = get_nav_menu_locations();
-
-if (! empty($nav_locations['header-menu-pc'])) {
-   $menu_items = wp_get_nav_menu_items($nav_locations['header-menu-pc']);
-
-   if ($menu_items) {
-      foreach ($menu_items as $item) {
-         if ($item->menu_item_parent != 0) continue;
-         $nav_items[] = [
-            'label'  => $item->title,
-            'url'    => $item->url,
-            'active' => in_array('current-menu-item', $item->classes),
-         ];
-      }
-   }
-}
-
 $lang_vi = home_url('/');
 $lang_en = '#';
 ?>
@@ -49,14 +28,15 @@ $lang_en = '#';
       <div class="flex items-center gap-6 max-xl:hidden">
 
          <!-- Nav items -->
-         <nav class="flex items-center gap-6">
-            <?php foreach ($nav_items as $item) : ?>
-               <a href="<?php echo esc_url($item['url']); ?>"
-                  class="hd-nav-link<?php echo $item['active'] ? ' hd-nav-link--active' : ''; ?>">
-                  <?php echo esc_html($item['label']); ?>
-               </a>
-            <?php endforeach; ?>
-         </nav>
+         <?php wp_nav_menu([
+            'theme_location' => 'header-menu-pc',
+            'container'      => 'nav',
+            'container_class' => 'flex items-center gap-6',
+            'menu_class'     => 'menu-list flex items-center gap-6',
+            'link_class'     => 'hd-nav-link',
+            'depth'          => 1,
+            'fallback_cb'    => false,
+         ]); ?>
 
          <!-- Divider -->
          <span class="block w-px h-6 bg-[#d9d9d9] shrink-0"></span>
@@ -102,14 +82,15 @@ $lang_en = '#';
    </div>
 
    <!-- Nav items -->
-   <nav class="flex flex-col px-6 py-4">
-      <?php foreach ($nav_items as $item) : ?>
-         <a href="<?php echo esc_url($item['url']); ?>"
-            class="hd-nav-item font-bold text-[16px] uppercase py-4 border-b border-[#f0f0f0] text-pri<?php echo $item['active'] ? ' text-sec' : ''; ?>">
-            <?php echo esc_html($item['label']); ?>
-         </a>
-      <?php endforeach; ?>
-   </nav>
+   <?php wp_nav_menu([
+      'theme_location' => 'header-menu-pc',
+      'container'      => 'nav',
+      'container_class' => 'flex flex-col px-6 py-4',
+      'menu_class'     => 'menu-list flex flex-col',
+      'link_class'     => 'hd-nav-item font-bold text-[16px] uppercase py-4 border-b border-[#f0f0f0] text-pri',
+      'depth'          => 1,
+      'fallback_cb'    => false,
+   ]); ?>
 
    <!-- Language switcher -->
    <div class="flex items-center gap-3 px-6 pt-2 hd-lang">

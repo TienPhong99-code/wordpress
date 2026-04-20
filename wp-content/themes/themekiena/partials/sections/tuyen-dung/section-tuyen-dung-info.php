@@ -46,7 +46,7 @@ $data = $sample;
                 <div class="row items-center">
 
                     <!-- Text: số + tiêu đề + mô tả -->
-                    <div class="col col-6 max-md:col-12">
+                    <div class="col col-6 max-md:w-full!">
                         <div class="flex flex-col gap-2 text-pri">
                             <p class="text-[120px] max-xl:text-[80px] max-md:text-[60px] font-black leading-none tracking-tight uppercase">
                                 <?php echo esc_html($item['number']); ?>

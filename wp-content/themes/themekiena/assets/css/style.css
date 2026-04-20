@@ -203,10 +203,10 @@ form .wpcf7-not-valid-tip {
   width: -moz-fit-content;
   width: fit-content;
   position: absolute;
-  bottom: -35px;
-  right: 16px;
+  top: 50%;
+  right: 0;
   z-index: 10;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .wpcf7 form .wpcf7-response-output {
@@ -219,13 +219,7 @@ form .wpcf7-not-valid-tip {
   width: fit-content;
   margin: 0 auto;
   margin-top: 12px;
-}
-
-.wpcf7 form.sent .wpcf7-response-output {
-  color: #46b450;
-  font-size: 16px;
-  padding: 4px 8px;
-  border-radius: 8px;
+  color: #1e994f;
 }
 
 .wpcf7 form.invalid .wpcf7-response-output {
@@ -569,6 +563,17 @@ form .wpcf7-not-valid-tip {
   background-color: var(--color-pri);
   color: #fff;
 }
+.btn-second {
+  padding: 10px 20px;
+  border: 1px solid var(--color-sec);
+  border-radius: 8px;
+  background-color: var(--color-sec);
+  color: #fff;
+}
+.btn-second:hover {
+  background-color: #fff;
+  color: var(--color-sec);
+}
 .btn-pri:hover {
   background-color: #fff;
   color: var(--color-pri);
@@ -614,10 +619,6 @@ form .wpcf7-not-valid-tip {
 }
 
 @media (max-width: 1200px) {
-  .btn {
-    font-size: 14px;
-    gap: 6px;
-  }
   .btn-pri,
   .btn-white,
   .btn-outline-white {
@@ -629,10 +630,6 @@ form .wpcf7-not-valid-tip {
 }
 
 @media (max-width: 768px) {
-  .btn {
-    font-size: 13px;
-    gap: 5px;
-  }
   .btn-pri,
   .btn-white,
   .btn-outline-white {
@@ -787,4 +784,317 @@ div#ez-toc-container ul li:not(:last-child) {
   font-weight: 700;
   border-left: 3px solid var(--color-pri);
   padding-left: 8px;
+}
+
+/* ══════════════════════════════════════════════════════
+   Modal overlay — generic reusable
+   ══════════════════════════════════════════════════════ */
+[data-modal] {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  background: rgba(40, 51, 119, 0.4);
+}
+[data-modal].is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+[data-modal] .modal-box {
+  transform: translateY(16px);
+  transition: transform 0.25s ease;
+}
+[data-modal].is-active .modal-box {
+  transform: translateY(0);
+}
+
+/* ── CF7 form override cho modal ứng tuyển ── */
+.cf7-ung-tuyen .wpcf7-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cf7-ung-tuyen .wpcf7-form > p {
+  margin: 0;
+}
+
+.cf7-ung-tuyen .cf7-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cf7-ung-tuyen .cf7-field-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #283377;
+  display: block;
+}
+.cf7-ung-tuyen .cf7-required {
+  color: #f04438;
+}
+
+.cf7-ung-tuyen .cf7-row-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+@media (max-width: 480px) {
+  .cf7-ung-tuyen .cf7-row-2col {
+    grid-template-columns: 1fr;
+  }
+}
+
+#cf7-vi-tri[readonly] {
+  background: #f4f5f8;
+  cursor: default;
+  color: #283377;
+  font-weight: 600;
+}
+
+.cf7-ung-tuyen .wpcf7-text,
+.cf7-ung-tuyen .wpcf7-email,
+.cf7-ung-tuyen .wpcf7-tel {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid #e7e7e9;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #283377;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+  letter-spacing: -0.04em;
+}
+.cf7-ung-tuyen .wpcf7-textarea {
+  width: 100%;
+  height: 96px;
+  padding: 12px;
+  border: 1px solid #e7e7e9;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #283377;
+  background: #fff;
+  resize: none;
+  outline: none;
+  transition: border-color 0.2s;
+  letter-spacing: -0.04em;
+}
+.cf7-ung-tuyen .wpcf7-text::placeholder,
+.cf7-ung-tuyen .wpcf7-email::placeholder,
+.cf7-ung-tuyen .wpcf7-tel::placeholder,
+.cf7-ung-tuyen .wpcf7-textarea::placeholder {
+  color: #bdbdbd;
+}
+.cf7-ung-tuyen .wpcf7-text:focus,
+.cf7-ung-tuyen .wpcf7-email:focus,
+.cf7-ung-tuyen .wpcf7-tel:focus,
+.cf7-ung-tuyen .wpcf7-textarea:focus {
+  border-color: #283377;
+}
+
+/* File upload */
+.cf7-ung-tuyen .cf7-upload-area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 116px;
+  border: 1px solid #e7e7e9;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  padding: 12px;
+  cursor: pointer;
+}
+.cf7-ung-tuyen .cf7-upload-area .wpcf7-form-control-wrap {
+  position: absolute;
+  inset: 0;
+}
+.cf7-ung-tuyen .cf7-upload-area .wpcf7-file {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+.cf7-ung-tuyen .cf7-upload-text {
+  font-size: 14px;
+  color: #818181;
+  pointer-events: none;
+  line-height: 20px;
+}
+.cf7-ung-tuyen .cf7-upload-text strong {
+  color: #283377;
+  font-weight: 600;
+}
+.cf7-ung-tuyen .cf7-upload-hint {
+  font-size: 14px;
+  color: #818181;
+  pointer-events: none;
+  line-height: 20px;
+}
+.cf7-ung-tuyen .cf7-upload-area.has-file {
+  border-color: #283377;
+  background: #f0f2fb;
+}
+.cf7-ung-tuyen .cf7-upload-area.has-file .cf7-upload-hint {
+  display: none;
+}
+.cf7-ung-tuyen .cf7-upload-area.has-file .cf7-upload-text strong {
+  color: #283377;
+  word-break: break-all;
+}
+
+/* Buttons */
+.cf7-ung-tuyen .cf7-btn-row {
+  display: flex;
+  gap: 8px;
+}
+.cf7-ung-tuyen .cf7-submit-wrap,
+.cf7-ung-tuyen .cf7-btn-row .cf7-cancel-btn {
+  flex: 1;
+  border-radius: 6px;
+}
+.cf7-ung-tuyen .cf7-submit-wrap {
+  display: flex;
+}
+.cf7-ung-tuyen .cf7-submit-wrap .wpcf7-submit {
+  width: 100%;
+  justify-content: center;
+  border-radius: 6px;
+}
+.cf7-ung-tuyen .cf7-cancel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background: transparent;
+  color: #283377;
+  font-size: 16px;
+  font-weight: 700;
+  border: 1px solid #e7e7e9;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.cf7-submit-wrap {
+  position: relative;
+}
+/* Submit loading state */
+.cf7-submit-wrap.is-loading .wpcf7-submit {
+  opacity: 0.75;
+  pointer-events: none;
+}
+.cf7-submit-wrap.is-loading::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: cf7-spin 0.65s linear infinite;
+  transform: translateY(-50%);
+}
+@keyframes cf7-spin {
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+/* Validation */
+
+.cf7-ung-tuyen .wpcf7-response-output {
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+.wpcf7-form-control-wrap {
+  display: block;
+  position: relative;
+}
+.screen-reader-response {
+  display: none;
+}
+
+.sidebar-td .item-td {
+  border: 1px solid #e7e7e9;
+}
+
+/* ============================================================
+   CF7 — Liên hệ
+   ============================================================ */
+.cf7-lien-he .wpcf7-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.cf7-lien-he .wpcf7-form > p {
+  margin: 0;
+}
+
+.cf7-lien-he .cf7-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cf7-lien-he .cf7-field-group label {
+  font-size: 14px;
+  color: var(--color-pri);
+  display: block;
+}
+
+.cf7-lien-he .wpcf7-text,
+.cf7-lien-he .wpcf7-email,
+.cf7-lien-he .wpcf7-tel {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--cl-border);
+  border-radius: 8px;
+  font-size: 16px;
+  color: var(--color-pri);
+  background: transparent;
+  outline: none;
+  transition: border-color 0.2s;
+  letter-spacing: -0.04em;
+}
+.cf7-lien-he .wpcf7-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--cl-border);
+  border-radius: 8px;
+  font-size: 16px;
+  color: var(--color-pri);
+  background: transparent;
+  resize: none;
+  outline: none;
+  transition: border-color 0.2s;
+  letter-spacing: -0.04em;
+  height: 92px;
+  overflow-y: auto;
+}
+.cf7-lien-he .wpcf7-text::placeholder,
+.cf7-lien-he .wpcf7-email::placeholder,
+.cf7-lien-he .wpcf7-tel::placeholder,
+.cf7-lien-he .wpcf7-textarea::placeholder {
+  color: #bdbdbd;
+}
+.cf7-lien-he .wpcf7-text:focus,
+.cf7-lien-he .wpcf7-email:focus,
+.cf7-lien-he .wpcf7-tel:focus,
+.cf7-lien-he .wpcf7-textarea:focus {
+  border-color: var(--color-pri);
+}
+
+.cf7-lien-he .wpcf7-submit {
+  width: 100%;
+  justify-content: center;
+  border-radius: 8px;
+}
+.hide-sitename {
+  display: none;
 }

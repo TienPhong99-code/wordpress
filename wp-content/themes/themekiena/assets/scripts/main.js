@@ -132,3 +132,33 @@ function functionSlider(selector, options = {}, pagiType = 'bullets') {
       });
    });
 }
+/**
+ * CF7 Loading State Handler
+ * Tự động thêm/xóa class is-loading cho nút submit của CF7
+ */
+(function () {
+  'use strict';
+
+  // Thêm loading khi bắt đầu submit
+  document.addEventListener('wpcf7beforesubmit', function (event) {
+    var form = event.target;
+    var submitWrap = form.querySelector('.cf7-submit-wrap');
+    if (submitWrap) {
+      submitWrap.classList.add('is-loading');
+    }
+  }, false);
+
+  // Xóa loading khi hoàn thành (bất kể thành công hay thất bại)
+  function removeLoading(event) {
+    var form = event.target;
+    var submitWrap = form.querySelector('.cf7-submit-wrap');
+    if (submitWrap) {
+      submitWrap.classList.remove('is-loading');
+    }
+  }
+
+  document.addEventListener('wpcf7submit', removeLoading, false);
+  document.addEventListener('wpcf7invalid', removeLoading, false);
+  document.addEventListener('wpcf7mailfailed', removeLoading, false);
+  document.addEventListener('wpcf7spam', removeLoading, false);
+})();
