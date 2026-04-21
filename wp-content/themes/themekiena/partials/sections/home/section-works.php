@@ -1,7 +1,7 @@
 <?php
 defined('ABSPATH') || exit;
 
-$items = get_field('works') ?: [];
+$items = get_field('works', get_option('page_on_front')) ?: [];
 
 if (empty($items)) return;
 ?>

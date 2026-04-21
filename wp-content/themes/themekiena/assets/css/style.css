@@ -529,7 +529,7 @@ form .wpcf7-not-valid-tip {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .title-main {
     font-size: 28px;
     letter-spacing: -1.12px;
@@ -1097,4 +1097,75 @@ div#ez-toc-container ul li:not(:last-child) {
 }
 .hide-sitename {
   display: none;
+}
+
+/* =============================================
+   Section About Mission
+   ============================================= */
+.sec-about-mission .mission-col-desc.is-active {
+  max-height: 400px;
+  opacity: 1;
+}
+.mission-col-desc {
+  transition:
+    max-height 0.8s ease,
+    opacity 0.8s ease;
+}
+.section-about-awards:before {
+  content: "";
+  position: absolute;
+  top: 0%;
+  left: 100%;
+  width: 5%;
+  transform: translate(-50%, 50%);
+  aspect-ratio: 9 / 60;
+  background: #ffca1b;
+  border-radius: 100rem;
+  filter: blur(8rem);
+}
+.section-about-awards:after {
+  content: "";
+  position: absolute;
+  top: 22%;
+  right: 100%;
+  width: 5%;
+  transform: translate(50%, 50%);
+  aspect-ratio: 9 / 60;
+  background: #ffca1b;
+  border-radius: 100rem;
+  filter: blur(8rem);
+}
+
+/* =============================================
+   ABOUT JOURNEY — Timeline active state
+   ============================================= */
+.journey-tl-item.is-active .journey-tl-tick {
+  background-color: var(--color-sec);
+}
+.journey-tl-item.is-active .journey-tl-year {
+  color: var(--color-sec);
+  font-weight: 700;
+}
+.journey-tl-item {
+  width: 8px;
+}
+.bg-line-sm {
+  position: absolute;
+  bottom: 0;
+  left: 0%;
+  height: 1rem;
+  width: 100%;
+  background-image: url("../images/about/journey/line-sm.svg");
+  background-repeat: repeat-x;
+  background-size: contain;
+}
+.journey-slide.active .t-titlte {
+  color: var(--color-sec);
+}
+.c-second {
+  color: var(--color-sec);
+}
+.list-disc ul {
+  list-style: disc;
+  margin-left: 1.5em;
 }

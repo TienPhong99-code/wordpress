@@ -41,10 +41,10 @@ return [
     MONA_THEME_INC_PATH . '/acf/GeneralACF.php',
     MONA_THEME_INC_PATH . '/acf/MenuACF.php',
     MONA_THEME_INC_PATH . '/acf/SidebarACF.php',
-    MONA_THEME_INC_PATH . '/acf/AboutACF.php',
     MONA_THEME_INC_PATH . '/acf/BlogACF.php',
     MONA_THEME_INC_PATH . '/acf/HomeACF.php',
     MONA_THEME_INC_PATH . '/acf/DuAnACF.php',
     MONA_THEME_INC_PATH . '/acf/HoatDongCongDongACF.php',
     MONA_THEME_INC_PATH . '/acf/TuyenDungACF.php',
+    MONA_THEME_INC_PATH . '/acf/AboutACF.php',
 ];
