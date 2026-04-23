@@ -3,7 +3,17 @@ $(document).ready(function () {
 
    initAboutsTimeline();
    initProjectParallax();
+   initPopupDuAn();
 });
+
+function initPopupDuAn() {
+   var STORAGE_KEY = 'kiena_popup_du_an_seen';
+   if (sessionStorage.getItem(STORAGE_KEY)) return;
+   sessionStorage.setItem(STORAGE_KEY, '1');
+   setTimeout(function () {
+      if (window.modalOpen) window.modalOpen('popup-du-an');
+   }, 800);
+}
 
 function initProjectParallax() {
    const section = document.querySelector('.section-project');

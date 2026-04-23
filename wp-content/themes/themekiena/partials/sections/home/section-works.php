@@ -26,7 +26,7 @@ if (empty($items)) return;
                               'loading' => 'lazy',
                            ]); ?>
                         </div>
-                        <p class="font-bold text-[28px] max-xl:text-[22px] max-md:text-[18px] text-center px-2 text-pri hover:text-sec">
+                        <p class="font-bold text-[28px] max-xl:text-[22px] text-center px-2 text-pri hover:text-sec">
                            <?php echo esc_html($item['title']); ?>
                         </p>
                      </div>

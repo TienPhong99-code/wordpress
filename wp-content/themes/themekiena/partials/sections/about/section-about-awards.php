@@ -7,7 +7,7 @@ $cards   = $acf['cards']   ?? [];
 $img     = MONA_THEME_PATH_URI . '/assets/images/';
 ?>
 
-<section class="section-about-awards section-pd relative overflow-hidden">
+<section class="section-about-awards section-pd relative overflow-hidden" id="giai-thuong">
    <span class="absolute bottom-0 right-0 w-[12%] mix-blend-screen">
       <img src="<?php echo $img . 'about/awards/dc-right2.png'; ?>" alt="Awards Banner" class="block w-full">
    </span>

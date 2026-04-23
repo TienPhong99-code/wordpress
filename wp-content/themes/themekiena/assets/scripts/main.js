@@ -10,15 +10,10 @@ window.lenis = lenis;
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Sync Lenis với ScrollTrigger
+// Sync Lenis với ScrollTrigger qua gsap.ticker (tránh double RAF)
 lenis.on('scroll', ScrollTrigger.update);
-lenis.on('scroll', function () { $(window).trigger('scroll'); });
-
-function raf(time) {
-   lenis.raf(time);
-   requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
 
 $(document).ready(function () {
    initTitleMainAnim();
@@ -162,3 +157,27 @@ function functionSlider(selector, options = {}, pagiType = 'bullets') {
   document.addEventListener('wpcf7mailfailed', removeLoading, false);
   document.addEventListener('wpcf7spam', removeLoading, false);
 })();
+  window.addEventListener("load", function () {
+    const speed = 0;
+
+    const hash = window.location.hash;
+    if ($(hash).length) scrollToID(hash, speed);
+
+    $(".clickToSection").on("click", function (e) {
+      e.preventDefault();
+      const href = $(this).find("> a").attr("href") || $(this).attr("href");
+      const id = href.slice(href.lastIndexOf("#"));
+      if ($(id).length) {
+        scrollToID(id, speed);
+      } else {
+        window.location.href = href;
+      }
+    });
+
+    function scrollToID(id, speed) {
+      const el = document.querySelector(id);
+      if (!el) return;
+      const offSet = document.querySelector('.hd')?.offsetHeight || 0;
+      window.lenis.scrollTo(el, { offset: -offSet, duration: speed / 1000 || 0 });
+    }
+  });

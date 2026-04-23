@@ -93,7 +93,17 @@ $data = [
 ];
 
 get_header();
+
+$tuyen_dung_page = get_page_by_path('tuyen-dung');
 ?>
+
+<?php get_template_part('partials/components/breadcrumb', null, [
+    'links' => [
+        ['title' => 'Trang chủ', 'url' => home_url('/'), 'is-active' => false],
+        ['title' => 'Tuyển dụng', 'url' => $tuyen_dung_page ? get_permalink($tuyen_dung_page) : home_url('/tuyen-dung'), 'is-active' => false],
+        ['title' => get_the_title(), 'url' => '', 'is-active' => true],
+    ],
+]); ?>
 
 <section class="section-tuyen-dung-chi-tiet py-(--pd-sc)">
     <div class="container">

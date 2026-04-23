@@ -68,7 +68,7 @@ $lang_en = '#';
 <div class="hd-nav" id="hd-nav" aria-hidden="true">
 
    <!-- Top bar -->
-   <div class="flex items-center justify-between px-6 py-4 border-b border-[#f0f0f0]">
+   <div class="flex items-center justify-between p-2 border-b border-[#f0f0f0]">
       <a href="<?php echo esc_url(home_url('/')); ?>" class="block hd-logo">
          <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/icons/header-logo.png"
             class="block w-full object-contain" alt="KIENA">
@@ -85,15 +85,15 @@ $lang_en = '#';
    <?php wp_nav_menu([
       'theme_location' => 'header-menu-pc',
       'container'      => 'nav',
-      'container_class' => 'flex flex-col px-6 py-4',
+      'container_class' => 'flex flex-col p-2',
       'menu_class'     => 'menu-list flex flex-col',
-      'link_class'     => 'hd-nav-item font-bold text-[16px] uppercase py-4 border-b border-[#f0f0f0] text-pri',
+      'link_class'     => 'hd-nav-item font-bold text-[14px] block uppercase py-3 border-b border-[#f0f0f0] text-pri',
       'depth'          => 1,
       'fallback_cb'    => false,
    ]); ?>
 
    <!-- Language switcher -->
-   <div class="flex items-center gap-3 px-6 pt-2 hd-lang">
+   <div class="flex items-center gap-3 px-2 pt-2 hd-lang justify-end">
       <a href="<?php echo esc_url($lang_vi); ?>" class="font-bold text-[14px] uppercase lang-active">VI</a>
       <span class="block w-px h-4 bg-[#d9d9d9]"></span>
       <a href="<?php echo esc_url($lang_en); ?>" class="font-bold text-[14px] uppercase">EN</a>

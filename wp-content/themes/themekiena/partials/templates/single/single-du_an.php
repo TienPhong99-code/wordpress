@@ -1,12 +1,14 @@
 <?php
 
 /**
- * Template Name: Danh mục dự án
+ * Template for single: Dự án chi tiết
  *
  * @author MONA.Retail / Website
  */
 
 defined('ABSPATH') || exit;
+
+$du_an_page = get_page_by_path('du-an');
 
 get_header();
 ?>
@@ -14,12 +16,9 @@ get_header();
 <?php get_template_part('partials/components/breadcrumb', null, [
     'links' => [
         ['title' => 'Trang chủ', 'url' => home_url('/'), 'is-active' => false],
+        ['title' => 'Dự án', 'url' => $du_an_page ? get_permalink($du_an_page) : home_url('/du-an'), 'is-active' => false],
         ['title' => get_the_title(), 'url' => '', 'is-active' => true],
     ],
 ]); ?>
 
-<?php get_template_part('partials/sections/danh-muc-du-an/section', 'hero'); ?>
-<?php get_template_part('partials/sections/danh-muc-du-an/section', 'categories'); ?>
-
-<?php
-get_footer();
+<?php get_footer(); ?>

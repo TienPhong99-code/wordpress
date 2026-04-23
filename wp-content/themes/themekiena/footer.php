@@ -20,6 +20,9 @@ if (!defined('ABSPATH')) {
 if (is_singular('tuyen_dung')) {
     get_template_part('partials/modals/modal-ung-tuyen');
 }
+if (is_front_page()) {
+    get_template_part('partials/sections/home/section', 'popup-du-an');
+}
 ?>
 
 <?php wp_footer(); ?>

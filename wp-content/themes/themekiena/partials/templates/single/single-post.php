@@ -33,7 +33,17 @@ $related_query = new WP_Query([
 ]);
 
 get_header();
+
+$tin_tuc_page = get_page_by_path('tin-tuc');
 ?>
+
+<?php get_template_part('partials/components/breadcrumb', null, [
+    'links' => [
+        ['title' => 'Trang chủ', 'url' => home_url('/'), 'is-active' => false],
+        ['title' => 'Tin tức', 'url' => $tin_tuc_page ? get_permalink($tin_tuc_page) : home_url('/tin-tuc'), 'is-active' => false],
+        ['title' => get_the_title(), 'url' => '', 'is-active' => true],
+    ],
+]); ?>
 
 <section class="single-tin-tuc relative py-(--pd-sc)">
     <div class="container">
@@ -50,7 +60,7 @@ get_header();
             <div class="col col-6 max-lg:w-full!">
 
                 <!-- Tiêu đề -->
-                <h1 class="text-pri text-[36px] font-bold leading-normal mb-2">
+                <h1 class="text-pri text-[36px] font-bold leading-normal mb-2 max-md:text-[24px]">
                     <?php the_title(); ?>
                 </h1>
 
@@ -117,7 +127,7 @@ get_header();
                             <?php while ($related_query->have_posts()) : $related_query->the_post(); ?>
                                 <div class="relative group flex gap-3 items-center">
                                     <!-- Thumbnail -->
-                                    <div class="relative rounded-lg overflow-hidden bg-pri shrink-0 w-37 h-24">
+                                    <div class="relative rounded-lg overflow-hidden shrink-0 w-37 h-24">
                                         <?php if (has_post_thumbnail()) : ?>
                                             <img src="<?php echo esc_url(get_the_post_thumbnail_url(null, 'thumbnail')); ?>"
                                                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="">

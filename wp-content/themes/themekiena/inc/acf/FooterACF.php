@@ -1,161 +1,90 @@
 <?php
 
-use Extended\ACF\ConditionalLogic;
 use Extended\ACF\Fields\Group;
 use Extended\ACF\Fields\Image;
-use Extended\ACF\Fields\Link;
 use Extended\ACF\Fields\Repeater;
 use Extended\ACF\Fields\Tab;
 use Extended\ACF\Fields\Text;
 use Extended\ACF\Fields\Textarea;
-use Extended\ACF\Fields\TrueFalse;
-use Extended\ACF\Fields\URL;
 use Extended\ACF\Location;
 
 defined('ABSPATH') || exit;
 
 add_action('acf/init', function () {
     register_extended_field_group([
-        'title' => 'Thiết lập footer',
-        'style' => 'default',
+        'title'    => 'Thiết lập footer',
+        'style'    => 'default',
         'position' => 'acf_after_title',
         'location' => [
             Location::where('options_page', '==', 'theme-settings'),
         ],
         'fields' => [
-            Tab::make('Tab footer trên')
+
+            Tab::make('Thông tin công ty')
                 ->placement('left'),
-            Group::make('Footer trên', 'footer_top')
+
+            Group::make('Thông tin công ty', 'footer_company')
                 ->fields([
-                    TrueFalse::make('Hiển thị', 'show')
-                        ->stylized(),
-                    Image::make('Logo')
-                        ->conditionalLogic([
-                            ConditionalLogic::where('show', '==', '1'),
-                        ])
-                        ->column(50)
-                        ->acceptedFileTypes([
-                            'png', 'jpg', 'jpeg', 'gif',
-                            'webp', 'avif', 'svg',
-                        ])
+                    Image::make('Logo', 'logo')
+                        ->helperText('Kích thước đề xuất: 230x80px')
+                        ->acceptedFileTypes(['png', 'jpg', 'jpeg', 'gif', 'webp', 'avif', 'svg'])
                         ->format('id'),
-                    URL::make('Đường dẫn logo', 'logo_url')
-                        ->conditionalLogic([
-                            ConditionalLogic::where('show', '==', '1'),
-                        ])
-                        ->column(50)
-                        ->default(home_url()),
-                    Text::make('Form shortcode')
-                        ->conditionalLogic([
-                            ConditionalLogic::where('show', '==', '1'),
-                        ]),
-                ]),
-
-            Tab::make('Tab footer chính')
-                ->placement('left'),
-            Group::make('Footer chính', 'footer_main')
-                ->fields([
-                    TrueFalse::make('Hiển thị', 'show')
-                        ->stylized(),
-                    Tab::make('Tab cột chính')
-                        ->conditionalLogic([
-                            ConditionalLogic::where('show', '==', '1'),
-                        ]),
-                    Group::make('Cột chính', 'main')
-                        ->fields([
-                            TrueFalse::make('Hiển thị', 'show')
-                                ->stylized(),
-                            Repeater::make('Thông tin liên hệ', 'contacts')
-                                ->conditionalLogic([
-                                    ConditionalLogic::where('show', '==', '1'),
-                                ])
-                                ->fields([
-                                    Image::make('Ảnh', 'image')
-                                        ->acceptedFileTypes([
-                                            'png', 'jpg', 'jpeg', 'gif',
-                                            'webp', 'avif', 'svg',
-                                        ])
-                                        ->format('id'),
-                                    Text::make('Văn bản', 'text')
-                                        ->required(),
-                                    Text::make('Đường dẫn', 'url'),
-                                ]),
-                            Repeater::make('Các liên kết ngoài', 'socials')
-                                ->conditionalLogic([
-                                    ConditionalLogic::where('show', '==', '1'),
-                                ])
-                                ->fields([
-                                    Image::make('Ảnh', 'image')
-                                        ->acceptedFileTypes([
-                                            'png', 'jpg', 'jpeg', 'gif',
-                                            'webp', 'avif', 'svg',
-                                        ])
-                                        ->format('id')
-                                        ->required(),
-                                    Text::make('Đường dẫn', 'url'),
-                                ]),
-                        ]),
-
-                    Tab::make('Tab cột phụ')
-                        ->conditionalLogic([
-                            ConditionalLogic::where('show', '==', '1'),
-                        ]),
-                    Repeater::make('Cột phụ', 'subs')
-                        ->layout('block')
-                        ->maxRows(2)
-                        ->fields([
-                            TrueFalse::make('Hiển thị', 'show')
-                                ->stylized(),
-                            Repeater::make('Các liên kết ngoài', 'socials')
-                                ->conditionalLogic([
-                                    ConditionalLogic::where('show', '==', '1'),
-                                ])
-                                ->fields([
-                                    Link::make('Liên kết', 'link')
-                                        ->required(),
-                                ]),
-                        ]),
-                ]),
-
-            Tab::make('Tab footer dưới')
-                ->placement('left'),
-            Group::make('Footer dưới', 'footer_bottom')
-                ->fields([
-                    TrueFalse::make('Hiển thị', 'show')
-                        ->stylized(),
-                    Text::make('Bản quyền', 'copyright')
-                        ->conditionalLogic([
-                            ConditionalLogic::where('show', '==', '1'),
-                        ]),
-                    Repeater::make('Các chứng chỉ', 'certificates')
-                        ->conditionalLogic([
-                            ConditionalLogic::where('show', '==', '1'),
-                        ])
-                        ->fields([
-                            Image::make('Ảnh', 'image')
-                                ->acceptedFileTypes([
-                                    'png', 'jpg', 'jpeg', 'gif',
-                                    'webp', 'avif', 'svg',
-                                ])
-                                ->format('id')
-                                ->required(),
-                            URL::make('Đường dẫn', 'url'),
-                        ]),
-                ]),
- 
-            Tab::make('Tab nút sticky')
-                ->placement('left'),
-            Repeater::make('Các nút sticky', 'sticky_buttons')
-                ->fields([
-                    Image::make('Ảnh', 'image')
-                        ->acceptedFileTypes([
-                            'png', 'jpg', 'jpeg', 'gif',
-                            'webp', 'avif', 'svg',
-                        ])
-                        ->format('id')
+                    Text::make('Tên công ty', 'name')
                         ->required(),
-                    Text::make('Đường dẫn', 'link'),
+                    Text::make('Mã số thuế', 'tax'),
+                    Text::make('Email', 'email'),
+                    Textarea::make('Địa chỉ', 'address')
+                        ->newLines('br')
+                        ->rows(3),
+                    Text::make('Hotline', 'hotline'),
                 ]),
+
+            Tab::make('Mạng xã hội')
+                ->placement('left'),
+
+            Repeater::make('Mạng xã hội', 'footer_socials')
+                ->layout('block')
+                ->collapsed('label')
+                ->fields([
+                    Image::make('Icon', 'icon')
+                        ->acceptedFileTypes(['png', 'jpg', 'jpeg', 'gif', 'webp', 'avif', 'svg'])
+                        ->format('id')
+                        ->column(33)
+                        ->required(),
+                    Text::make('Nhãn', 'label')
+                        ->column(33)
+                        ->required(),
+                    Text::make('Đường dẫn', 'url')
+                        ->column(33),
+                ]),
+
+            Tab::make('Menu điều hướng')
+                ->placement('left'),
+
+            Repeater::make('Cột menu', 'footer_nav')
+                ->layout('block')
+                ->collapsed('heading')
+                ->maxRows(6)
+                ->fields([
+                    Text::make('Tiêu đề cột', 'heading')
+                        ->required(),
+                    Repeater::make('Các liên kết', 'links')
+                        ->layout('table')
+                        ->fields([
+                            Text::make('Nhãn', 'label')
+                                ->required(),
+                            Text::make('Đường dẫn', 'path')
+                                ->helperText('VD: /gioi-thieu hoặc để trống cho trang chủ'),
+                            Text::make('Section ID', 'section_id')
+                                ->helperText('VD: about-vision (không cần #)'),
+                        ]),
+                ]),
+
+            Tab::make('Bản đồ')
+                ->placement('left'),
+
+            Text::make('Google Maps embed URL', 'footer_map_url')
+                ->helperText('Lấy link nhúng từ Google Maps → Chia sẻ → Nhúng bản đồ → copy src của iframe'),
         ],
     ]);
 }, 10);

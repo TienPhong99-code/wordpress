@@ -2,7 +2,8 @@
 defined('ABSPATH') || exit;
 
 if (! function_exists('mona_ajax_get_posts')) {
-    function mona_ajax_get_posts() {
+    function mona_ajax_get_posts()
+    {
         try {
             if (! check_ajax_referer('mona-ajax-security', 'security', false)) {
                 throw new Exception(__('Hành động không được xác thực', 'monamedia'));
@@ -79,7 +80,7 @@ if (! function_exists('mona_ajax_get_posts')) {
             } else {
                 $response['data']['empty_message'] = __('Không có bài viết nào được tìm thấy', 'monamedia');
             }
-            
+
             wp_send_json($response);
         } catch (\Throwable $th) {
             wp_send_json([
@@ -90,6 +91,49 @@ if (! function_exists('mona_ajax_get_posts')) {
                 ],
             ]);
         }
+
+        wp_die();
+    }
+}
+
+if (! function_exists('kiena_ajax_load_more_tin_tuc')) {
+    function kiena_ajax_load_more_tin_tuc()
+    {
+        $offset   = filter_input(INPUT_POST, 'offset', FILTER_VALIDATE_INT);
+        $offset   = ($offset !== false && $offset !== null && $offset >= 0) ? $offset : 6;
+        $per_page = 4;
+
+        $query = new WP_Query([
+            'post_type'      => 'post',
+            'post_status'    => 'publish',
+            'posts_per_page' => $per_page,
+            'offset'         => $offset,
+            'orderby'        => 'date',
+            'order'          => 'DESC',
+        ]);
+
+        if (! $query->have_posts()) {
+            wp_send_json(['success' => true, 'html' => '', 'has_more' => false]);
+            wp_die();
+        }
+
+        $total = (int) $query->found_posts;
+
+        ob_start();
+        while ($query->have_posts()) {
+            $query->the_post();
+            echo '<div class="col col-6 max-md:w-full! mb-6 max-xl:mb-4 max-md:mb-3">';
+            get_template_part('partials/components/card-tin-tuc', null, ['post_id' => get_the_ID()]);
+            echo '</div>';
+        }
+        $html = ob_get_clean();
+        wp_reset_postdata();
+
+        wp_send_json([
+            'success'  => true,
+            'html'     => $html,
+            'has_more' => ($offset + $per_page) < $total,
+        ]);
 
         wp_die();
     }

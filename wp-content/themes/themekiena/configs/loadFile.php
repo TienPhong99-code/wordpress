@@ -36,6 +36,9 @@ return [
     MONA_THEME_INC_PATH . '/cpt/DuAnCPT.php',
     MONA_THEME_INC_PATH . '/cpt/TuyenDungCPT.php',
 
+    // Seeders — đã chạy xong, comment lại để tránh load thừa
+    // MONA_THEME_INC_PATH . '/seeders/HoatDongSeeder.php',
+
     // ACF
     MONA_THEME_INC_PATH . '/acf/FooterACF.php',
     MONA_THEME_INC_PATH . '/acf/GeneralACF.php',

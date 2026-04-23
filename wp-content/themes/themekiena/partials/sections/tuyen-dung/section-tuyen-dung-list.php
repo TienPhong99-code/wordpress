@@ -125,7 +125,7 @@ $data = compact('title', 'title_span', 'categories', 'jobs');
                                 <option value="oldest" <?php selected($sort, 'oldest'); ?>>Cũ nhất trước</option>
                             </select>
                             <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/icons/ic-chevron-right.svg"
-                                class="w-4 h-4 absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none" alt="">
+                                class="w-4 h-4 absolute rotate-90 right-0 top-1/2 -translate-y-1/2 pointer-events-none" alt="">
                         </div>
                     </div>
                     <div class="flex items-center rounded-lg bg-white h-11 overflow-hidden w-63.5 max-sm:w-full">

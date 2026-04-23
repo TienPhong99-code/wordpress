@@ -42,17 +42,19 @@ $data = [
 
 ?>
 
-<section class="section-about-journey relative overflow-hidden " id="secJourney">
+<section class="section-about-journey relative overflow-hidden max-md:mt-8" id="secJourney">
    <span class="absolute inset-0 bg-[#f4f5f8] z-[-1]"></span>
 
    <div class="journey-pin w-full min-h-screen section-pd flex flex-col">
 
       <!-- Title -->
-      <div class="container pt-(--pd-sc) pb-10 max-lg:pb-6">
-         <h2 class="title-main text-center">
-            Hành trình
-            <span>Phát triển</span>
-         </h2>
+      <div class="container ">
+         <div class="pt-(--pd-sc) pb-10 max-lg:pb-6">
+            <h2 class="title-main text-center">
+               Hành trình
+               <span>Phát triển</span>
+            </h2>
+         </div>
       </div>
 
       <!-- Horizontal track — GSAP x-translate on lg+ -->
@@ -65,14 +67,14 @@ $data = [
                   <div class="row items-center">
 
                      <!-- Content col: ~40% -->
-                     <div class="col col-5">
+                     <div class="col col-5 max-md:w-full!">
                         <div class="flex flex-col gap-3">
-                           <p class="text-[64px] max-lg:text-[40px] font-extrabold text-pri t-titlte uppercase transition-colors duration-300 leading-none">
+                           <p class="text-[64px] max-lg:text-[32px] font-extrabold text-pri t-titlte uppercase transition-colors duration-300 leading-none">
                               <?php echo esc_html($m['year']); ?>:
                            </p>
                            <div class="flex flex-col gap-2 list-disc">
                               <?php foreach ($m['items'] as $item) : ?>
-                                 <div class="text-[28px] max-lg:text-[18px] font-bold text-pri">
+                                 <div class="text-[28px] max-lg:text-[18px]! font-bold text-pri">
                                     <?php echo wp_kses_post($item); ?>
                                  </div>
                               <?php endforeach; ?>
@@ -81,7 +83,7 @@ $data = [
                      </div>
 
                      <!-- Image col: ~60% -->
-                     <div class="col col-7">
+                     <div class="col col-7 max-md:w-full!">
                         <div class="relative">
 
                            <?php if (!empty($m['image'])) : ?>
@@ -105,7 +107,7 @@ $data = [
       </div>
 
       <!-- Timeline bar — desktop only -->
-      <span class="absolute left-0 bottom-0 w-full z-1">
+      <span class="absolute left-0 bottom-0 w-full z-1 max-md:hidden">
          <span class="bg-line-sm"></span>
          <div class="container">
             <div class="journey-timeline relative">

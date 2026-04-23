@@ -20,6 +20,26 @@
   --color-pri: #283377;
   --color-sec: #ed1c24;
 }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-pri);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-sec);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-pri) #f1f1f1;
+}
 @media (max-width: 1200px) {
   :root {
     --pd-sc: 40px;
@@ -34,10 +54,10 @@
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat";
   font-size: 16px;
   line-height: 1.55;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--color-text);
   overflow: hidden auto;
 }
@@ -402,6 +422,7 @@ form .wpcf7-not-valid-tip {
   line-height: 1.3;
   margin-bottom: 0.5em;
   margin-top: 0.6em;
+  font-weight: 700;
 }
 .mona-content h1 {
   font-size: 1.7em;
@@ -423,7 +444,6 @@ form .wpcf7-not-valid-tip {
 }
 .mona-content p {
   margin-top: 0.4em;
-  font-size: 14px;
 }
 .mona-content ul,
 .mona-content ol {
@@ -628,14 +648,6 @@ form .wpcf7-not-valid-tip {
     padding: 0 15px;
   }
 }
-
-@media (max-width: 768px) {
-  .btn-pri,
-  .btn-white,
-  .btn-outline-white {
-    padding: 7px 14px;
-  }
-}
 .bg-linear {
   background: linear-gradient(
     360deg,
@@ -648,6 +660,17 @@ form .wpcf7-not-valid-tip {
   width: 100%;
   height: 25%;
 }
+@media (max-width: 768px) {
+  .btn-pri,
+  .btn-white,
+  .btn-outline-white {
+    padding: 7px 14px;
+  }
+  .bg-linear {
+    height: 70%;
+  }
+}
+
 .svg-title-about {
   display: block;
   width: 100%;
@@ -705,49 +728,6 @@ form .wpcf7-not-valid-tip {
   color: var(--color-pri);
 }
 
-/* ── Single post: article content ── */
-.article-content h2,
-.article-content h3,
-.article-content h4,
-.article-content h5 {
-  color: #121214;
-  font-weight: 700;
-  line-height: 1.5;
-  margin-top: 32px;
-  margin-bottom: 12px;
-}
-.article-content h2 {
-  font-size: 28px;
-}
-.article-content h3 {
-  font-size: 22px;
-}
-.article-content h4 {
-  font-size: 18px;
-}
-.article-content p {
-  margin-bottom: 16px;
-  color: #121214;
-}
-.article-content img {
-  border-radius: 8px;
-  max-width: 100%;
-  height: auto;
-  margin: 16px 0;
-}
-.article-content figcaption,
-.article-content .wp-caption-text {
-  font-size: 12px;
-  font-style: italic;
-  color: #121214;
-  text-align: center;
-  margin-top: 8px;
-}
-.article-content a {
-  color: var(--color-sec);
-  text-decoration: underline;
-}
-
 /* ── Easy TOC: ẩn TOC inline trong bài, chỉ dùng ở sidebar ── */
 .article-content #ez-toc-container {
   display: none !important;
@@ -760,6 +740,12 @@ form .wpcf7-not-valid-tip {
   background: unset;
   border: unset;
 }
+#ez-toc-container a {
+  text-decoration: unset !important;
+}
+#ez-toc-container a:hover {
+  color: var(--color-pri);
+}
 div#ez-toc-container .ez-toc-title {
   font-size: 20px;
   font-weight: 700;
@@ -769,23 +755,18 @@ div#ez-toc-container .ez-toc-title {
 }
 div#ez-toc-container ul li,
 div#ez-toc-container ul li a {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   color: #818181;
 }
 div#ez-toc-container ul li:not(:last-child) {
   margin-bottom: 8px;
 }
-
-/* ── Easy TOC: active item highlight ── */
-#ez-toc-container .ez-toc-list li.active > a,
-#ez-toc-container .ez-toc-list li.active a {
-  color: var(--color-pri);
-  font-weight: 700;
-  border-left: 3px solid var(--color-pri);
-  padding-left: 8px;
+#ez-toc-container ul ul,
+.ez-toc div.ez-toc-widget-container ul ul {
+  margin-left: 0.8em;
+  margin-top: 0.4em;
 }
-
 /* ══════════════════════════════════════════════════════
    Modal overlay — generic reusable
    ══════════════════════════════════════════════════════ */
@@ -805,6 +786,19 @@ div#ez-toc-container ul li:not(:last-child) {
 }
 [data-modal].is-active .modal-box {
   transform: translateY(0);
+}
+
+/* ── Popup dự án home ── */
+[data-modal="popup-du-an"] .modal-box {
+  transform: scale(0.96) translateY(12px);
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  opacity: 0;
+}
+[data-modal="popup-du-an"].is-active .modal-box {
+  transform: scale(1) translateY(0);
+  opacity: 1;
 }
 
 /* ── CF7 form override cho modal ứng tuyển ── */
@@ -1168,4 +1162,104 @@ div#ez-toc-container ul li:not(:last-child) {
 .list-disc ul {
   list-style: disc;
   margin-left: 1.5em;
+}
+
+@keyframes spin8932 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#circle8932 {
+  transform-origin: 50% 50%;
+  stroke: url(#RadialGradient8932);
+  fill: none;
+  animation: spin8932 0.5s infinite linear;
+}
+.tts-btn:hover {
+  background: var(--color-pri);
+  cursor: pointer;
+}
+.tts-btn:hover svg {
+  filter: brightness(0) invert(1);
+}
+
+/* ── section-hoat-dong Masonry ── */
+.hoat-dong-grid {
+  margin: 0 -8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.hoat-dong-grid.is-ready {
+  opacity: 1;
+}
+.hoat-dong-grid-sizer,
+.hoat-dong-grid-item.is-small {
+  width: 33.3333%;
+}
+.hoat-dong-grid-item.is-big {
+  width: 66.6667%;
+}
+.hoat-dong-grid-item {
+  padding: 0 8px 16px;
+  box-sizing: border-box;
+}
+@media (max-width: 1024px) {
+  .hoat-dong-grid-sizer,
+  .hoat-dong-grid-item.is-small {
+    width: 50%;
+  }
+  .hoat-dong-grid-item.is-big {
+    width: 100%;
+  }
+}
+@media (max-width: 767px) {
+  .hoat-dong-grid-sizer,
+  .hoat-dong-grid-item.is-small,
+  .hoat-dong-grid-item.is-big {
+    width: 100%;
+  }
+  .hoat-dong-grid-item {
+    padding: 0 0 12px;
+  }
+  .hoat-dong-grid {
+    margin: 0;
+  }
+}
+
+/* ── Breadcrumb ── */
+.breadcrumb {
+  padding: 12px 0;
+}
+.breadcrumb-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: var(--color-pri);
+}
+.breadcrumb-item:not(:last-child)::after {
+  content: "";
+  margin-left: 4px;
+  width: 18px;
+  height: 18px;
+  background-image: url("../images/icons/ic-chevron-right2.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.breadcrumb-item a {
+  color: var(--color-pri);
+  transition: color 0.2s;
+}
+
+.breadcrumb-item.is-current span {
+  font-weight: 700;
 }

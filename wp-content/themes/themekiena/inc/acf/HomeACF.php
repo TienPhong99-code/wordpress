@@ -5,6 +5,7 @@ use Extended\ACF\Fields\Link;
 use Extended\ACF\Fields\Repeater;
 use Extended\ACF\Fields\Tab;
 use Extended\ACF\Fields\Text;
+use Extended\ACF\Fields\TrueFalse;
 use Extended\ACF\Location;
 
 defined('ABSPATH') || exit;
@@ -79,6 +80,21 @@ add_action('acf/init', function () {
                         ->required(),
                     Link::make('Link chi tiết', 'link'),
                 ]),
+
+            Tab::make('Popup dự án')
+                ->placement('left'),
+            TrueFalse::make('Hiển thị popup', 'popup_show')
+                ->stylized()
+                ->default(0),
+            Text::make('Tiêu đề (phần thường)', 'popup_title_1')
+                ->default('Ra mắt dự án khu căn hộ cao cấp'),
+            Text::make('Tiêu đề (phần nổi bật — màu đỏ)', 'popup_title_2')
+                ->default('ARCADIA AT LAVILA'),
+            Image::make('Ảnh dự án', 'popup_image')
+                ->helperText('Kích thước đề xuất: 680x780px')
+                ->acceptedFileTypes(['jpg', 'jpeg', 'png', 'webp', 'avif'])
+                ->format('id'),
+            Link::make('Link nút "Chi tiết dự án"', 'popup_link'),
         ],
     ], false);
 }, 10);

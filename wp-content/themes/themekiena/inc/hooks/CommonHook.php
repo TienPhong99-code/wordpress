@@ -25,6 +25,22 @@ add_action('after_setup_theme', function () {
    ]);
 });
 
+// Register ACF options page
+add_action('acf/init', function () {
+   if (function_exists('acf_add_options_page')) {
+      acf_add_options_page([
+         'page_title'  => 'Thiết lập Theme',
+         'menu_title'  => 'Theme Settings',
+         'menu_slug'   => 'theme-settings',
+         'capability'  => 'manage_options',
+         'parent_slug' => 'themes.php',
+         'position'    => false,
+         'icon_url'    => false,
+         'redirect'    => false,
+      ]);
+   }
+});
+
 /**
  * Add param to admin url when use ajax
  * 
@@ -105,7 +121,8 @@ add_action('wp_enqueue_scripts', function () {
    if (is_page_template('page-template/template-hoat-dong-cong-dong.php')) {
       wp_enqueue_style('mona-fancybox', MONA_THEME_PATH_URI . '/assets/library/fancybox/fancybox.css', [], MONA_THEME_VERSION);
       wp_enqueue_script('mona-fancybox', MONA_THEME_PATH_URI . '/assets/library/fancybox/fancybox.umd.js', array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
-      wp_enqueue_script('mona-hoat-dong-cong-dong', MONA_THEME_PATH_URI . '/assets/scripts/hoat-dong-cong-dong.js', array('jquery', 'mona-main', 'mona-fancybox'), filemtime(MONA_THEME_PATH . '/assets/scripts/hoat-dong-cong-dong.js'), array('in_footer' => true));
+      wp_enqueue_script('masonry');
+      wp_enqueue_script('mona-hoat-dong-cong-dong', MONA_THEME_PATH_URI . '/assets/scripts/hoat-dong-cong-dong.js', array('jquery', 'mona-main', 'mona-fancybox', 'masonry'), filemtime(MONA_THEME_PATH . '/assets/scripts/hoat-dong-cong-dong.js'), array('in_footer' => true));
    }
 }, 10);
 

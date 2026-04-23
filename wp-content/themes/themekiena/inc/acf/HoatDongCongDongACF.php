@@ -1,5 +1,6 @@
 <?php
 
+use Extended\ACF\Fields\Gallery;
 use Extended\ACF\Fields\Image;
 use Extended\ACF\Fields\Repeater;
 use Extended\ACF\Fields\Tab;
@@ -42,6 +43,37 @@ add_action('acf/init', function () {
                 ->helperText('Ảnh full-width phía dưới mô tả. Kích thước đề xuất: 1728x741px.')
                 ->acceptedFileTypes(['jpg', 'jpeg', 'png', 'webp', 'avif'])
                 ->format('id'),
+
+            // ── Tab: Các hoạt động ──────────────────────
+            Tab::make('Các hoạt động')->placement('left'),
+
+            Text::make('Tiêu đề (trắng)', 'hoat_dong_title')
+                ->helperText('Phần tiêu đề màu trắng. Ví dụ: Các')
+                ->default('Các'),
+
+            Text::make('Tiêu đề (màu đỏ)', 'hoat_dong_title_span')
+                ->helperText('Phần tiêu đề màu đỏ. Ví dụ: hoạt động')
+                ->default('hoạt động'),
+
+            Repeater::make('Danh sách hoạt động', 'hoat_dong_items')
+                ->helperText('Mỗi item là 1 ô trong lưới Masonry. Có thể thêm bao nhiêu tuỳ ý.')
+                ->layout('block')
+                ->collapsed('hoat_dong_item_title')
+                ->fields([
+                    Image::make('Ảnh thumbnail', 'image')
+                        ->helperText('Ảnh đại diện hiển thị trên lưới. Kích thước đề xuất: 800x600px.')
+                        ->acceptedFileTypes(['jpg', 'jpeg', 'png', 'webp', 'avif'])
+                        ->format('url')
+                        ->required(),
+
+                    Text::make('Tiêu đề', 'hoat_dong_item_title')
+                        ->required(),
+
+                    Gallery::make('Thư viện ảnh', 'gallery')
+                        ->helperText('Ảnh hiển thị trong lightbox khi click vào item. Nếu để trống sẽ dùng ảnh thumbnail.')
+                        ->acceptedFileTypes(['jpg', 'jpeg', 'png', 'webp', 'avif'])
+                        ->format('url'),
+                ]),
 
             // ── Tab: Tư liệu video ───────────────────────
             Tab::make('Tư liệu video')->placement('left'),
