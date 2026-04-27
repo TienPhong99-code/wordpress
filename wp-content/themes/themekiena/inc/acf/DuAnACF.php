@@ -69,9 +69,10 @@ add_action('acf/init', function () {
             // ── Loại dự án (radio) ───────────────────────
             RadioButton::make('Loại dự án', 'loai_du_an')
                 ->choices([
-                    'giao-duc' => 'Giáo dục',
-                    'dich-vu'  => 'Dịch vụ',
-                    'xay-dung' => 'Xây dựng',
+                    'giao-duc'     => 'Giáo dục',
+                    'dich-vu'      => 'Dịch vụ',
+                    'xay-dung'     => 'Xây dựng',
+                    'bat-dong-san' => 'Bất động sản',
                 ])
                 ->default('giao-duc')
                 ->layout('horizontal')
@@ -110,6 +111,42 @@ add_action('acf/init', function () {
                 ->helperText('Ví dụ: 2.000 học sinh')
                 ->conditionalLogic([
                     ConditionalLogic::where('loai_du_an', '==', 'giao-duc'),
+                ]),
+
+            // ── Bất động sản: outer = Swiper, middle = slide, inner = dự án con ──
+            Repeater::make('Danh sách hiển thị các dự án', 'bds_swiper_groups')
+                ->helperText('Add Row ở đây = thêm 1 item mới trên trang.')
+                ->layout('block')
+                ->conditionalLogic([
+                    ConditionalLogic::where('loai_du_an', '==', 'bat-dong-san'),
+                ])
+                ->fields([
+                    Repeater::make('Các nhóm dự án (slides)', 'slides')
+                        ->helperText('Add Row ở đây = thêm 1 slide trong Swiper này.')
+                        ->layout('block')
+                        ->fields([
+                            Text::make('Tiêu đề nhóm', 'title')
+                                ->helperText('Hiển thị ở cột trái. Ví dụ: Khu đô thị Cát Lái')
+                                ->required(),
+                            Repeater::make('Danh sách dự án', 'items')
+                                ->helperText('Add Row ở đây = thêm 1 dự án con trong slide.')
+                                ->layout('block')
+                                ->fields([
+                                    Text::make('Tên dự án', 'name')->required(),
+                                    Image::make('Ảnh', 'image')
+                                        ->helperText('Kích thước đề xuất: 1200x800px')
+                                        ->acceptedFileTypes(['jpg', 'jpeg', 'png', 'webp', 'avif'])
+                                        ->format('id'),
+                                    Textarea::make('Mô tả', 'description')
+                                        ->helperText('Mô tả ngắn hiển thị ở cột phải.'),
+                                    Text::make('Vị trí', 'location')
+                                        ->helperText('Ví dụ: Khu đô thị Cát Lái, TP. Thủ Đức, TP.HCM'),
+                                    Text::make('Diện tích', 'area')
+                                        ->helperText('Ví dụ: 1,55 ha'),
+                                    Text::make('Quy mô', 'scale')
+                                        ->helperText('Ví dụ: 751 căn hộ'),
+                                ]),
+                        ]),
                 ]),
 
             // ── Xây dựng: Đơn vị thực hiện ───────────────
@@ -227,6 +264,7 @@ add_action('acf/init', function () {
                 ->fields([
                     WYSIWYGEditor::make('Đoạn văn', 'paragraph')->required(),
                 ]),
+
 
         ],
     ], false);

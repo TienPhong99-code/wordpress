@@ -60,6 +60,74 @@ $(document).ready(function () {
       slidesPerView: 'auto',
       autoplay: { delay: 2600 },
    });
+
+   // ── Bất động sản swiper ──────────────────────────────────────────
+   functionSlider('.sec-bds-projects', {
+      speed: 800,
+      slidesPerView: 1,
+      loop: false,
+      rewind: true,
+        effect: 'fade',
+          fadeEffect: {
+    crossFade: true
+  },
+      allowTouchMove: true,
+      autoplay: false,
+      on: {
+         slideChange: function () {
+            var slide = this.slides[this.activeIndex];
+            if (!slide) return;
+            var first = slide.querySelector('.js-bds-item[data-index="0"]');
+            if (first) bdsActivateItem(first, false);
+         },
+      },
+   });
+
+   document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.sec-bds-projects .js-bds-item');
+      if (btn) bdsActivateItem(btn, true);
+   });
+
+   function bdsActivateItem(btn, animate) {
+      if (!btn) return;
+      var slide = btn.closest('.swiper-slide');
+      if (!slide) return;
+
+      slide.querySelectorAll('.js-bds-item').forEach(function (b) {
+         var isActive = (b === btn);
+         b.classList.toggle('bg-pri', isActive);
+         b.classList.toggle('text-white', isActive);
+         b.classList.toggle('text-pri', !isActive);
+         var span = b.querySelector('span');
+         if (span) span.style.fontWeight = isActive ? '700' : '400';
+      });
+
+      var right = slide.querySelector('.bds-slide-right');
+      if (!right) return;
+
+      function update() {
+         var img = right.querySelector('.js-bds-image img');
+         if (img) { img.src = btn.dataset.image || ''; img.alt = btn.dataset.name || ''; }
+         var nameEl = right.querySelector('.js-bds-name');
+         var descEl = right.querySelector('.js-bds-desc');
+         if (nameEl) nameEl.textContent = btn.dataset.name || '';
+         if (descEl) descEl.textContent = btn.dataset.description || '';
+         right.querySelectorAll('.js-bds-meta').forEach(function (m) {
+            var val = btn.dataset[m.dataset.key] || '';
+            var valEl = m.querySelector('.js-bds-meta-value');
+            if (valEl) valEl.textContent = val;
+            m.style.display = val ? '' : 'none';
+         });
+      }
+
+      if (animate) {
+         right.style.opacity = '0';
+         setTimeout(function () { update(); right.style.opacity = '1'; }, 200);
+      } else {
+         update();
+      }
+   }
+   // ────────────────────────────────────────────────────────────────
       functionSlider('.slideFade', {
       speed: 1200,
       loop: false,

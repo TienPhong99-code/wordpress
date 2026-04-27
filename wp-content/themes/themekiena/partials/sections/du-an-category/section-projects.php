@@ -17,7 +17,7 @@ $projects = get_posts([
     ]],
 ]);
 
-if (empty($projects)) return;
+if (empty($projects) && $term_slug !== 'bat-dong-san') return;
 
 // ══════════════════════════════════════════════════════════════════
 // GIÁO DỤC — alternating rows (text trái/phải xen kẽ), full-bleed
@@ -212,6 +212,182 @@ elseif ($term_slug === 'xay-dung') :
         </div>
     </section>
 
+<?php
+// ══════════════════════════════════════════════════════════════════
+// BẤT ĐỘNG SẢN — Swiper chính, mỗi slide: cột trái (title + list) + cột phải (image + info)
+// Mỗi du_an post = 1 Swiper, bds_slides repeater = danh sách slide (mỗi slide = 1 nhóm dự án)
+// ══════════════════════════════════════════════════════════════════
+elseif ($term_slug === 'bat-dong-san') :
+
+    $icons_base = get_template_directory_uri() . '/assets/images/icons/';
+    $meta_defs  = [
+        ['key' => 'location', 'label' => 'Vị trí',   'icon' => 'ic-pin.svg'],
+        ['key' => 'area',     'label' => 'Diện tích', 'icon' => 'ic-ruler.svg'],
+        ['key' => 'scale',    'label' => 'Quy mô',    'icon' => 'ic-box.svg'],
+    ];
+
+    $all_swipers = [];
+    foreach ($projects as $project) {
+        foreach (get_field('bds_swiper_groups', $project->ID) ?: [] as $swiper_group) {
+            $groups = [];
+            foreach ($swiper_group['slides'] ?: [] as $slide_row) {
+                $raw_items = $slide_row['items'] ?: [];
+                if (empty($raw_items)) continue;
+                $items = [];
+                foreach ($raw_items as $row) {
+                    $items[] = [
+                        'name'        => $row['name'] ?? '',
+                        'image_url'   => $row['image'] ? wp_get_attachment_image_url($row['image'], 'full') : '',
+                        'description' => $row['description'] ?? '',
+                        'location'    => $row['location'] ?? '',
+                        'area'        => $row['area'] ?? '',
+                        'scale'       => $row['scale'] ?? '',
+                    ];
+                }
+                $groups[] = ['title' => $slide_row['title'] ?? '', 'items' => $items];
+            }
+            if (!empty($groups)) {
+                $all_swipers[] = $groups;
+            }
+        }
+    }
+
+    if (empty($all_swipers)) return;
+
+?>
+
+
+    <div class="flex flex-col">
+        <?php foreach ($all_swipers as $swiper_index => $groups) : ?>
+
+            <div class="sec-bds-projects <?php echo ($swiper_index % 2 !== 0) ? 'is-custom' : ''; ?> relative overflow-hidden">
+                <div class="container-second <?php echo ($swiper_index % 2 === 0) ? 'ml-auto' : ''; ?>">
+                    <div class="relative">
+                        <!-- Nav nằm ngoài swiper-slide, absolute theo cột trái -->
+                        <div class="bds-nav top-12 flex gap-2 w-fit absolute z-10 <?php echo ($swiper_index % 2 !== 0) ? 'right-0' : 'left-82.5'; ?>">
+                            <button class="swiper-prev w-9 h-9 flex items-center justify-center
+                           rounded-full border border-[#b3b4b9]
+                           hover:border-pri hover:bg-pri group transition-colors duration-200"
+                                aria-label="Dự án trước">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 4L6 8L10 12" stroke="#283377" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-white transition-colors" />
+                                </svg>
+                            </button>
+                            <button class="swiper-next w-9 h-9 flex items-center justify-center
+                           rounded-full border border-[#b3b4b9]
+                           hover:border-pri hover:bg-pri group transition-colors duration-200"
+                                aria-label="Dự án tiếp theo">
+                                <svg class="scale-x-[-1]" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 4L6 8L10 12" stroke="#283377" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-white transition-colors" />
+                                </svg>
+
+                            </button>
+                        </div>
+
+                        <div class="swiper overflow-hidden">
+                            <div class="swiper-wrapper">
+
+                                <?php foreach ($groups as $group) :
+                                    $items = $group['items'];
+                                    $first = $items[0];
+                                ?>
+                                    <div class="swiper-slide">
+                                        <div class="relative flex gap-10 overflow-hidden max-md:flex-col  <?php echo ($swiper_index % 2 !== 0) ? 'flex-row-reverse' : ''; ?>">
+
+                                            <!-- LEFT COLUMN -->
+                                            <div class="bds-slide-left py-10 shrink-0 w-95 max-md:w-full justify-center right flex flex-col gap-4">
+
+                                                <h3 class="font-bold text-[36px] max-xl:text-[28px] max-md:text-[22px]
+                                           text-pri tracking-[-0.04em] leading-normal w-[86%]">
+                                                    <?php echo esc_html($group['title']); ?>
+                                                </h3>
+
+                                                <div class="flex flex-col gap-0.5 overflow-y-auto flex-1 pr-1">
+                                                    <?php foreach ($items as $ii => $item) :
+                                                        $is_active = ($ii === 0);
+                                                    ?>
+                                                        <button type="button"
+                                                            class="js-bds-item text-left w-full px-4 py-2.5 rounded-lg
+                                                   transition-colors duration-200
+                                                   <?php echo $is_active ? ($swiper_index % 2 === 0 ? 'bg-pri text-white' : 'bg-white text-pri') : ''; ?>"
+                                                            data-index="<?php echo $ii; ?>"
+                                                            data-image="<?php echo esc_attr($item['image_url']); ?>"
+                                                            data-name="<?php echo esc_attr($item['name']); ?>"
+                                                            data-description="<?php echo esc_attr($item['description']); ?>"
+                                                            data-location="<?php echo esc_attr($item['location']); ?>"
+                                                            data-area="<?php echo esc_attr($item['area']); ?>"
+                                                            data-scale="<?php echo esc_attr($item['scale']); ?>">
+                                                            <span class="text-[16px] max-md:text-[14px] tracking-[-0.04em] leading-normal
+                                                         <?php echo $is_active ? 'font-bold' : 'font-normal'; ?>">
+                                                                <?php echo esc_html($item['name']); ?>
+                                                            </span>
+                                                        </button>
+                                                    <?php endforeach; ?>
+                                                </div>
+
+                                            </div><!-- /left -->
+
+                                            <!-- RIGHT COLUMN -->
+                                            <div class="bds-slide-right flex-1 "
+                                                style="transition: opacity 0.25s ease;">
+                                                <div class="aspect-1024/738 relative overflow-hidden">
+                                                    <div class="js-bds-image absolute inset-0">
+                                                        <img src="<?php echo esc_url($first['image_url']); ?>"
+                                                            alt="<?php echo esc_attr($first['name']); ?>"
+                                                            class="absolute inset-0 w-full h-full object-cover">
+                                                    </div>
+
+                                                    <div class="absolute inset-0 pointer-events-none z-1"
+                                                        style="background: linear-gradient(to top, rgba(26,26,26,0.85) 0%, rgba(26,26,26,0.2) 50%, transparent 100%);"></div>
+
+                                                    <div class="js-bds-info absolute bottom-0 left-0 right-0 z-2
+                                            px-8 pb-8 pt-16 max-xl:px-6 max-xl:pb-6 max-md:px-4 max-md:pb-4
+                                            flex flex-col gap-4">
+                                                        <div class="flex flex-col gap-2 text-white">
+                                                            <h4 class="js-bds-name font-bold
+                                                   text-[28px] max-xl:text-[22px] max-md:text-[18px]
+                                                   tracking-[-0.04em] leading-normal">
+                                                                <?php echo esc_html($first['name']); ?>
+                                                            </h4>
+                                                            <p class="js-bds-desc text-[14px] max-md:text-[13px] leading-[1.6] max-w-140 line-clamp-3">
+                                                                <?php echo esc_html($first['description']); ?>
+                                                            </p>
+                                                        </div>
+                                                        <div class="flex flex-col gap-1">
+                                                            <?php foreach ($meta_defs as $meta) :
+                                                                $val = $first[$meta['key']] ?? '';
+                                                            ?>
+                                                                <div class="js-bds-meta flex items-center gap-2"
+                                                                    data-key="<?php echo esc_attr($meta['key']); ?>"
+                                                                    <?php echo !$val ? 'style="display:none"' : ''; ?>>
+                                                                    <span class="w-4 h-4 shrink-0 block">
+                                                                        <img src="<?php echo esc_url($icons_base . $meta['icon']); ?>"
+                                                                            class="block w-full h-full object-contain brightness-0 invert"
+                                                                            alt="">
+                                                                    </span>
+                                                                    <p class="text-[14px] text-white leading-normal">
+                                                                        <span class="font-bold"><?php echo esc_html($meta['label']); ?>:</span>
+                                                                        <span class="js-bds-meta-value"><?php echo esc_html($val); ?></span>
+                                                                    </p>
+                                                                </div>
+                                                            <?php endforeach; ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /right -->
+
+                                        </div>
+                                    </div><!-- /swiper-slide -->
+                                <?php endforeach; ?>
+
+                            </div><!-- /swiper-wrapper -->
+                        </div><!-- /swiper -->
+
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
 <?php
 // ══════════════════════════════════════════════════════════════════
 // DỊCH VỤ & khác — grid 2 cột
