@@ -269,6 +269,14 @@ add_action('template_redirect', function () {
    $mona_current_permalink = mona_get_current_permalink();
 });
 
+// Shift+Enter tạo <br> thay vì <p> trong tất cả TinyMCE editor
+add_filter('tiny_mce_before_init', function (array $settings) {
+   $settings['newline_as_br']       = true;
+   $settings['force_br_newlines']   = true;
+   $settings['force_p_newlines']    = false;
+   return $settings;
+});
+
 // Tắt WordPress Emoji JS
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');

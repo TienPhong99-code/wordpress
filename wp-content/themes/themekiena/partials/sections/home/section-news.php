@@ -5,7 +5,7 @@ $title_2 = get_field('news_title_2') ?: 'mới cập nhật';
 $query = new WP_Query([
    'post_type'      => 'post',
    'post_status'    => 'publish',
-   'posts_per_page' => 6,
+   'posts_per_page' => 4,
    'orderby'        => 'date',
    'order'          => 'DESC',
 ]);

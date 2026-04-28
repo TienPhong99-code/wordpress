@@ -36,11 +36,10 @@ add_action('acf/init', function () {
                 ->acceptedFileTypes(['jpg', 'jpeg', 'png', 'webp', 'avif'])
                 ->format('id'),
 
-            Text::make('Subtitle (màu đỏ)', 'hero_subtitle')
-                ->helperText('Dòng in đậm màu đỏ phía dưới tiêu đề.'),
-
-            Text::make('Mô tả', 'hero_desc')
-                ->helperText('Dòng chữ thường phía dưới subtitle.'),
+            WYSIWYGEditor::make('Thông tin', 'hero_content')
+                ->helperText('Tự chỉnh màu sắc, in đậm trực tiếp trong editor.')
+                ->toolbar(['bold', 'italic', 'forecolor', 'removeformat', '|', 'undo', 'redo'])
+                ->tabs('visual'),
 
         ],
     ], false);

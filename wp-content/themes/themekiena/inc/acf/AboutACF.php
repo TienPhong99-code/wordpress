@@ -60,13 +60,14 @@ add_action('acf/init', function () {
                         ]),
                     Repeater::make('Thẻ giải thưởng (cards)', 'cards')
                         ->helperText('Kích thước đề xuất: 200×200px — 8 card mỗi hàng trên desktop')
-                        ->collapsed('alt')
+                        ->collapsed('name')
                         ->layout('table')
                         ->fields([
                             Image::make('Ảnh', 'image')
                                 ->acceptedFileTypes(['jpg', 'jpeg', 'png', 'webp', 'avif'])
                                 ->format('id')
                                 ->required(),
+                            Text::make('Tên giải thưởng', 'name'),
                             Text::make('Alt text', 'alt'),
                         ]),
                 ]),

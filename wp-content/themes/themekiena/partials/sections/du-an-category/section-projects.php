@@ -40,7 +40,7 @@ if ($term_slug === 'giao-duc') :
                 $scale      = get_field('scale', $project->ID);
                 $text_pad   = $is_even ? 'left' : 'right';
             ?>
-                <div class="item-prj">
+                <div class="item-prj <?php echo $is_even ? 'is-custom' : ''; ?>">
                     <div class="container-second <?php echo $is_even ? '' : 'ml-auto'; ?>">
                         <div class="flex flex-col">
                             <div class="relative flex gap-10 overflow-hidden max-md:flex-col <?php echo $is_even ? 'flex-row-reverse' : ''; ?>">
@@ -264,7 +264,7 @@ elseif ($term_slug === 'bat-dong-san') :
                 <div class="container-second <?php echo ($swiper_index % 2 === 0) ? 'ml-auto' : ''; ?>">
                     <div class="relative">
                         <!-- Nav nằm ngoài swiper-slide, absolute theo cột trái -->
-                        <div class="bds-nav top-12 flex gap-2 w-fit absolute z-10 <?php echo ($swiper_index % 2 !== 0) ? 'right-0' : 'left-82.5'; ?>">
+                        <div class="bds-nav top-12 max-lg:top-10 flex gap-2 w-fit absolute z-10 max-lg:right-0 <?php echo ($swiper_index % 2 !== 0) ? 'right-0' : 'lg:left-82.5'; ?>">
                             <button class="swiper-prev w-9 h-9 flex items-center justify-center
                            rounded-full border border-[#b3b4b9]
                            hover:border-pri hover:bg-pri group transition-colors duration-200"
@@ -292,10 +292,10 @@ elseif ($term_slug === 'bat-dong-san') :
                                     $first = $items[0];
                                 ?>
                                     <div class="swiper-slide">
-                                        <div class="relative flex gap-10 overflow-hidden max-md:flex-col  <?php echo ($swiper_index % 2 !== 0) ? 'flex-row-reverse' : ''; ?>">
+                                        <div class="relative flex gap-10 overflow-hidden max-lg:flex-col max-md:gap-0!  <?php echo ($swiper_index % 2 !== 0) ? 'flex-row-reverse' : ''; ?>">
 
                                             <!-- LEFT COLUMN -->
-                                            <div class="bds-slide-left py-10 shrink-0 w-95 max-md:w-full justify-center right flex flex-col gap-4">
+                                            <div class="bds-slide-left py-10 shrink-0 w-95 max-lg:w-full justify-center right flex flex-col gap-4">
 
                                                 <h3 class="font-bold text-[36px] max-xl:text-[28px] max-md:text-[22px]
                                            text-pri tracking-[-0.04em] leading-normal w-[86%]">
@@ -330,18 +330,9 @@ elseif ($term_slug === 'bat-dong-san') :
                                             <!-- RIGHT COLUMN -->
                                             <div class="bds-slide-right flex-1 "
                                                 style="transition: opacity 0.25s ease;">
-                                                <div class="aspect-1024/738 relative overflow-hidden">
-                                                    <div class="js-bds-image absolute inset-0">
-                                                        <img src="<?php echo esc_url($first['image_url']); ?>"
-                                                            alt="<?php echo esc_attr($first['name']); ?>"
-                                                            class="absolute inset-0 w-full h-full object-cover">
-                                                    </div>
-
-                                                    <div class="absolute inset-0 pointer-events-none z-1"
-                                                        style="background: linear-gradient(to top, rgba(26,26,26,0.85) 0%, rgba(26,26,26,0.2) 50%, transparent 100%);"></div>
-
-                                                    <div class="js-bds-info absolute bottom-0 left-0 right-0 z-2
-                                            px-8 pb-8 pt-16 max-xl:px-6 max-xl:pb-6 max-md:px-4 max-md:pb-4
+                                                <div class="relative">
+                                                    <div class="js-bds-info max-sm:bg-[#283377] sm:absolute bottom-0 left-0 right-0 z-2
+                                            px-8 pb-8 sm:pt-16 max-xl:px-6 max-xl:pb-6 max-md:px-4 max-md:py-4
                                             flex flex-col gap-4">
                                                         <div class="flex flex-col gap-2 text-white">
                                                             <h4 class="js-bds-name font-bold
@@ -372,6 +363,18 @@ elseif ($term_slug === 'bat-dong-san') :
                                                                 </div>
                                                             <?php endforeach; ?>
                                                         </div>
+                                                    </div>
+                                                    <div class="aspect-1024/738 relative overflow-hidden">
+                                                        <div class="js-bds-image absolute inset-0">
+                                                            <img src="<?php echo esc_url($first['image_url']); ?>"
+                                                                alt="<?php echo esc_attr($first['name']); ?>"
+                                                                class="absolute inset-0 w-full h-full object-cover">
+                                                        </div>
+
+                                                        <div class="absolute inset-0 pointer-events-none z-1"
+                                                            style="background: linear-gradient(to top, rgba(26,26,26,0.85) 0%, rgba(26,26,26,0.2) 50%, transparent 100%);"></div>
+
+
                                                     </div>
                                                 </div>
                                             </div><!-- /right -->

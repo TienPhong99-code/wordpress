@@ -50,14 +50,14 @@ $tin_tuc_page = get_page_by_path('tin-tuc');
         <div class="row">
 
             <!-- ── Left: Mục lục (Easy TOC plugin) ── -->
-            <div class="col col-3 max-lg:hidden">
+            <!-- <div class="col col-3 max-lg:hidden">
                 <div class="sticky top-24">
                     <?php echo do_shortcode('[ez-toc]'); ?>
                 </div>
-            </div>
+            </div> -->
 
             <!-- ── Center: Nội dung bài viết ── -->
-            <div class="col col-6 max-lg:w-full!">
+            <div class="col col-8 max-lg:w-full!">
 
                 <!-- Tiêu đề -->
                 <h1 class="text-pri text-[36px] font-bold leading-normal mb-2 max-md:text-[24px]">
@@ -118,7 +118,7 @@ $tin_tuc_page = get_page_by_path('tin-tuc');
             </div>
 
             <!-- ── Right: Có thể bạn quan tâm ── -->
-            <div class="col col-3 max-xl:hidden">
+            <div class="col col-4 max-xl:hidden">
                 <div class="sticky top-24">
                     <p class="text-pri text-[20px] font-bold mb-4">Có thể bạn quan tâm</p>
 

@@ -16,7 +16,7 @@ $hero_desc  = get_field('hero_desc', $term) ?: [];
                 <?php echo esc_html($term->name); ?>
             </h1>
             <?php if ($hero_desc) : ?>
-                <div class="flex project-desc flex-col gap-3 max-md:gap-2 text-[16px] max-md:text-[14px] text-pri max-w-148 mx-auto">
+                <div class="flex project-desc flex-col gap-3 max-md:gap-2 text-[16px] max-md:text-[14px] text-pri max-w-161.5 mx-auto">
                     <?php foreach ($hero_desc as $row) : ?>
                         <p><?php echo wp_kses_post($row['paragraph']); ?></p>
                     <?php endforeach; ?>

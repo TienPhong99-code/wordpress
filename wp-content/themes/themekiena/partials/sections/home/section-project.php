@@ -6,16 +6,18 @@ $items = get_field('projects') ?: [];
 if (empty($items)) return;
 ?>
 
-<section class="section-project section-pd-t">
+<section class="section-project">
 
    <!-- Title + desc -->
    <div class="container">
       <div class="mb-8 max-xl:mb-5 max-md:mb-4 text-center">
          <h2 class="title-main">
-            CÁC DỰ ÁN <span>MỚI NHẤT</span>
+            Khám phá <br> <span>các dự án Mới nhất</span>
          </h2>
-         <p class="text-[16px] max-md:text-[14px] text-pri">Tất cả lĩnh vực hoạt động của Tập đoàn đều hướng đến tầm nhìn dài hạn:</p>
-         <p class="font-bold text-[16px] max-md:text-[14px] text-sec">kiến tạo giá trị bền vững và góp phần thúc đẩy sự phát triển của các khu đô thị hiện đại.</p>
+         <div class="max-w-175 mx-auto">
+            <p class="text-[16px] max-md:text-[14px] text-pri">Tất cả lĩnh vực hoạt động của Tập đoàn đều hướng <span class="c-second font-bold">đến tầm nhìn dài hạn:
+                  kiến tạo giá trị bền vững </span> và góp phần thúc đẩy sự <span class="c-second font-bold">phát triển</span> của các khu <span class="c-second font-bold">đô thị</span> hiện đại.</p>
+         </div>
       </div>
    </div>
 
@@ -26,18 +28,17 @@ if (empty($items)) return;
          <div class="container absolute bottom-0 left-1/2 -translate-x-1/2 w-full z-10 pointer-events-none">
             <div class="flex w-fit ml-auto max-md:w-full py-16 max-xl:py-10 max-md:py-6 pointer-events-auto">
                <div class="flex flex-col gap-4 max-md:gap-3 items-end max-md:items-center max-md:w-full">
-                  <div class="flex items-center gap-8 max-xl:gap-5 max-md:gap-3">
-                     <button class="swiper-prev flex items-center gap-2 text-[16px] max-md:text-[13px] font-bold text-[#cbd3dd] hover:text-white transition-colors">
-                        <div class="w-4 h-4 max-md:w-3 max-md:h-3">
-                           <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/icons/ic-arrow-left-white.svg"
+                  <div class="flex items-center gap-8 max-xl:gap-5 max-md:gap-3 justify-between w-full">
+                     <button class="swiper-prev flex items-center gap-2 text-[16px] max-md:text-[13px] font-bold cursor-pointer text-[#cbd3dd] hover:opacity-70 transition-opacity">
+                        <div class="md:w-11! md:h-11! w-8 h-8 max-md:w-3 max-md:h-3">
+                           <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/icons/ic-ar-left.svg"
                               class="block w-full h-full object-contain" alt="">
                         </div>
-                        Dự án trước
+
                      </button>
-                     <button class="swiper-next flex items-center gap-2 text-[16px] max-md:text-[13px] font-bold text-white hover:text-[#cbd3dd] transition-colors">
-                        Dự án tiếp theo
-                        <div class="w-4 h-4 max-md:w-3 max-md:h-3">
-                           <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/icons/ic-arrow-right-project.svg"
+                     <button class="swiper-next flex items-center gap-2 text-[16px] max-md:text-[13px] font-bold cursor-pointer text-white hover:opacity-70 transition-opacity">
+                        <div class="md:w-11! md:h-11! w-8 h-8 max-md:w-3 max-md:h-3">
+                           <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/icons/ic-ar-right.svg"
                               class="block w-full h-full object-contain" alt="">
                         </div>
                      </button>
@@ -69,6 +70,9 @@ if (empty($items)) return;
                            <!-- Bottom-left: title + button -->
                            <div class="container absolute bottom-0 left-1/2 -translate-x-1/2 w-full">
                               <div class="flex flex-col gap-4 max-md:gap-3 py-16 max-xl:py-10 max-md:py-6 max-md:pb-20">
+                                 <?php if (!empty($item['type'])) : ?>
+                                    <span class="font-bold text-white"><?php echo esc_html($item['type']); ?></span>
+                                 <?php endif; ?>
                                  <p class="font-bold text-[36px] max-xl:text-[28px] max-md:text-[20px] text-white">
                                     <?php echo esc_html($item['title']); ?>
                                  </p>

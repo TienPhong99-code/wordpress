@@ -30,19 +30,18 @@ if (empty($items)) return;
          </div>
 
          <!-- Prev: Dự án trước -->
-         <button type="button" class="max-sm:hidden swiper-prev absolute left-8 max-xl:left-4 max-md:left-2 top-1/2 -translate-y-1/2 z-10 flex items-center gap-2 max-md:gap-1 text-[16px] max-md:text-[13px] font-bold text-white hover:text-[#cbd3dd] transition-colors">
-            <div class="w-4 h-4 max-md:w-3 max-md:h-3 shrink-0">
-               <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/icons/ic-arrow-left-white.svg"
+         <button type="button" class="max-sm:hidden swiper-prev absolute left-8 cursor-pointer max-xl:left-4 max-md:left-2 top-1/2 -translate-y-1/2 z-10 flex items-center gap-2 max-md:gap-1 text-[16px] max-md:text-[13px] font-bold text-white hover:opacity-70 transition-opacity">
+            <div class="w-11 h-11 max-md:w-3 max-md:h-3 shrink-0">
+               <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/icons/ic-ar-left.svg"
                   class="block w-full h-full object-contain" alt="">
             </div>
-            <span>Dự án trước</span>
+
          </button>
 
          <!-- Next: Dự án tiếp theo -->
-         <button type="button" class="max-sm:hidden swiper-next absolute right-8 max-xl:right-4 max-md:right-2 top-1/2 -translate-y-1/2 z-10 flex items-center gap-2 max-md:gap-1 text-[16px] max-md:text-[13px] font-bold text-white hover:text-[#cbd3dd] transition-colors">
-            <span>Dự án tiếp theo</span>
-            <div class="w-4 h-4 max-md:w-3 max-md:h-3 shrink-0">
-               <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/icons/ic-arrow-right-project.svg"
+         <button type="button" class="max-sm:hidden swiper-next absolute right-8 cursor-pointer max-xl:right-4 max-md:right-2 top-1/2 -translate-y-1/2 z-10 flex items-center gap-2 max-md:gap-1 text-[16px] max-md:text-[13px] font-bold text-white hover:opacity-70 transition-opacity">
+            <div class="w-11 h-11 max-md:w-3 max-md:h-3 shrink-0">
+               <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/icons/ic-ar-right.svg"
                   class="block w-full h-full object-contain" alt="">
             </div>
          </button>

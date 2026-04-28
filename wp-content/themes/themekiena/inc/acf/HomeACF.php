@@ -3,6 +3,7 @@
 use Extended\ACF\Fields\Image;
 use Extended\ACF\Fields\Link;
 use Extended\ACF\Fields\Repeater;
+use Extended\ACF\Fields\Taxonomy;
 use Extended\ACF\Fields\Tab;
 use Extended\ACF\Fields\Text;
 use Extended\ACF\Fields\TrueFalse;
@@ -49,6 +50,11 @@ add_action('acf/init', function () {
                         ->required(),
                     Text::make('Tiêu đề', 'title')
                         ->required(),
+                    Taxonomy::make('Danh mục dự án', 'category')
+                        ->taxonomy('danh_muc_du_an')
+                        ->appearance('select')
+                        ->format('id')
+                        ->nullable(),
                 ]),
 
             Tab::make('Đối tác')
@@ -76,6 +82,8 @@ add_action('acf/init', function () {
                         ->acceptedFileTypes(['jpg', 'jpeg', 'png', 'webp', 'avif'])
                         ->format('id')
                         ->required(),
+                    Text::make('Loại dự án', 'type')
+                        ->helperText('Ví dụ: Khu căn hộ cao cấp, Khu biệt thự đảo'),
                     Text::make('Tiêu đề dự án', 'title')
                         ->required(),
                     Link::make('Link chi tiết', 'link'),

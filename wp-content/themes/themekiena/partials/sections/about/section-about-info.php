@@ -35,7 +35,7 @@ $data = $sample;
    <!-- Top: content group -->
    <div class="container">
       <div class="mb-[-20%] relative z-1">
-         <div class="about-info-content max-w-148 mx-auto text-center">
+         <div class="about-info-content max-w-130 mx-auto text-center">
 
             <!-- KIENA SVG logo (draw animation) -->
             <span class="max-w-175 mx-auto mb-6 block">
@@ -84,10 +84,20 @@ $data = $sample;
             </span>
 
             <!-- Paragraphs -->
-            <div class="text-[16px]">
-               <?php foreach ($data['paragraphs'] as $p) : ?>
-                  <p class="<?php echo esc_attr($p['class']); ?>"><?php echo wp_kses_post($p['content']); ?></p>
-               <?php endforeach; ?>
+            <div class="text-[16px] text-pri">
+               <p class="mb-4">
+                  Được thành lập hơn 30 năm, KIẾN Á GROUP phát triển đa ngành với trọng tâm <span class="c-second font-bold">là bất động sản, giáo dục và xây dựng - dịch vụ,</span> theo đuổi <span class="c-second font-bold">triết lý phát triển bền vững</span> lấy con người làm trung tâm. Tập đoàn hướng
+                  đến kiến tạo những công trình không chỉ đáp ứng nhu cầu an cư - đầu tư mà còn góp phần hình thành chuẩn mực sống văn minh, lâu dài cho cộng đồng.
+               </p>
+               <p class="mb-4">
+                  Trong lĩnh vực bất động sản và xây dựng - dịch vụ, Tập đoàn sở hữu <span class="c-second font-bold">năng lực phát triển dự án toàn diện</span> từ quy hoạch, thiết kế, thi công, pháp lý đến vận hành, bảo đảm tính thẩm mỹ, minh bạch và hiệu quả khai thác cho khách hàng và nhà đầu tư.
+               </p>
+               <p class="mb-4">
+                  Ở lĩnh vực giáo dục, KIẾN Á GROUP đầu tư <span>phát triển hệ thống trường học từ tiểu học đến trung cấp, đại học hướng đến tiêu chuẩn quốc tế,</span> thể hiện cam kết dài hạn trong việc nuôi dưỡng tri thức, con người và tương lai xã hội.
+               </p>
+               <p>
+                  Xuyên suốt các hoạt động là văn hóa doanh nghiệp đề cao sự <span class="c-second font-bold">tận tâm, chuẩn mực, sáng tạo và trách nhiệm,</span> với mục tiêu tạo nên những giá trị bền vững cho cộng đồng và xã hội.
+               </p>
             </div>
          </div>
       </div>

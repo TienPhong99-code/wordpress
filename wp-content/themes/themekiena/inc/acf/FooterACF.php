@@ -58,28 +58,6 @@ add_action('acf/init', function () {
                         ->column(33),
                 ]),
 
-            Tab::make('Menu điều hướng')
-                ->placement('left'),
-
-            Repeater::make('Cột menu', 'footer_nav')
-                ->layout('block')
-                ->collapsed('heading')
-                ->maxRows(6)
-                ->fields([
-                    Text::make('Tiêu đề cột', 'heading')
-                        ->required(),
-                    Repeater::make('Các liên kết', 'links')
-                        ->layout('table')
-                        ->fields([
-                            Text::make('Nhãn', 'label')
-                                ->required(),
-                            Text::make('Đường dẫn', 'path')
-                                ->helperText('VD: /gioi-thieu hoặc để trống cho trang chủ'),
-                            Text::make('Section ID', 'section_id')
-                                ->helperText('VD: about-vision (không cần #)'),
-                        ]),
-                ]),
-
             Tab::make('Bản đồ')
                 ->placement('left'),
 

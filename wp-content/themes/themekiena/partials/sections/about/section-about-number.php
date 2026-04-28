@@ -30,7 +30,7 @@ $img  = MONA_THEME_PATH_URI . '/assets/images/';
       <div class="counter-js grid grid-cols-1 md:grid-cols-4 gap-4">
 
          <!-- Card 1: 360+ Hecta đất (col 1-2, row 1) -->
-         <div class="md:col-span-2 rounded-2xl overflow-hidden bg-[#f9f9f9] p-8 max-lg:p-5 relative min-h-70 flex items-start">
+         <div class="md:col-span-2 rounded-2xl overflow-hidden bg-[#f9f9f9] p-6 max-lg:p-5 relative min-h-70 flex items-start">
             <img src="<?= $img ?>about/number-land2.jpg" alt="" class="absolute inset-0 size-full object-cover pointer-events-none" data-parallax-bg>
             <div class="absolute top-0 left-0 w-full h-[75%] bg-linear-to-b from-white to-transparent md:hidden pointer-events-none"></div>
             <div class="relative z-1 flex flex-col gap-2 text-pri">
@@ -43,7 +43,7 @@ $img  = MONA_THEME_PATH_URI . '/assets/images/';
          <div class="grid grid-cols-1 sm:grid-cols-2 md:flex! md:flex-col gap-4">
 
             <!-- Card 2a: 36+ Công ty thành viên -->
-            <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-[#fcf5de] p-8 max-lg:p-5 relative flex flex-col gap-2 items-center justify-center">
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-[#fcf5de] p-6 max-lg:p-5 relative flex flex-col gap-2 items-center justify-center">
                <img src="<?= $img . esc_attr($data['brands'][0]); ?>" alt=""
                   class="absolute top-[0.5%] right-[-22%] w-[40%] h-auto pointer-events-none">
                <img src="<?= $img . esc_attr($data['brands'][1]); ?>" alt=""
@@ -61,25 +61,28 @@ $img  = MONA_THEME_PATH_URI . '/assets/images/';
             </div>
 
             <!-- Card 2b: 40+ Giải thưởng -->
-            <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-[#fcf5de] p-8 max-lg:p-5 relative flex flex-col gap-2 items-center justify-center text-center">
-               <p class="countNum text-[80px] max-lg:text-[40px] font-extrabold uppercase leading-none tracking-[-3.2px] text-pri" data-count="40+">40+</p>
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden p-6 max-lg:p-5 relative flex flex-col gap-2 items-center justify-center text-center">
+               <span class="absolute inset-0 z-[-1]">
+                  <img src="<?= $img ?>about/bg-num2.jpg" class="block w-full h-full object-cover" alt="">
+               </span>
+               <p class=" countNum text-[80px] max-lg:text-[40px] font-extrabold uppercase leading-none tracking-[-3.2px] text-pri" data-count="40+">40+</p>
                <p class="text-[16px] font-semibold tracking-[-0.64px] text-pri">Giải thưởng danh giá trong nước và quốc tế</p>
             </div>
 
          </div>
 
          <!-- Card 3: 20+ Năm kinh nghiệm giáo dục (col 4, row 1-2) -->
-         <div class="md:row-span-2 rounded-2xl overflow-hidden bg-[#fcf5de] p-8 max-lg:p-5 relative min-h-70 flex items-start">
-            <img src="<?= $img ?>about/number-edu.jpg" alt="" class="absolute inset-0 size-full object-cover pointer-events-none" data-parallax-bg>
+         <div class="md:row-span-2 rounded-2xl overflow-hidden bg-[#fcf5de] p-6 max-lg:p-5 relative min-h-70 flex items-start">
+            <img src="<?= $img ?>about/number-edu2.jpg" alt="" class="absolute inset-0 size-full object-cover pointer-events-none" data-parallax-bg>
             <div class="absolute top-0 left-0 w-full h-[75%] bg-linear-to-b from-white to-transparent md:hidden pointer-events-none"></div>
             <div class="relative z-1 flex flex-col gap-3 text-pri">
                <p class="countNum text-[80px] max-lg:text-[40px] font-extrabold uppercase leading-none tracking-[-3.2px]" data-count="20+">20+</p>
-               <p class="text-[16px] tracking-[-0.64px] max-sm:font-medium">Năm kinh nghiệm đầu tư và phát triển mảng giáo dục</p>
+               <p class="text-[16px] tracking-[-0.64px] font-semibold">Năm kinh nghiệm đầu tư và phát triển mảng giáo dục</p>
             </div>
          </div>
 
          <!-- Card 4: 6+ Tỉnh thành (col 1, row 2 — red square) -->
-         <div class="aspect-square max-lg:aspect-video rounded-2xl overflow-hidden bg-[#d81921] p-8 max-lg:p-5 relative flex items-start">
+         <div class="aspect-square max-lg:aspect-video rounded-2xl overflow-hidden bg-[#d81921] p-6 max-lg:p-5 relative flex items-center">
             <img src="<?= $img ?>about/number-map.svg" alt=""
                class="absolute inset-0 size-full object-cover pointer-events-none">
             <div class="relative z-1 flex flex-col gap-2">
@@ -89,7 +92,7 @@ $img  = MONA_THEME_PATH_URI . '/assets/images/';
          </div>
 
          <!-- Card 5: 30+ Năm kinh nghiệm BĐS (col 2-3, row 2 — dark blue) -->
-         <div class="md:col-span-2 rounded-2xl overflow-hidden bg-pri p-8 max-lg:p-5 relative flex items-center min-h-50">
+         <div class="md:col-span-2 rounded-2xl overflow-hidden bg-pri p-6 max-lg:p-5 relative flex items-center min-h-50">
             <img src="<?= $img ?>about/number-logo-bg.svg" alt=""
                class="absolute inset-0 h-full w-auto pointer-events-none object-cover">
             <img src="<?= $img ?>about/number-bds.jpg" alt=""

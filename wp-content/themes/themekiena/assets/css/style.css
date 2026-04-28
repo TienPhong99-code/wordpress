@@ -317,7 +317,9 @@ form .wpcf7-not-valid-tip {
     gap: 4px;
   }
 }
-
+.pagination-pri.custom-pri .swiper-pagination-bullet-active {
+  background: var(--color-pri);
+}
 .row {
   --cg: 24px;
   --rg: 24px;
@@ -1176,9 +1178,14 @@ div#ez-toc-container ul li:not(:last-child) {
   fill: none;
   animation: spin8932 0.5s infinite linear;
 }
+.tts-btn {
+  border: 1px solid #b3b4b9;
+  border-radius: 100rem;
+}
 .tts-btn:hover {
   background: var(--color-pri);
   cursor: pointer;
+  border-color: var(--color-pri);
 }
 .tts-btn:hover svg {
   filter: brightness(0) invert(1);
@@ -1262,4 +1269,17 @@ div#ez-toc-container ul li:not(:last-child) {
 
 .breadcrumb-item.is-current span {
   font-weight: 700;
+}
+
+.item-prj.is-custom {
+  background-color: #283377;
+  color: white;
+}
+.item-prj.is-custom h3,
+.item-prj.is-custom p,
+.item-prj.is-custom span {
+  color: white;
+}
+.item-prj.is-custom .w-4.h-4 img {
+  filter: brightness(0) invert(1);
 }
