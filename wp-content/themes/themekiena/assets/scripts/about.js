@@ -184,24 +184,24 @@ function initAboutInfoTimeline() {
    gsap.set('.section-about-info .about-info-content p', { opacity: 0, y: 28 });
    gsap.set('.section-about-info .about-info-img', { y: 80, opacity: 0 });
 
-   const tl = gsap.timeline({ delay: 0.3 });
+   const tl = gsap.timeline({ delay: 0.2 });
 
    tl.to(drawPaths, {
       strokeDashoffset: 0,
-      duration: 2,
-      stagger: 0.3,
+      duration: 1.2,
+      stagger: 0.18,
       ease: 'power2.out',
    });
 
    tl.to('.section-about-info .svg-fill-layer', {
       opacity: 1,
-      duration: 1,
+      duration: 0.6,
       ease: 'power2.out',
-   }, '-=0.8');
+   }, '-=0.5');
 
    tl.to('.section-about-info .svg-draw-layer', {
       opacity: 0,
-      duration: 0.8,
+      duration: 0.5,
       ease: 'power2.out',
    }, '<');
 

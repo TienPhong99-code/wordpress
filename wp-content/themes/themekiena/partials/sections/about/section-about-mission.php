@@ -59,7 +59,7 @@ $items = [
         <div class="relative z-2 flex h-full max-md:flex-col">
             <?php foreach ($items as $i => $item) : ?>
                 <div
-                    class="mission-col flex-1 flex flex-col justify-end p-8 max-xl:p-6 max-md:p-5 relative cursor-pointer<?= $i < count($items) - 1 ? ' border-r border-white/20 max-md:border-r-0 max-md:border-b' : '' ?>"
+                    class="mission-col flex-1 flex flex-col justify-end p-12 max-xl:p-6 max-md:p-5 relative cursor-pointer<?= $i < count($items) - 1 ? ' border-r border-white/20 max-md:border-r-0 max-md:border-b' : '' ?>"
                     data-index="<?= $i ?>">
 
                     <div class="mission-col-overlay absolute inset-0 bg-[#1a1a1a]/40 pointer-events-none transition-opacity duration-500 <?= $i === 0 ? 'opacity-100' : 'opacity-0' ?>"></div>
@@ -74,7 +74,7 @@ $items = [
                         <h3 class="font-black text-[36px] max-xl:text-[26px] max-md:text-[20px] text-white uppercase text-center m-0">
                             <?= esc_html($item['title']) ?>
                         </h3>
-                        <div class="mission-col-desc w-full md:max-h-0 overflow-hidden md:opacity-0 transition-[max-height,opacity] duration-500 ease-in-out <?= $i === 0 ? 'is-active' : '' ?>">
+                        <div class="mission-col-desc flex flex-col gap-2 w-full md:max-h-0 overflow-hidden md:opacity-0 transition-[max-height,opacity] duration-500 ease-in-out <?= $i === 0 ? 'is-active' : '' ?>">
                             <?= $item['desc'] ?>
                         </div>
                     </div>

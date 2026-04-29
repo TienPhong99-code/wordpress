@@ -15,11 +15,11 @@ if (is_wp_error($terms) || empty($terms)) return;
     <div class="container">
 
         <!-- Title -->
-        <div class="mb-8 max-xl:mb-5 max-md:mb-4 text-center">
+        <!-- <div class="mb-8 max-xl:mb-5 max-md:mb-4 text-center">
             <h2 class="title-main">
                 CÁC <span>DỰ ÁN</span>
             </h2>
-        </div>
+        </div> -->
 
         <!-- 2x2 grid -->
         <div class="row">

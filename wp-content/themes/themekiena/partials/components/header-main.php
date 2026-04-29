@@ -20,8 +20,14 @@ $lang_en = '#';
 
       <!-- Logo -->
       <a href="<?php echo esc_url(home_url('/')); ?>" class="block shrink-0 hd-logo">
-         <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/icons/header-logo.png"
-            class="block w-full object-contain" alt="KIENA">
+         <?php
+         $custom_logo_id = get_theme_mod('custom_logo');
+         $logo_url = $custom_logo_id
+            ? wp_get_attachment_image_url($custom_logo_id, 'full')
+            : MONA_THEME_PATH_URI . '/assets/images/icons/header-logo.png';
+         ?>
+         <img src="<?php echo esc_url($logo_url); ?>"
+            class="block w-full object-contain" alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
       </a>
 
       <!-- Right: Nav + Language (desktop) -->
@@ -70,8 +76,8 @@ $lang_en = '#';
    <!-- Top bar -->
    <div class="flex items-center justify-between p-2 border-b border-[#f0f0f0]">
       <a href="<?php echo esc_url(home_url('/')); ?>" class="block hd-logo">
-         <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/icons/header-logo.png"
-            class="block w-full object-contain" alt="KIENA">
+         <img src="<?php echo esc_url($logo_url); ?>"
+            class="block w-full object-contain" alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
       </a>
       <button type="button" class="js-nav-close flex items-center justify-center w-10 h-10 cursor-pointer" aria-label="Đóng menu">
          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

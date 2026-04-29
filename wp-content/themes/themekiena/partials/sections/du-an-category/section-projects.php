@@ -17,7 +17,7 @@ $projects = get_posts([
     ]],
 ]);
 
-if (empty($projects) && $term_slug !== 'bat-dong-san') return;
+if (empty($projects) && !in_array($term_slug, ['bat-dong-san', 'xay-dung-cay-canh'], true)) return;
 
 // ══════════════════════════════════════════════════════════════════
 // GIÁO DỤC — alternating rows (text trái/phải xen kẽ), full-bleed
@@ -123,94 +123,195 @@ if ($term_slug === 'giao-duc') :
 
 <?php
 // ══════════════════════════════════════════════════════════════════
-// XÂY DỰNG — nhóm theo công ty, 4 cột
+// XÂY DỰNG — accordion phạm vi hoạt động + ảnh toggle
 // ══════════════════════════════════════════════════════════════════
-elseif ($term_slug === 'xay-dung') :
+elseif ($term_slug === 'xay-dung-cay-canh') :
 
-    $icons = [
-        'done'   => get_template_directory_uri() . '/assets/images/du-an/xay-dung/icons/ic-status-done.png',
-        'doing'  => get_template_directory_uri() . '/assets/images/du-an/xay-dung/icons/ic-status-doing.png',
-        'future' => get_template_directory_uri() . '/assets/images/du-an/xay-dung/icons/ic-status-future.png',
+    $img = MONA_THEME_PATH_URI . '/assets/images/';
+
+    $default_icons = [
+        0 => [
+            $img . 'icons/ic-road.svg',
+            $img . 'icons/ic-water.svg',
+            $img . 'icons/ic-house.svg',
+            $img . 'icons/ic-complex.svg',
+        ],
+        1 => [
+            $img . 'icons/ic-building.svg',
+            $img . 'icons/ic-worker.svg',
+        ],
+        2 => [
+            $img . 'icons/ic-landscape.svg',
+            $img . 'icons/ic-tree.svg',
+        ],
     ];
 
-    $status_labels = [
-        'done'   => 'Đã thực hiện',
-        'doing'  => 'Đang thực hiện',
-        'future' => 'Sẽ thực hiện',
+    $fallback = [
+        [
+            'title' => 'Thi công hạ tầng kỹ thuật',
+            'image' => $img . 'du-an/xay-dung/scope-building.jpg',
+            'items' => [
+                ['icon' => $img . 'icons/ic-road.svg',    'text' => 'San nền, đường giao thông'],
+                ['icon' => $img . 'icons/ic-water.svg',   'text' => 'Hệ thống cấp – thoát nước'],
+                ['icon' => $img . 'icons/ic-house.svg',   'text' => 'Hệ thống kỹ thuật ngoài nhà'],
+                ['icon' => $img . 'icons/ic-complex.svg', 'text' => 'Dự án phức hợp'],
+            ],
+        ],
+        [
+            'title' => 'Thi công công trình dân dụng & công nghiệp',
+            'image' => $img . 'du-an/xay-dung/scope-building.jpg',
+            'items' => [
+                ['icon' => $img . 'icons/ic-building.svg', 'text' => 'Nhà ở, công trình thương mại'],
+                ['icon' => $img . 'icons/ic-worker.svg',   'text' => 'Hạng mục kỹ thuật'],
+            ],
+        ],
+        [
+            'title' => 'Thi công cảnh quan & cây xanh',
+            'image' => $img . 'du-an/xay-dung/scope-building.jpg',
+            'items' => [
+                ['icon' => $img . 'icons/ic-landscape.svg', 'text' => 'Landscape đô thị, công viên, khuôn viên trường học, khu nghỉ dưỡng'],
+                ['icon' => $img . 'icons/ic-tree.svg',      'text' => 'Mảng xanh dự án'],
+            ],
+        ],
     ];
 
-    $grouped = [];
-    foreach ($projects as $project) {
-        $company             = get_field('company', $project->ID) ?: 'Khác';
-        $grouped[$company][] = $project;
-    }
+    $acf_rows = get_field('scope_tabs', $term) ?: [];
+    $tabs = $acf_rows ? array_map(function ($row) {
+        return [
+            'title' => $row['tab_title'] ?? '',
+            'image' => $row['tab_image'] ?? '',
+            'items' => array_map(function ($item) {
+                return [
+                    'icon' => $item['item_icon'] ?? '',
+                    'text' => $item['item_text'] ?? '',
+                ];
+            }, $row['tab_items'] ?: []),
+        ];
+    }, $acf_rows) : $fallback;
 ?>
 
-    <section class="sec-du-an-category-projects section-pd-t section-pd-b">
+    <section class="section-scope section-pd">
         <div class="container">
+            <div class="relative">
+                <!-- Right: Content -->
+                <div class="row max-md:flex-col-reverse">
+                    <div class="col col-7 max-md:w-full!">
+                        <!-- Left: Image Panel -->
+                        <div class="scope-image-panel rounded-lg overflow-hidden relative" style="aspect-ratio:696/522">
+                            <?php foreach ($tabs as $idx => $tab) : ?>
+                                <img
+                                    src="<?php echo esc_url($tab['image']); ?>"
+                                    alt="<?php echo esc_attr($tab['title']); ?>"
+                                    class="scope-tab-img absolute inset-0 w-full h-full object-cover transition-opacity duration-500 <?php echo $idx === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'; ?>"
+                                    data-index="<?php echo $idx; ?>">
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    <div class="col col-5 max-md:w-full!">
+                        <div class="flex flex-col gap-8">
+                            <h2 class="title-main max-md:text-center">
+                                <span>phạm vi</span> <br>
+                                hoạt động
+                            </h2>
 
-            <div class="mb-8 max-xl:mb-5 max-md:mb-4 text-center">
-                <h2 class="title-main">CÁC <span>DỰ ÁN</span></h2>
-            </div>
+                            <!-- Accordion -->
+                            <div class="flex flex-col">
+                                <?php foreach ($tabs as $idx => $tab) : ?>
+                                    <div class="scope-item <?php echo $idx === 0 ? 'is-active' : ''; ?>" data-index="<?php echo $idx; ?>">
 
-            <?php foreach ($grouped as $company => $items) : ?>
-                <p class="font-bold text-[36px] max-xl:text-[28px] max-md:text-[22px] text-pri mb-4 max-md:mb-3">
-                    <?php echo esc_html($company); ?>
-                </p>
-                <div class="relative mb-6">
-                    <div class="row">
-                        <?php foreach ($items as $project) :
-                            $image_id   = get_field('image', $project->ID);
-                            $image      = $image_id ? wp_get_attachment_image_url($image_id, 'large') : '';
-                            $url        = get_field('url', $project->ID) ?: '#';
-                            $scope      = get_field('scope', $project->ID);
-                            $status_key = get_field('status', $project->ID) ?: 'done';
-                        ?>
-                            <div class="col col-3 max-xl:col-4 max-md:w-full!">
-                                <div class="relative flex flex-col gap-2 group mb-6 max-md:mb-4">
-                                    <div class="w-full aspect-4/3 rounded-lg overflow-hidden bg-pri">
-                                        <?php if ($image) : ?>
-                                            <img src="<?php echo esc_url($image); ?>"
-                                                alt="<?php echo esc_attr($project->post_title); ?>"
-                                                loading="lazy"
-                                                class="block w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="flex flex-col gap-1">
-                                        <p class="font-bold text-[20px] max-xl:text-[18px] max-md:text-[16px] text-pri leading-normal transition-colors duration-300 group-hover:text-sec">
-                                            <?php echo esc_html($project->post_title); ?>
-                                        </p>
-                                        <div class="flex items-center gap-2">
-                                            <div class="w-4 h-4 shrink-0">
-                                                <img src="<?php echo esc_url($icons[$status_key]); ?>" class="block w-full h-full object-contain" alt="">
-                                            </div>
-                                            <p class="text-[16px] max-md:text-[14px] text-pri leading-normal">
-                                                <?php echo esc_html($status_labels[$status_key] ?? ''); ?>
-                                            </p>
-                                        </div>
-                                        <?php if ($scope) : ?>
-                                            <div class="flex items-start gap-2">
-                                                <div class="w-4 h-4 shrink-0 mt-0.75">
-                                                    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="block w-full h-full">
-                                                        <path d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6C3.5 9.375 8 14.5 8 14.5C8 14.5 12.5 9.375 12.5 6C12.5 3.515 10.485 1.5 8 1.5ZM8 7.5C7.175 7.5 6.5 6.825 6.5 6C6.5 5.175 7.175 4.5 8 4.5C8.825 4.5 9.5 5.175 9.5 6C9.5 6.825 8.825 7.5 8 7.5Z" fill="#283377" />
-                                                    </svg>
+                                        <button type="button" class="scope-item-header w-full flex items-center justify-between py-4 gap-4 cursor-pointer text-left">
+                                            <span class="scope-item-title font-bold text-[20px] tracking-[-0.04em] leading-normal transition-colors duration-300 <?php echo $idx === 0 ? 'text-sec' : 'text-pri'; ?>">
+                                                <?php echo esc_html($tab['title']); ?>
+                                            </span>
+                                            <span class="scope-item-chevron shrink-0 flex items-center justify-center transition-transform duration-300 <?php echo $idx === 0 ? 'text-sec rotate-180' : 'text-pri'; ?>">
+                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M3 6L8 11L13 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </span>
+                                        </button>
+
+                                        <?php if (!empty($tab['items'])) : ?>
+                                            <div class="scope-item-body pb-4 <?php echo $idx === 0 ? '' : 'hidden'; ?>">
+                                                <div class="flex flex-col gap-3">
+                                                    <?php foreach ($tab['items'] as $ii => $item) :
+                                                        $icon_src = $item['icon'] ?: ($default_icons[$idx][$ii] ?? $default_icons[$idx][0] ?? '');
+                                                    ?>
+                                                        <div class="flex gap-2 items-start">
+                                                            <?php if ($icon_src) : ?>
+                                                                <span class="shrink-0 mt-1 w-4 h-4">
+                                                                    <img src="<?php echo esc_url($icon_src); ?>" alt="" class="w-full h-full object-contain">
+                                                                </span>
+                                                            <?php endif; ?>
+                                                            <span class="text-pri text-[16px] tracking-[-0.04em] leading-normal">
+                                                                <?php echo esc_html($item['text']); ?>
+                                                            </span>
+                                                        </div>
+                                                    <?php endforeach; ?>
                                                 </div>
-                                                <p class="text-[16px] max-md:text-[14px] text-pri leading-normal">
-                                                    <?php echo esc_html($scope); ?>
-                                                </p>
                                             </div>
                                         <?php endif; ?>
+
+                                        <?php if ($idx < count($tabs) - 1) : ?>
+                                            <div class="border-b border-[#d9d9d9]"></div>
+                                        <?php endif; ?>
+
                                     </div>
-                                    <a href="<?php echo esc_url($url); ?>" class="absolute inset-0 z-1" aria-label="<?php echo esc_attr($project->post_title); ?>"></a>
-                                </div>
+                                <?php endforeach; ?>
                             </div>
-                        <?php endforeach; ?>
+                        </div>
+
                     </div>
                 </div>
-            <?php endforeach; ?>
 
+            </div>
         </div>
     </section>
+
+    <script>
+        (function() {
+            var section = document.querySelector('.section-scope');
+            if (!section) return;
+
+            var items = section.querySelectorAll('.scope-item');
+            var tabImgs = section.querySelectorAll('.scope-tab-img');
+
+            items.forEach(function(item) {
+                item.querySelector('.scope-item-header').addEventListener('click', function() {
+                    var idx = parseInt(item.dataset.index, 10);
+
+                    items.forEach(function(el) {
+                        var isTarget = parseInt(el.dataset.index, 10) === idx;
+                        el.classList.toggle('is-active', isTarget);
+
+                        var title = el.querySelector('.scope-item-title');
+                        var chevron = el.querySelector('.scope-item-chevron');
+                        var body = el.querySelector('.scope-item-body');
+
+                        if (isTarget) {
+                            title.classList.remove('text-pri');
+                            title.classList.add('text-sec');
+                            chevron.classList.remove('text-pri');
+                            chevron.classList.add('text-sec', 'rotate-180');
+                            if (body) body.classList.remove('hidden');
+                        } else {
+                            title.classList.remove('text-sec');
+                            title.classList.add('text-pri');
+                            chevron.classList.remove('text-sec', 'rotate-180');
+                            chevron.classList.add('text-pri');
+                            if (body) body.classList.add('hidden');
+                        }
+                    });
+
+                    tabImgs.forEach(function(img) {
+                        var active = parseInt(img.dataset.index, 10) === idx;
+                        img.classList.toggle('opacity-100', active);
+                        img.classList.toggle('opacity-0', !active);
+                        img.classList.toggle('pointer-events-none', !active);
+                    });
+                });
+            });
+        })();
+    </script>
 
 <?php
 // ══════════════════════════════════════════════════════════════════
@@ -260,7 +361,7 @@ elseif ($term_slug === 'bat-dong-san') :
     <div class="flex flex-col">
         <?php foreach ($all_swipers as $swiper_index => $groups) : ?>
 
-            <div class="sec-bds-projects <?php echo ($swiper_index % 2 !== 0) ? 'is-custom' : ''; ?> relative overflow-hidden">
+            <div class="sec-bds-projects <?php echo ($swiper_index % 2 !== 0) ? 'is-custom bg-[#283377]' : ''; ?> relative overflow-hidden">
                 <div class="container-second <?php echo ($swiper_index % 2 === 0) ? 'ml-auto' : ''; ?>">
                     <div class="relative">
                         <!-- Nav nằm ngoài swiper-slide, absolute theo cột trái -->
@@ -295,21 +396,21 @@ elseif ($term_slug === 'bat-dong-san') :
                                         <div class="relative flex gap-10 overflow-hidden max-lg:flex-col max-md:gap-0!  <?php echo ($swiper_index % 2 !== 0) ? 'flex-row-reverse' : ''; ?>">
 
                                             <!-- LEFT COLUMN -->
-                                            <div class="bds-slide-left py-10 shrink-0 w-95 max-lg:w-full justify-center right flex flex-col gap-4">
+                                            <div class="bds-slide-left py-10 shrink-0 w-95 max-lg:w-full justify-center right flex flex-col gap-4 <?php echo ($swiper_index % 2 !== 0) ? 'text-white' : ''; ?>">
 
                                                 <h3 class="font-bold text-[36px] max-xl:text-[28px] max-md:text-[22px]
-                                           text-pri tracking-[-0.04em] leading-normal w-[86%]">
+                                           <?php echo ($swiper_index % 2 !== 0) ? 'text-white' : 'text-pri'; ?> tracking-[-0.04em] leading-normal w-[86%]">
                                                     <?php echo esc_html($group['title']); ?>
                                                 </h3>
 
-                                                <div class="flex flex-col gap-0.5 overflow-y-auto flex-1 pr-1">
+                                                <div class="flex flex-col gap-0.5 overflow-y-auto flex-1 pr-1 max-md:max-h-60">
                                                     <?php foreach ($items as $ii => $item) :
                                                         $is_active = ($ii === 0);
                                                     ?>
                                                         <button type="button"
                                                             class="js-bds-item text-left w-full px-4 py-2.5 rounded-lg
                                                    transition-colors duration-200
-                                                   <?php echo $is_active ? ($swiper_index % 2 === 0 ? 'bg-pri text-white' : 'bg-white text-pri') : ''; ?>"
+                                                   <?php echo $is_active ? ($swiper_index % 2 !== 0 ? 'bg-white text-pri' : 'bg-pri text-white') : ''; ?>"
                                                             data-index="<?php echo $ii; ?>"
                                                             data-image="<?php echo esc_attr($item['image_url']); ?>"
                                                             data-name="<?php echo esc_attr($item['name']); ?>"
@@ -396,15 +497,13 @@ elseif ($term_slug === 'bat-dong-san') :
 // DỊCH VỤ & khác — grid 2 cột
 // ══════════════════════════════════════════════════════════════════
 else :
-    $col_class = $term_slug === 'dich-vu' ? 'col-6' : 'col-4';
+    $col_class = $term_slug === 'dich-vu' ? 'col-4' : 'col-4';
 ?>
 
     <section class="sec-du-an-category-projects section-pd-t section-pd-b">
         <div class="container">
 
-            <div class="mb-8 max-xl:mb-5 max-md:mb-4 text-center">
-                <h2 class="title-main">CÁC <span>DỰ ÁN</span></h2>
-            </div>
+
             <div class="relative">
                 <div class="row">
                     <?php foreach ($projects as $project) :
@@ -412,7 +511,7 @@ else :
                         $image    = $image_id ? wp_get_attachment_image_url($image_id, 'large') : '';
                         $url      = get_field('url', $project->ID) ?: '#';
                     ?>
-                        <div class="col <?php echo esc_attr($col_class); ?> max-md:w-full!">
+                        <div class="col <?php echo esc_attr($col_class); ?> max-lg:w-1/2! max-md:w-full!">
                             <div class="relative flex flex-col gap-2 group">
                                 <div class="w-full aspect-4/3 rounded-lg overflow-hidden">
                                     <?php if ($image) : ?>

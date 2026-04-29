@@ -28,14 +28,14 @@ $data = [
                      <?php echo mona_get_image_by_id($data['logo'], 'full', false, ['class' => 'block w-full', 'alt' => esc_attr($data['name'])]); ?>
                   </div>
                </a>
-               <div class="flex flex-col gap-1">
-                  <p class="font-bold text-[28px] max-xl:text-[22px] max-md:text-[20px] text-white tracking-[-0.04em] leading-normal">
+               <div class="flex flex-col gap-1 max-w-110">
+                  <p class="font-bold text-[20px]  text-white tracking-[-0.04em] leading-normal">
                      <?php echo esc_html($data['name']); ?>
                   </p>
-                  <p class="text-[14px] max-md:text-[13px] text-white">
+                  <!-- <p class="text-[14px] max-md:text-[13px] text-white">
                      <span class="font-bold">Mã số thuế:</span>
                      <span class="font-normal"> <?php echo esc_html($data['tax']); ?></span>
-                  </p>
+                  </p> -->
                </div>
             </div>
          </div>
@@ -71,7 +71,7 @@ $data = [
                   <div class="flex gap-2 items-center">
                      <?php foreach ($data['socials'] as $social) : ?>
                         <a href="<?php echo esc_url($social['url']); ?>"
-                           class="block w-6 h-6 hover:opacity-75 transition-opacity"
+                           class="block w-6 h-6 icon-link"
                            aria-label="<?php echo esc_attr($social['label']); ?>">
                            <?php echo mona_get_image_by_id($social['icon'], 'full', false, ['class' => 'block w-full h-full object-contain', 'alt' => esc_attr($social['label'])]); ?>
                         </a>
@@ -98,10 +98,28 @@ $data = [
 
       <!-- MONA branding -->
       <div class="mt-8 max-md:mt-6 flex gap-1 items-center justify-center">
-         <p class="text-[14px] text-white font-light">
-            Thiết kế bởi <strong>MONA.Software</strong>
+         <p class="text-[14px] text-white font-light flex items-center gap-2">
+            Thiết kế bởi <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/icons/mona-soft.svg" class="block h-4" alt="MONA Media">
          </p>
       </div>
 
    </div>
 </footer>
+
+<!-- Back to top -->
+<button id="backToTop" aria-label="Về đầu trang">
+   <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="44" height="44" rx="8" fill="#F4DE96" />
+      <g clip-path="url(#clip0_btt)">
+         <path d="M29.3098 16.9692L22.3659 10.1715C22.1983 9.96971 21.8987 9.942 21.6969 10.1096C21.6745 10.1283 21.6537 10.149 21.635 10.1715L14.6911 16.9692C14.4691 17.175 14.456 17.5219 14.6618 17.744C14.7638 17.8541 14.9065 17.9175 15.0567 17.9195H18.3458V26.7272C18.4082 27.0953 18.7059 27.3781 19.0768 27.4216H24.9242C25.2167 27.4216 25.2897 27.0562 25.2897 26.7272V17.9195H28.9444C29.2471 17.9155 29.4893 17.6669 29.4853 17.3641C29.4833 17.214 29.4199 17.0713 29.3098 16.9692Z" fill="#283377" />
+         <path d="M24.924 28.5176H19.0765C18.7738 28.5176 18.5283 28.763 18.5283 29.0658C18.5283 29.3686 18.7738 29.614 19.0765 29.614H24.924C25.2268 29.614 25.4722 29.3686 25.4722 29.0658C25.4722 28.763 25.2269 28.5176 24.924 28.5176Z" fill="#283377" />
+         <path d="M24.924 30.7109H19.0765C18.7738 30.7109 18.5283 30.9564 18.5283 31.2592C18.5283 31.5619 18.7738 31.8074 19.0765 31.8074H24.924C25.2268 31.8074 25.4722 31.5619 25.4722 31.2592C25.4722 30.9564 25.2269 30.7109 24.924 30.7109Z" fill="#283377" />
+         <path d="M24.924 32.9033H19.0765C18.7738 32.9033 18.5283 33.1488 18.5283 33.4515C18.5283 33.7543 18.7738 33.9998 19.0765 33.9998H24.924C25.2268 33.9998 25.4722 33.7543 25.4722 33.4515C25.4722 33.1488 25.2269 32.9033 24.924 32.9033Z" fill="#283377" />
+      </g>
+      <defs>
+         <clipPath id="clip0_btt">
+            <rect width="24" height="24" fill="white" transform="translate(10 10)" />
+         </clipPath>
+      </defs>
+   </svg>
+</button>

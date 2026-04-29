@@ -6,9 +6,10 @@ if (! defined('ABSPATH')) {
 // Inject link_class + active class vào <a> của wp_nav_menu()
 add_filter('nav_menu_link_attributes', function ($atts, $item, $args, $depth) {
    if (! empty($args->link_class)) {
-      $classes   = [$args->link_class];
+      $base_class    = explode(' ', trim($args->link_class))[0]; // chỉ lấy class đầu tiên làm base
+      $classes       = [$args->link_class];
       if ($item->current || $item->current_item_ancestor) {
-         $classes[] = $args->link_class . '--active';
+         $classes[] = $base_class . '--active';
       }
       $atts['class'] = implode(' ', $classes);
    }
@@ -88,6 +89,8 @@ add_action('wp_enqueue_scripts', function () {
    // wp_enqueue_script('mona-fancybox',         MONA_THEME_PATH_URI . '/assets/library/fancybox/fancybox.umd.js',                       array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
    wp_enqueue_script('mona-gsap',             MONA_THEME_PATH_URI . '/assets/library/gsap/gsap.min.js',                               array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
    wp_enqueue_script('mona-ScrollTrigger',    MONA_THEME_PATH_URI . '/assets/library/gsap/ScrollTrigger.min.js',                      array('mona-gsap'), MONA_THEME_VERSION, array('in_footer' => true));
+   wp_enqueue_script('mona-MorphSVGPlugin',   MONA_THEME_PATH_URI . '/assets/library/gsap/MorphSVGPlugin.min.js',                     array('mona-gsap'), filemtime(MONA_THEME_PATH . '/assets/library/gsap/MorphSVGPlugin.min.js'), array('in_footer' => true));
+   wp_enqueue_script('mona-SplitText',        MONA_THEME_PATH_URI . '/assets/library/gsap/SplitText.min.js',                          array('mona-gsap'), filemtime(MONA_THEME_PATH . '/assets/library/gsap/SplitText.min.js'),        array('in_footer' => true));
    // wp_enqueue_script('mona-ukiyo',            MONA_THEME_PATH_URI . '/assets/library/ukiyo/ukiyo.min.js',                             array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
    // wp_enqueue_script('mona-splide',           MONA_THEME_PATH_URI . '/assets/library/splide/splide.min.js',                           array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
    // wp_enqueue_script('mona-splide-extension', MONA_THEME_PATH_URI . '/assets/library/splide/splide-extension-auto-scroll.min.js',     array('jquery'), MONA_THEME_VERSION, array('in_footer' => true));
@@ -107,7 +110,8 @@ add_action('wp_enqueue_scripts', function () {
    wp_enqueue_script('mona-main', MONA_THEME_PATH_URI . '/assets/scripts/main.js', array('jquery', 'mona-swiper', 'mona-lenis', 'mona-modal'), filemtime(MONA_THEME_PATH . '/assets/scripts/main.js'), array('in_footer' => true));
 
    if (is_front_page()) {
-      wp_enqueue_script('mona-home', MONA_THEME_PATH_URI . '/assets/scripts/home.js', array('jquery', 'mona-swiper', 'mona-main'), filemtime(MONA_THEME_PATH . '/assets/scripts/home.js'), array('in_footer' => true));
+      // Intro animation removed — do not enqueue intro.js
+      wp_enqueue_script('mona-home',  MONA_THEME_PATH_URI . '/assets/scripts/home.js',               array('jquery', 'mona-swiper', 'mona-main'),  filemtime(MONA_THEME_PATH . '/assets/scripts/home.js'),               array('in_footer' => true));
    }
 
    if (is_singular('post')) {

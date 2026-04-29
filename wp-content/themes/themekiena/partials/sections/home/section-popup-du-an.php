@@ -20,7 +20,7 @@ $btn_target = !empty($popup_link['target']) ? $popup_link['target'] : '_self';
 
       <!-- Nút đóng — luôn hiển thị -->
       <button type="button"
-         class="absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-black/10 hover:bg-black/20 transition-colors cusror-pointer"
+         class="absolute cursor-pointer top-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-black/10 hover:bg-black/20 transition-colors"
          data-modal-close aria-label="Đóng">
          <span class="w-3 h-3">
             <img src="<?php echo esc_url(MONA_THEME_PATH_URI); ?>/assets/images/icons/ic-close.svg"

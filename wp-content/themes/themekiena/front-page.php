@@ -21,8 +21,7 @@ get_header();
 // the_title('<h1 class="hide-sitename">', '</h1>');
 ?>
 
-<?php ?>
-<?php ?>
+<?php get_template_part('partials/sections/home/section', 'intro'); ?>
 <div class="banner-abouts-group">
    <?php get_template_part('partials/sections/home/section', 'banner'); ?>
    <?php get_template_part('partials/sections/home/section', 'abouts'); ?>

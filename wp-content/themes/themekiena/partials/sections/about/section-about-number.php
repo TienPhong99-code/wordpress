@@ -43,8 +43,8 @@ $img  = MONA_THEME_PATH_URI . '/assets/images/';
          <div class="grid grid-cols-1 sm:grid-cols-2 md:flex! md:flex-col gap-4">
 
             <!-- Card 2a: 36+ Công ty thành viên -->
-            <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-[#fcf5de] p-6 max-lg:p-5 relative flex flex-col gap-2 items-center justify-center">
-               <img src="<?= $img . esc_attr($data['brands'][0]); ?>" alt=""
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden p-6 max-lg:p-5 relative flex flex-col gap-2 items-center justify-center">
+               <!-- <img src="<?= $img . esc_attr($data['brands'][0]); ?>" alt=""
                   class="absolute top-[0.5%] right-[-22%] w-[40%] h-auto pointer-events-none">
                <img src="<?= $img . esc_attr($data['brands'][1]); ?>" alt=""
                   class="absolute bottom-[4%] right-[-22%] w-[50%] h-auto pointer-events-none">
@@ -53,7 +53,10 @@ $img  = MONA_THEME_PATH_URI . '/assets/images/';
                <img src="<?= $img . esc_attr($data['brands'][3]); ?>" alt=""
                   class="absolute top-1/2 -translate-y-1/2 left-[-26%] w-[41%] h-auto pointer-events-none">
                <img src="<?= $img . esc_attr($data['brands'][4]); ?>" alt=""
-                  class="absolute bottom-[6%] left-[15%] w-[25%] h-auto pointer-events-none">
+                  class="absolute bottom-[6%] left-[15%] w-[25%] h-auto pointer-events-none"> -->
+               <span class="block absolute w-full h-full z-[-1] bg-[#fcf5de] ">
+                  <img src="<?= $img ?>about/bg-br2.png" class="block w-full h-full object-cover" alt="">
+               </span>
                <div class="relative z-1 flex flex-col gap-2 text-pri text-center">
                   <p class="countNum text-[80px] max-lg:text-[40px] font-extrabold uppercase leading-none tracking-[-3.2px]" data-count="36+">36+</p>
                   <p class="text-[16px] font-semibold tracking-[-0.64px]">Công ty thành viên</p>
@@ -66,13 +69,13 @@ $img  = MONA_THEME_PATH_URI . '/assets/images/';
                   <img src="<?= $img ?>about/bg-num2.jpg" class="block w-full h-full object-cover" alt="">
                </span>
                <p class=" countNum text-[80px] max-lg:text-[40px] font-extrabold uppercase leading-none tracking-[-3.2px] text-pri" data-count="40+">40+</p>
-               <p class="text-[16px] font-semibold tracking-[-0.64px] text-pri">Giải thưởng danh giá trong nước và quốc tế</p>
+               <p class="text-[16px] font-semibold tracking-[-0.64px] text-pri">Giải thưởng danh giá <br> trong nước và <br> quốc tế</p>
             </div>
 
          </div>
 
          <!-- Card 3: 20+ Năm kinh nghiệm giáo dục (col 4, row 1-2) -->
-         <div class="md:row-span-2 rounded-2xl overflow-hidden bg-[#fcf5de] p-6 max-lg:p-5 relative min-h-70 flex items-start">
+         <div class="md:row-span-2 rounded-2xl overflow-hidden  p-6 max-lg:p-5 relative min-h-70 flex items-start">
             <img src="<?= $img ?>about/number-edu2.jpg" alt="" class="absolute inset-0 size-full object-cover pointer-events-none" data-parallax-bg>
             <div class="absolute top-0 left-0 w-full h-[75%] bg-linear-to-b from-white to-transparent md:hidden pointer-events-none"></div>
             <div class="relative z-1 flex flex-col gap-3 text-pri">

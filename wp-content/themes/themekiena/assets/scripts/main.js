@@ -92,12 +92,19 @@ $(document).ready(function () {
       if (!btn) return;
       var slide = btn.closest('.swiper-slide');
       if (!slide) return;
+      var section = btn.closest('.sec-bds-projects');
+      var isOdd = section && section.classList.contains('is-custom');
 
       slide.querySelectorAll('.js-bds-item').forEach(function (b) {
          var isActive = (b === btn);
-         b.classList.toggle('bg-pri', isActive);
-         b.classList.toggle('text-white', isActive);
-         b.classList.toggle('text-pri', !isActive);
+         if (isOdd) {
+            b.classList.toggle('bg-white', isActive);
+            b.classList.toggle('text-pri', isActive);
+         } else {
+            b.classList.toggle('bg-pri', isActive);
+            b.classList.toggle('text-white', isActive);
+            b.classList.toggle('text-pri', !isActive);
+         }
          var span = b.querySelector('span');
          if (span) span.style.fontWeight = isActive ? '700' : '400';
       });
@@ -120,12 +127,7 @@ $(document).ready(function () {
          });
       }
 
-      if (animate) {
-         right.style.opacity = '0';
-         setTimeout(function () { update(); right.style.opacity = '1'; }, 200);
-      } else {
-         update();
-      }
+      update();
    }
    // ────────────────────────────────────────────────────────────────
       functionSlider('.slideFade', {
@@ -249,3 +251,25 @@ function functionSlider(selector, options = {}, pagiType = 'bullets') {
       window.lenis.scrollTo(el, { offset: -offSet, duration: speed / 1000 || 0 });
     }
   });
+
+  // ── Back to top ──────────────────────────────────────────────────────
+  (function () {
+    const btn = document.getElementById('backToTop');
+    if (!btn) return;
+
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 300) {
+        btn.classList.add('is-visible');
+      } else {
+        btn.classList.remove('is-visible');
+      }
+    }, { passive: true });
+
+    btn.addEventListener('click', function () {
+      if (window.lenis) {
+        window.lenis.scrollTo(0, { duration: 1 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  })();

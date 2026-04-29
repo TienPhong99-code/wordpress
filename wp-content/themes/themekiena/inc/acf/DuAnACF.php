@@ -264,6 +264,33 @@ add_action('acf/init', function () {
                     WYSIWYGEditor::make('Đoạn văn', 'paragraph')->required(),
                 ]),
 
+            Tab::make('Phạm vi hoạt động (Xây dựng)')->placement('left'),
+
+            Repeater::make('Các tab phạm vi', 'scope_tabs')
+                ->helperText('Mỗi hàng = 1 accordion item. Chỉ dùng cho danh mục Xây dựng.')
+                ->layout('block')
+                ->fields([
+                    Text::make('Tiêu đề', 'tab_title')
+                        ->helperText('Ví dụ: Thi công hạ tầng kỹ thuật')
+                        ->required(),
+                    Image::make('Ảnh', 'tab_image')
+                        ->helperText('Hiển thị bên trái khi tab active. Kích thước đề xuất: 696×522px (4:3).')
+                        ->acceptedFileTypes(['jpg', 'jpeg', 'png', 'webp', 'avif'])
+                        ->format('url'),
+                    Repeater::make('Danh sách hạng mục', 'tab_items')
+                        ->helperText('Mỗi hàng = 1 bullet point hiện ra khi accordion mở.')
+                        ->layout('table')
+                        ->fields([
+                            Image::make('Icon', 'item_icon')
+                                ->helperText('Icon 16×16px. Để trống nếu không có.')
+                                ->acceptedFileTypes(['jpg', 'jpeg', 'png', 'webp', 'svg'])
+                                ->format('url'),
+                            Text::make('Nội dung', 'item_text')
+                                ->helperText('Ví dụ: San nền, đường giao thông')
+                                ->required(),
+                        ]),
+                ]),
+
 
         ],
     ], false);

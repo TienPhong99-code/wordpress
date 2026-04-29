@@ -16,7 +16,9 @@ $image_url  = $image_id ? wp_get_attachment_image_url($image_id, 'full') : MONA_
 
             <?php if ($description) : ?>
                 <div class="max-w-148 mx-auto mt-4 text-[16px] text-pri text-center">
-                    <?php echo wp_kses_post($description); ?>
+                    <div class="mona-content">
+                        <?php echo wp_kses_post($description); ?>
+                    </div>
                 </div>
             <?php endif; ?>
         </div>

@@ -10,7 +10,7 @@ $socials = get_field('footer_socials', 'option') ?: [];
 ?>
 
 <section class="sec-lien-he relative py-20">
-    <span class="absolute inset-0 bg-[#f5f7fb] z-[-1]"></span>
+
 
     <div class="container">
         <div class="text-center mb-10">
@@ -61,7 +61,7 @@ $socials = get_field('footer_socials', 'option') ?: [];
                                 <div class="flex gap-2 items-center">
                                     <?php foreach ($socials as $social) : ?>
                                         <a href="<?php echo esc_url($social['url'] ?? '#'); ?>"
-                                            class="block w-6 h-6 hover:opacity-75 transition-opacity"
+                                            class="block w-6 h-6 icon-link"
                                             aria-label="<?php echo esc_attr($social['label'] ?? ''); ?>">
                                             <?php echo mona_get_image_by_id($social['icon'], 'full', false, ['class' => 'block w-full h-full object-contain', 'alt' => esc_attr($social['label'] ?? '')]); ?>
                                         </a>

@@ -1,33 +1,10 @@
 $(document).ready(function () {
     initVideoGallery();
     initHoatDongGallery();
-    initHoatDongMasonry();
+
 });
 
-function initHoatDongMasonry() {
-    var grid = document.querySelector('#hoatDongGrid');
-    if (!grid) return;
 
-    var msnry;
-
-    imagesLoaded(grid, function () {
-        msnry = new Masonry(grid, {
-            itemSelector: '.hoat-dong-grid-item',
-            columnWidth: '.hoat-dong-grid-sizer',
-            percentPosition: true,
-            gutter: 0,
-        });
-        grid.classList.add('is-ready');
-    });
-
-    var resizeTimer;
-    window.addEventListener('resize', function () {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function () {
-            if (msnry) msnry.layout();
-        }, 200);
-    });
-}
 
 function initHoatDongGallery() {
     document.querySelectorAll('.js-hoat-dong-gallery').forEach(function (trigger) {

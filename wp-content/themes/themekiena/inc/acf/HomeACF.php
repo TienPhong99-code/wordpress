@@ -1,5 +1,6 @@
 <?php
 
+use Extended\ACF\Fields\File;
 use Extended\ACF\Fields\Image;
 use Extended\ACF\Fields\Link;
 use Extended\ACF\Fields\Repeater;
@@ -35,6 +36,10 @@ add_action('acf/init', function () {
                         ->format('id')
                         ->required(),
                     Text::make('Alt text', 'alt'),
+                    File::make('Video (tuỳ chọn)', 'video')
+                        ->helperText('Nếu có video, video sẽ được ưu tiên hiển thị thay ảnh. Định dạng: mp4, webm')
+                        ->acceptedFileTypes(['mp4', 'webm'])
+                        ->format('url'),
                 ]),
 
             Tab::make('Lĩnh vực hoạt động')
