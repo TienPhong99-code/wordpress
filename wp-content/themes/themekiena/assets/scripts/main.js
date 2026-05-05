@@ -2,7 +2,7 @@
 // Lenis smooth scroll
 // =============================================
 const lenis = new Lenis({
-   duration: 1.2,
+   duration: .8,
    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
    smooth: true,
 });
@@ -17,6 +17,9 @@ gsap.ticker.lagSmoothing(0);
 
 $(document).ready(function () {
    initTitleMainAnim();
+   initDuAnCategoryHero();
+   initNumberCardsHover();
+   initMissionCardsAnim();
 
    // =============================================
    // Mobile nav drawer
@@ -140,7 +143,148 @@ $(document).ready(function () {
     crossFade: true
   },
    });
+
+   // ── Journey swiper + timeline pagination ─────────────────────────
+   (function () {
+      var section = document.querySelector('.section-about-journey');
+      if (!section) return;
+
+      var swiperEl = section.querySelector('.journey-swiper');
+      var tlItems  = section.querySelectorAll('.journey-tl-item');
+      var fillEl   = section.querySelector('.journey-progress-fill');
+
+      if (!swiperEl) return;
+
+      function syncTimeline(sw, activeIndex) {
+         tlItems.forEach(function (item) {
+            item.classList.toggle('is-active', parseInt(item.dataset.index, 10) === activeIndex);
+         });
+         if (fillEl) {
+            var total = sw.slides.length;
+            var pct   = total > 1 ? (activeIndex / (total - 1)) * 100 : 0;
+            fillEl.style.width = pct + '%';
+         }
+      }
+
+      var swiper = new Swiper(swiperEl, {
+         speed: 600,
+         slidesPerView: 'auto',
+         loop: false,
+         allowTouchMove: true,
+         autoplay: { delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true },
+         navigation: {
+            nextEl: section.querySelector('.swiper-next'),
+            prevEl: section.querySelector('.swiper-prev'),
+         },
+         on: {
+            init:        function () { syncTimeline(this, this.activeIndex); },
+            slideChange: function () { syncTimeline(this, this.activeIndex); },
+         },
+      });
+
+      tlItems.forEach(function (item) {
+         item.addEventListener('click', function () {
+            swiper.slideTo(parseInt(this.dataset.index, 10));
+         });
+      });
+   })();
 });
+
+// =============================================
+// Mission cols — auto-cycle highlight
+// =============================================
+function initMissionCardsAnim() {
+   var section = document.querySelector('.sec-about-mission');
+   if (!section) return;
+
+   var cols = Array.from(section.querySelectorAll('.mission-col'));
+   var bgs  = Array.from(section.querySelectorAll('.mission-bg'));
+   if (!cols.length) return;
+
+   var isMobile = window.innerWidth < 768;
+   var currentIndex = -1;
+
+   // Desktop: ẩn tất cả desc ban đầu bằng GSAP
+   if (!isMobile) {
+      cols.forEach(function (col) {
+         gsap.set(col.querySelector('.mission-col-desc'), { maxHeight: 0, opacity: 0 });
+         gsap.set(col.querySelector('.mission-col-overlay'), { opacity: 0 });
+      });
+      gsap.set(bgs[0], { opacity: 1 });
+      bgs.slice(1).forEach(function (bg) { gsap.set(bg, { opacity: 0 }); });
+   }
+
+   function activate(idx) {
+      cols.forEach(function (col, i) {
+         var isActive = (i === idx);
+         var bg      = bgs[i];
+         var overlay = col.querySelector('.mission-col-overlay');
+         var desc    = col.querySelector('.mission-col-desc');
+         var title   = col.querySelector('.mission-col-title');
+
+         if (bg) gsap.to(bg, { opacity: isActive ? 1 : 0, duration: 0.7, ease: 'power2.inOut' });
+         if (overlay) gsap.to(overlay, { opacity: isActive ? 1 : 0, duration: 0.5 });
+         if (title) gsap.to(title, { color: isActive ? '#f4de96' : '#ffffff', duration: 0.4 });
+
+         if (!isMobile && desc) {
+            gsap.to(desc, {
+               maxHeight: isActive ? 300 : 0,
+               opacity:   isActive ? 1 : 0,
+               duration:  isActive ? 0.5 : 0.35,
+               ease:      isActive ? 'power2.out' : 'power2.in',
+            });
+         }
+      });
+      currentIndex = idx;
+   }
+
+   function startCycle() {
+      activate(0);
+      setInterval(function () {
+         activate((currentIndex + 1) % cols.length);
+      }, 3500);
+   }
+
+   var rect = section.getBoundingClientRect();
+   if (rect.top < window.innerHeight * 0.9) {
+      setTimeout(startCycle, 200);
+   } else {
+      ScrollTrigger.create({
+         trigger: section,
+         start: 'top 85%',
+         once: true,
+         onEnter: startCycle,
+      });
+   }
+}
+
+// =============================================
+// Number cards — hover đổi màu text
+// =============================================
+function initNumberCardsHover() {
+   const cards = document.querySelectorAll('.section-about-number [data-num-card]');
+   if (!cards.length) return;
+
+   cards.forEach(function (card) {
+      const color    = card.dataset.activeColor || '#ed1c24';
+      const texts    = card.querySelectorAll('.num-card-text');
+      const origColors = Array.from(texts).map(function (el) {
+         return window.getComputedStyle(el).color;
+      });
+
+      card.addEventListener('mouseenter', function () {
+         texts.forEach(function (el) {
+            gsap.to(el, { color: color, duration: 0.3, ease: 'power2.out' });
+         });
+      });
+
+      card.addEventListener('mouseleave', function () {
+         texts.forEach(function (el, i) {
+            gsap.to(el, { color: origColors[i] || '', duration: 0.3, ease: 'power2.out' });
+         });
+      });
+   });
+}
 
 // =============================================
 // Title main — hiệu ứng scroll cho .title-main
@@ -226,6 +370,49 @@ function functionSlider(selector, options = {}, pagiType = 'bullets') {
   document.addEventListener('wpcf7mailfailed', removeLoading, false);
   document.addEventListener('wpcf7spam', removeLoading, false);
 })();
+// =============================================
+// Du-an category hero — fade-in on enter
+// =============================================
+function initDuAnCategoryHero() {
+   const section = document.querySelector('.section-projects-hero');
+   if (!section) return;
+
+   const h1         = section.querySelector('h1');
+   const paragraphs = section.querySelectorAll('.project-desc p');
+   const img        = section.querySelector('img');
+
+   if (h1) gsap.set(h1, { opacity: 0, y: 30 });
+   if (paragraphs.length) gsap.set(paragraphs, { opacity: 0, y: 20 });
+   if (img) gsap.set(img, { opacity: 0, y: 60 });
+
+   const tl = gsap.timeline({ paused: true });
+
+   if (h1) {
+      tl.to(h1, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' });
+   }
+
+   if (paragraphs.length) {
+      tl.to(paragraphs, {
+         opacity: 1,
+         y: 0,
+         duration: 0.6,
+         stagger: 0.15,
+         ease: 'power2.out',
+      }, '-=0.4');
+   }
+
+   if (img) {
+      tl.to(img, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }, '-=0.4');
+   }
+
+   ScrollTrigger.create({
+      trigger: section,
+      start: 'top 85%',
+      once: true,
+      onEnter: function () { tl.play(); },
+   });
+}
+
   window.addEventListener("load", function () {
     const speed = 0;
 

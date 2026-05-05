@@ -40,16 +40,23 @@ $data = [
    ], $group['milestones'] ?? []),
 ];
 
+// Fallback sample nếu ACF chưa có dữ liệu
+if (empty($data['milestones'])) {
+   $data['milestones'] = $sample['milestones'];
+}
+
+$total       = count($data['milestones']);
+$highlighted = ['1994', '2001', '2016', '2018', '2021'];
 ?>
 
-<section class="section-about-journey relative overflow-hidden max-md:mt-8" id="secJourney">
+<section class="section-about-journey relative overflow-hidden" id="secJourney">
    <span class="absolute inset-0 bg-[#f4f5f8] z-[-1]"></span>
 
-   <div class="journey-pin w-full min-h-screen section-pd flex flex-col">
+   <div class="pt-(--pd-sc) pb-0">
 
       <!-- Title -->
-      <div class="container ">
-         <div class="pt-(--pd-sc) pb-10 max-lg:pb-6">
+      <div class="container">
+         <div class="pb-10 max-lg:pb-6">
             <h2 class="title-main text-center">
                Hành trình
                <span>Phát triển</span>
@@ -57,85 +64,118 @@ $data = [
          </div>
       </div>
 
-      <!-- Horizontal track — GSAP x-translate on lg+ -->
-      <div class="journey-track flex flex-1 flex-col lg:flex-row! lg:items-center gap-10 lg:gap-[120px] px-4 lg:px-0">
-         <div class="journey-spacer shrink-0 hidden lg:block"></div>
+      <!-- Swiper -->
+      <div class="journey-swiper-wrap relative container">
 
-         <?php foreach ($data['milestones'] as $i => $m) : ?>
-            <div class="journey-slide w-full lg:shrink-0 lg:pl-[5%] lg:w-334.25! <?php echo $i === 0 ? 'active' : ''; ?>" data-index="<?php echo $i; ?>">
-               <div class="relative">
-                  <div class="row">
+         <!-- Nav -->
 
-                     <!-- Content col: ~40% -->
-                     <div class="col col-5 max-md:w-full!">
-                        <div class="flex flex-col gap-3">
-                           <p class="text-[64px] max-lg:text-[32px] font-extrabold text-pri t-titlte uppercase transition-colors duration-300 leading-none">
-                              <?php echo esc_html($m['year']); ?>:
-                           </p>
-                           <div class="flex flex-col gap-2 list-disc">
-                              <?php foreach ($m['items'] as $item) : ?>
-                                 <div class="text-[28px] max-lg:text-[18px]! font-bold text-pri">
-                                    <?php echo wp_kses_post($item); ?>
+         <div class="absolute z-10 left-1/2 w-[105%] -translate-x-1/2 top-1/2 -translate-y-1/2 flex justify-between px-0 max-lg:px-4">
+            <button class="pointer-events-auto swiper-prev tts-btn w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition" aria-label="Trước">
+               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M5 8c0 .128.049.256.146.354l5 5a.5.5 0 0 0 .708-.708L6.207 8l4.647-4.646a.5.5 0 1 0-.708-.708l-5 5A.497.497 0 0 0 5 8Z" fill="currentColor" />
+               </svg>
+            </button>
+            <button class="pointer-events-auto swiper-next tts-btn w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition" aria-label="Tiếp theo">
+               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M11 8a.497.497 0 0 0-.146-.354l-5-5a.5.5 0 1 0-.708.708L9.793 8l-4.647 4.646a.5.5 0 0 0 .708.708l5-5A.497.497 0 0 0 11 8Z" fill="currentColor" />
+               </svg>
+            </button>
+         </div>
+
+         <div class="swiper-container overflow-hidden">
+            <div class="swiper journey-swiper rows">
+               <div class="swiper-wrapper">
+                  <?php foreach ($data['milestones'] as $i => $m) : ?>
+                     <div class="swiper-slide col journey-slide">
+                        <div class="relative overflow-hidden">
+                           <div class="row min-h-120 max-lg:min-h-0 py-6 max-lg:py-4 max-md:flex-col max-md:gap-6">
+
+                              <!-- Content col -->
+                              <div class="col col-5 md:mb-0! max-md:w-full!">
+                                 <div class="flex flex-col gap-3 b-content">
+                                    <p class="text-[64px] max-lg:text-[40px] max-md:text-[32px] font-extrabold text-sec uppercase leading-none">
+                                       <?php echo esc_html($m['year']); ?>:
+                                    </p>
+                                    <div class="flex flex-col gap-2">
+                                       <?php foreach ($m['items'] as $item) : ?>
+                                          <div class="text-[28px] max-lg:text-[20px] max-md:text-[18px] font-bold text-pri">
+                                             <?php echo nl2br(wp_kses_post($item)); ?>
+                                          </div>
+                                       <?php endforeach; ?>
+                                    </div>
                                  </div>
-                              <?php endforeach; ?>
+                              </div>
+
+                              <!-- Image col -->
+                              <div class="col col-7 md:mb-0! max-md:w-full!">
+                                 <div class="relative aspect-4/3 max-md:aspect-3/2">
+
+                                    <?php if (!empty($m['image'])) : ?>
+                                       <div class="w-full h-full overflow-hidden rounded-lg">
+                                          <img src="<?php echo esc_url($m['image']); ?>" alt="" class="block w-full h-full object-cover">
+                                       </div>
+                                    <?php else : ?>
+                                       <div class="absolute top-0 left-0 w-3/5 aspect-3/4 bg-[#b5b5b5] rounded-lg -rotate-[4deg] origin-top-left"></div>
+                                       <div class="absolute bottom-0 right-0 w-3/5 aspect-3/4 bg-[#b5b5b5] rounded-lg rotate-[4deg] origin-bottom-right"></div>
+                                    <?php endif; ?>
+
+                                 </div>
+                              </div>
+
                            </div>
                         </div>
                      </div>
-
-                     <!-- Image col: ~60% -->
-                     <div class="col col-7 max-md:w-full!">
-                        <div class="relative">
-
-                           <?php if (!empty($m['image'])) : ?>
-                              <div class="w-full h-full overflow-hidden">
-                                 <img src="<?php echo esc_url($m['image']); ?>" alt="" class="block w-full h-full object-cover">
-                              </div>
-                           <?php else : ?>
-                              <div class="absolute top-0 left-0 w-3/5 aspect-3/4 bg-[#b5b5b5] rounded-[8px] -rotate-[4deg] origin-top-left"></div>
-                              <div class="absolute bottom-0 right-0 w-3/5 aspect-3/4 bg-[#b5b5b5] rounded-[8px] rotate-[4deg] origin-bottom-right"></div>
-                           <?php endif; ?>
-
-                        </div>
-                     </div>
-
-                  </div>
-               </div>
-            </div>
-         <?php endforeach; ?>
-
-         <div class="journey-spacer shrink-0 hidden lg:block"></div>
-      </div>
-
-      <!-- Timeline bar — desktop only -->
-      <span class="absolute left-0 bottom-0 w-full z-1 max-md:hidden">
-         <span class="bg-line-sm"></span>
-         <div class="container">
-            <div class="journey-timeline relative">
-
-               <!-- Tick marks row -->
-               <div class="journey-tl-ticks flex justify-between items-end border-b border-[#cecfd2]">
-                  <?php foreach ($data['milestones'] as $i => $m) : ?>
-                     <div class="journey-tl-item flex flex-col items-center" data-index="<?php echo $i; ?>">
-                        <div class="journey-tl-tick bg-[#cecfd2] w-0.75 h-11"></div>
-                     </div>
                   <?php endforeach; ?>
                </div>
-               <!-- Year labels row -->
-               <div class="journey-tl-years flex justify-between absolute left-0 w-full bottom-full translate-x-[1%] translate-y-[35%]">
-                  <?php foreach ($data['milestones'] as $i => $m) : ?>
-                     <div class="journey-tl-item" data-index="<?php echo $i; ?>">
-                        <span class="journey-tl-year text-[16px] text-pri py-3 block"><?php echo esc_html($m['year']); ?></span>
-                     </div>
-                  <?php endforeach; ?>
-               </div>
-
             </div>
          </div>
-      </span>
+      </div>
+
+      <!-- Timeline pagination — desktop -->
+      <div class="w-full max-md:hidden mt-8">
+         <!-- <span class="bg-line-sm"></span> -->
+         <div class="container">
+            <div class="journey-timeline">
+               <div class="flex justify-between items-end border-b border-[#cecfd2]">
+                  <?php foreach ($data['milestones'] as $i => $m) :
+                     $is_key = in_array($m['year'], $highlighted);
+                  ?>
+                     <button class="journey-tl-item flex flex-col items-center cursor-pointer group" data-index="<?php echo $i; ?>" aria-label="<?php echo esc_attr($m['year']); ?>">
+
+                        <?php if ($is_key) : ?>
+                           <!-- Icon phát triển cho mốc nổi bật -->
+                           <span class="journey-tl-icon text-[#cecfd2] transition-colors duration-300 mb-0.5">
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                 <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                                 <polyline points="17 6 23 6 23 12" />
+                              </svg>
+                           </span>
+                           <span class="journey-tl-year text-[20px] font-bold text-pri py-2 block transition-all duration-300 group-[.is-active]:text-sec">
+                              <?php echo esc_html($m['year']); ?>
+                           </span>
+                        <?php else : ?>
+                           <span class="journey-tl-year text-[16px] text-[#9e9e9e] py-2 pb-1.5 block transition-all duration-300 group-[.is-active]:text-sec group-[.is-active]:font-bold">
+                              <?php echo esc_html($m['year']); ?>
+                           </span>
+                        <?php endif; ?>
+
+                     </button>
+                  <?php endforeach; ?>
+               </div>
+            </div>
+         </div>
+      </div>
 
       <!-- Progress line -->
-      <div class="absolute z-1 bottom-0 left-0 w-full h-[3px] bg-[#cecfd2] lg:block">
-         <div class="journey-progress-fill h-full bg-sec w-0"></div>
+      <div class="absolute z-1 bottom-0 left-0 w-full h-[3px] bg-[#cecfd2] max-md:hidden">
+         <div class="journey-progress-fill h-full bg-sec transition-[width] duration-500 ease-in-out w-0"></div>
+      </div>
+
+      <!-- Mobile pagination dots -->
+      <div class="journey-mobile-pagi flex justify-center gap-2 py-4 md:hidden!">
+         <?php foreach ($data['milestones'] as $i => $m) : ?>
+            <button class="journey-tl-item w-2 h-2 rounded-full bg-[#cecfd2] transition-all duration-300 cursor-pointer" data-index="<?php echo $i; ?>" aria-label="<?php echo esc_attr($m['year']); ?>"></button>
+         <?php endforeach; ?>
       </div>
 
    </div>

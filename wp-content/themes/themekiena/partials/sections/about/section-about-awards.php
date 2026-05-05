@@ -55,21 +55,21 @@ $img     = MONA_THEME_PATH_URI . '/assets/images/';
                   </svg>
                </button>
             </div>
-            <div class="swiper-container overflow-hidden">
-               <div class="swiper rows">
+            <div class="swiper-container py-4 -my-4">
+               <div class="swiper rows" style="overflow: visible;">
                   <div class="swiper-wrapper">
                      <?php foreach ($cards as $card) : ?>
                         <div class="swiper-slide col col-3  max-md:w-full! ">
-                           <div class="w-full flex flex-col gap-2 text-center">
-                              <div class="max-w-34.5 mx-auto">
+                           <div class="w-full flex flex-col gap-2 text-center transition-transform duration-500 ease-out hover:scale-105 cursor-pointer">
+                              <div class="max-w-40.5 mx-auto">
                                  <?php echo wp_get_attachment_image($card['image'], 'full', false, [
                                     'class' => 'block w-full h-full object-cover',
                                     'alt'   => esc_attr($card['alt'] ?? ''),
                                  ]); ?>
                               </div>
-                              <?php if (!empty($card['name'])) : ?>
+                              <!-- <?php if (!empty($card['name'])) : ?>
                                  <span class="text-[20px] font-bold text-white"><?php echo esc_html($card['name']); ?></span>
-                              <?php endif; ?>
+                              <?php endif; ?> -->
                            </div>
                         </div>
                      <?php endforeach; ?>

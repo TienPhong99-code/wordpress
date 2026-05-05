@@ -2,6 +2,7 @@
 
 use Extended\ACF\ConditionalLogic;
 use Extended\ACF\Fields\Image;
+use Extended\ACF\Fields\Number;
 use Extended\ACF\Fields\RadioButton;
 use Extended\ACF\Fields\Repeater;
 use Extended\ACF\Fields\Select;
@@ -65,6 +66,11 @@ add_action('acf/init', function () {
             Text::make('Tên dự án', 'ten_du_an')
                 ->required(),
 
+            // ── Thứ tự hiển thị ──────────────────────────
+            Number::make('Thứ tự hiển thị', 'thu_tu')
+                ->helperText('Số nhỏ hơn hiển thị trước. Ví dụ: 1, 2, 3…')
+                ->default(0),
+
             // ── Loại dự án (radio) ───────────────────────
             RadioButton::make('Loại dự án', 'loai_du_an')
                 ->choices([
@@ -87,29 +93,41 @@ add_action('acf/init', function () {
             URL::make('URL dự án', 'url')
                 ->helperText('Link tới trang chi tiết. Để trống nếu chưa có.'),
 
-            // ── Giáo dục ─────────────────────────────────
+            // ── Giáo dục / Dịch vụ ───────────────────────
             Textarea::make('Mô tả', 'description')
                 ->helperText('Mô tả ngắn về dự án.')
                 ->conditionalLogic([
                     ConditionalLogic::where('loai_du_an', '==', 'giao-duc'),
+                ])
+                ->conditionalLogic([
+                    ConditionalLogic::where('loai_du_an', '==', 'dich-vu'),
                 ]),
 
             Text::make('Vị trí', 'location')
                 ->helperText('Ví dụ: Quận 7, TP.HCM')
                 ->conditionalLogic([
                     ConditionalLogic::where('loai_du_an', '==', 'giao-duc'),
+                ])
+                ->conditionalLogic([
+                    ConditionalLogic::where('loai_du_an', '==', 'dich-vu'),
                 ]),
 
             Text::make('Diện tích', 'area')
                 ->helperText('Ví dụ: 10.000 m²')
                 ->conditionalLogic([
                     ConditionalLogic::where('loai_du_an', '==', 'giao-duc'),
+                ])
+                ->conditionalLogic([
+                    ConditionalLogic::where('loai_du_an', '==', 'dich-vu'),
                 ]),
 
             Text::make('Quy mô', 'scale')
                 ->helperText('Ví dụ: 2.000 học sinh')
                 ->conditionalLogic([
                     ConditionalLogic::where('loai_du_an', '==', 'giao-duc'),
+                ])
+                ->conditionalLogic([
+                    ConditionalLogic::where('loai_du_an', '==', 'dich-vu'),
                 ]),
 
             // ── Bất động sản: outer = Swiper, middle = slide, inner = dự án con ──
@@ -210,14 +228,19 @@ add_action('acf/save_post', function ($post_id) {
         return;
     }
 
-    // Sync tên dự án → post_title
-    $ten = get_field('ten_du_an', $post_id);
+    // Sync tên dự án → post_title, thứ tự → menu_order
+    $ten     = get_field('ten_du_an', $post_id);
+    $thu_tu  = get_field('thu_tu', $post_id);
+    $update  = ['ID' => $post_id];
     if ($ten) {
-        wp_update_post([
-            'ID'         => $post_id,
-            'post_title' => sanitize_text_field($ten),
-            'post_name'  => sanitize_title($ten),
-        ]);
+        $update['post_title'] = sanitize_text_field($ten);
+        $update['post_name']  = sanitize_title($ten);
+    }
+    if ($thu_tu !== '' && $thu_tu !== null) {
+        $update['menu_order'] = (int) $thu_tu;
+    }
+    if (count($update) > 1) {
+        wp_update_post($update);
     }
 
     // Tự động gán taxonomy theo loại đã chọn
@@ -231,6 +254,111 @@ add_action('acf/save_post', function ($post_id) {
 }, 20);
 
 // ══════════════════════════════════════════════════════════════════
+// PAGE TEMPLATE — Dự án Dịch vụ (template-du-an-dich-vu.php)
+// Fields: hero_image, hero_desc, thu_tu
+// ══════════════════════════════════════════════════════════════════
+add_action('acf/init', function () {
+    mona_regist_acf_field_group([
+        'title'          => 'Thiết lập trang Dự án Dịch vụ',
+        'style'          => 'default',
+        'position'       => 'acf_after_title',
+        'hide_on_screen' => ['the_content'],
+        'location'       => [
+            Location::where('page_template', '==', 'page-template/template-du-an-dich-vu.php'),
+        ],
+        'fields' => [
+
+            Tab::make('Thông tin chung')->placement('left'),
+
+            Number::make('Thứ tự hiển thị', 'thu_tu')
+                ->helperText('Số nhỏ hơn hiển thị trước trong danh sách trang dự án.')
+                ->default(0),
+
+            Tab::make('Hero')->placement('left'),
+
+            Image::make('Ảnh nền hero', 'hero_image')
+                ->helperText('Kích thước đề xuất: 1728x900px')
+                ->acceptedFileTypes(['jpg', 'jpeg', 'png', 'webp', 'avif'])
+                ->format('id'),
+
+            Repeater::make('Mô tả', 'hero_desc')
+                ->helperText('Mỗi hàng là một đoạn văn hiển thị trong hero.')
+                ->layout('block')
+                ->fields([
+                    WYSIWYGEditor::make('Đoạn văn', 'paragraph')->required(),
+                ]),
+
+        ],
+    ], false);
+}, 10);
+
+// ══════════════════════════════════════════════════════════════════
+// PAGE TEMPLATE — Dự án Giáo dục (template-du-an-giao-duc.php)
+// Fields: hero_image, hero_desc
+// ══════════════════════════════════════════════════════════════════
+add_action('acf/init', function () {
+    mona_regist_acf_field_group([
+        'title'          => 'Thiết lập trang Dự án Giáo dục',
+        'style'          => 'default',
+        'position'       => 'acf_after_title',
+        'hide_on_screen' => ['the_content'],
+        'location'       => [
+            Location::where('page_template', '==', 'page-template/template-du-an-giao-duc.php'),
+        ],
+        'fields' => [
+
+            Tab::make('Hero')->placement('left'),
+
+            Image::make('Ảnh nền hero', 'hero_image')
+                ->helperText('Kích thước đề xuất: 1728x900px')
+                ->acceptedFileTypes(['jpg', 'jpeg', 'png', 'webp', 'avif'])
+                ->format('id'),
+
+            Repeater::make('Mô tả', 'hero_desc')
+                ->helperText('Mỗi hàng là một đoạn văn hiển thị trong hero.')
+                ->layout('block')
+                ->fields([
+                    WYSIWYGEditor::make('Đoạn văn', 'paragraph')->required(),
+                ]),
+
+        ],
+    ], false);
+}, 10);
+
+// ══════════════════════════════════════════════════════════════════
+// PAGE TEMPLATE — Dự án Xây dựng (template-du-an-xay-dung.php)
+// Fields: hero_image, hero_desc
+// ══════════════════════════════════════════════════════════════════
+add_action('acf/init', function () {
+    mona_regist_acf_field_group([
+        'title'          => 'Thiết lập trang Dự án Xây dựng',
+        'style'          => 'default',
+        'position'       => 'acf_after_title',
+        'hide_on_screen' => ['the_content'],
+        'location'       => [
+            Location::where('page_template', '==', 'page-template/template-du-an-xay-dung.php'),
+        ],
+        'fields' => [
+
+            Tab::make('Hero')->placement('left'),
+
+            Image::make('Ảnh nền hero', 'hero_image')
+                ->helperText('Kích thước đề xuất: 1728x900px')
+                ->acceptedFileTypes(['jpg', 'jpeg', 'png', 'webp', 'avif'])
+                ->format('id'),
+
+            Repeater::make('Mô tả', 'hero_desc')
+                ->helperText('Mỗi hàng là một đoạn văn hiển thị trong hero.')
+                ->layout('block')
+                ->fields([
+                    WYSIWYGEditor::make('Đoạn văn', 'paragraph')->required(),
+                ]),
+
+        ],
+    ], false);
+}, 10);
+
+// ══════════════════════════════════════════════════════════════════
 // TAXONOMY — Danh mục dự án
 // Fields: image, url — hiện trên form tạo/sửa taxonomy term
 // ══════════════════════════════════════════════════════════════════
@@ -242,6 +370,10 @@ add_action('acf/init', function () {
             Location::where('taxonomy', '==', 'danh_muc_du_an'),
         ],
         'fields' => [
+
+            Number::make('Thứ tự hiển thị', 'order')
+                ->helperText('Số nhỏ hơn hiển thị trước. Ví dụ: 1, 2, 3…')
+                ->default(0),
 
             Tab::make('Ảnh danh mục')->placement('left'),
 

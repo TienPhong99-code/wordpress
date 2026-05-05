@@ -30,7 +30,7 @@ if (empty($groups)) return;
         <!-- Header: title trái + nav phải -->
         <div class="flex items-center justify-between mb-8 max-xl:mb-6 max-md:mb-5">
             <h2 class="title-main">
-                <?php echo esc_html($data['title']); ?> <span><?php echo esc_html($data['title_span']); ?></span>
+                <?php echo esc_html($data['title']); ?> </span>
             </h2>
             <div class="flex gap-1 items-center shrink-0">
                 <button class="swiper-prev tts-btn w-8 h-8 md:w-11! md:h-11! rounded-full flex items-center justify-center shrink-0 transition" aria-label="Trước">

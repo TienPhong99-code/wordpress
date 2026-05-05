@@ -3,72 +3,8 @@ $(document).ready(function () {
    initAboutNumberCounter();
    initAboutMission();
    initAboutNumberParallax();
-   initAboutJourney();
 });
 
-function initAboutJourney() {
-   const section = document.querySelector('.section-about-journey');
-   if (!section) return;
-
-   gsap.registerPlugin(ScrollTrigger);
-
-   const track        = section.querySelector('.journey-track');
-   const slides       = gsap.utils.toArray('.journey-slide', track);
-   const spacers      = section.querySelectorAll('.journey-spacer');
-   const progressFill = section.querySelector('.journey-progress-fill');
-
-   function setSpacers() {
-      const offset = Math.max(16, (window.innerWidth - 1200) / 2);
-      spacers.forEach(el => { el.style.width = offset + 'px'; });
-   }
-
-   function updateActive(idx) {
-      section.querySelectorAll('.journey-tl-item').forEach(el => {
-         el.classList.toggle('is-active', parseInt(el.dataset.index) === idx);
-      });
-      slides.forEach((el, i) => el.classList.toggle('active', i === idx));
-   }
-
-   setSpacers();
-   updateActive(0);
-
-   const mm = gsap.matchMedia();
-   mm.add('(min-width: 1024px)', () => {
-      setSpacers();
-
-      const getTotalMove = () => track.scrollWidth - window.innerWidth;
-
-      const tween = gsap.to(track, {
-         x: () => -getTotalMove(),
-         ease: 'none',
-         scrollTrigger: {
-            trigger: section,
-            pin: true,
-            scrub: 1,
-            invalidateOnRefresh: true,
-            end: () => '+=' + getTotalMove(),
-            onUpdate(self) {
-               const idx = Math.round(self.progress * (slides.length - 1));
-               updateActive(idx);
-               if (progressFill) progressFill.style.width = (self.progress * 100) + '%';
-            },
-         },
-      });
-
-      window.addEventListener('load', () => {
-         setSpacers();
-         ScrollTrigger.refresh();
-      }, { once: true });
-
-      const onResize = () => { setSpacers(); ScrollTrigger.refresh(); };
-      window.addEventListener('resize', onResize, { passive: true });
-
-      return () => {
-         tween.kill();
-         window.removeEventListener('resize', onResize);
-      };
-   });
-}
 
 function initAboutNumberParallax() {
    const imgs = document.querySelectorAll('.section-about-number [data-parallax-bg]');
@@ -184,25 +120,25 @@ function initAboutInfoTimeline() {
    gsap.set('.section-about-info .about-info-content p', { opacity: 0, y: 28 });
    gsap.set('.section-about-info .about-info-img', { y: 80, opacity: 0 });
 
-   const tl = gsap.timeline({ delay: 0.2 });
+   const tl = gsap.timeline({ paused: true });
 
    tl.to(drawPaths, {
       strokeDashoffset: 0,
-      duration: 1.2,
-      stagger: 0.18,
+      duration: 0.7,
+      stagger: 0.07,
       ease: 'power2.out',
    });
 
    tl.to('.section-about-info .svg-fill-layer', {
       opacity: 1,
-      duration: 0.6,
+      duration: 0.4,
       ease: 'power2.out',
-   }, '-=0.5');
+   }, '-=0.3');
 
    tl.to('.section-about-info .svg-draw-layer', {
       opacity: 0,
-      duration: 0.5,
-      ease: 'power2.out',
+      duration: 0.3,
+      ease: 'none',
    }, '<');
 
    tl.to('.section-about-info .about-info-content p', {
@@ -218,5 +154,12 @@ function initAboutInfoTimeline() {
       opacity: 1,
       duration: 1,
       ease: 'power2.out',
-   }, '-=0.4');
+   }, '-=0.5');
+
+   ScrollTrigger.create({
+      trigger: section,
+      start: 'top 80%',
+      once: true,
+      onEnter: function () { tl.play(); },
+   });
 }

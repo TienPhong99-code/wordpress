@@ -4,11 +4,15 @@ defined('ABSPATH') || exit;
 $terms = get_terms([
     'taxonomy'   => 'danh_muc_du_an',
     'hide_empty' => false,
-    'orderby'    => 'term_order',
-    'order'      => 'ASC',
 ]);
 
 if (is_wp_error($terms) || empty($terms)) return;
+
+usort($terms, function ($a, $b) {
+    $oa = (int) get_field('order', $a) ?: 0;
+    $ob = (int) get_field('order', $b) ?: 0;
+    return $oa - $ob;
+});
 ?>
 
 <section class="sec-du-an-categories section-pd-t section-pd-b">

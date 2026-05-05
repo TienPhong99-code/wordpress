@@ -4,22 +4,17 @@ $sample = [
     'title_span' => 'tại KIẾN Á',
     'items'      => [
         [
-            'title' => 'Không gian khai phóng sáng tạo',
-            'desc'  => 'Môi trường hiện đại, nơi mỗi ý tưởng khác biệt đều được lắng nghe và tôn trọng',
+            'title' => 'Lộ trình phát triển rõ ràng',
+            'desc'  => 'Đầu tư toàn diện vào năng lực cá nhân thông qua đào tạo chuyên sâu và văn hóa kế thừa',
             'image' => 'tuyen-dung/td-img-1.png',
         ],
         [
-            'title' => 'Lộ trình thăng tiến không giới hạn',
-            'desc'  => 'Đầu tư toàn diện vào năng lực cá nhân thông qua đào tạo chuyên sâu và văn hóa kế thừa',
-            'image' => 'tuyen-dung/td-img-2.png',
-        ],
-        [
-            'title' => 'Hệ sinh thái phúc lợi chuẩn mực',
+            'title' => 'Phúc lợi cạnh tranh',
             'desc'  => 'Lương thưởng cạnh tranh, bảo hiểm, du lịch công ty',
             'image' => 'tuyen-dung/td-img-3.png',
         ],
         [
-            'title' => 'Di sản nhân văn',
+            'title' => 'Văn hóa đề cao con người',
             'desc'  => 'Tự hào làm việc tại đơn vị luôn đặt con người làm tâm điểm trong mọi chiến lược phát triển',
             'image' => 'tuyen-dung/td-img-4.png',
         ],
@@ -32,11 +27,14 @@ $data = $sample;
     <div class="container">
 
         <!-- Header: title trái + nav phải -->
-        <div class=" relative mb-8">
-            <h2 class="title-main text-center">
+        <div class=" relative mb-8 text-center">
+            <h2 class="title-main ">
                 <?php echo esc_html($data['title']); ?><br>
                 <span><?php echo esc_html($data['title_span']); ?></span>
             </h2>
+            <p class="mt-4">
+                Tại KIẾN Á, chúng tôi tìm kiếm những người muốn cùng đồng hành xây dựng một hành trình dài hạn.
+            </p>
         </div>
 
         <!-- Swiper -->
@@ -56,7 +54,7 @@ $data = $sample;
             <div class="swiper rows overflow-hidden">
                 <div class="swiper-wrapper">
                     <?php foreach ($data['items'] as $item) : ?>
-                        <div class="swiper-slide col col-6  max-sm:w-3/4!">
+                        <div class="swiper-slide col col-4  max-lg:w-3/4!">
                             <div class="flex flex-col gap-3">
                                 <!-- Ảnh -->
                                 <div class="relative rounded-2xl overflow-hidden bg-pri aspect-4/3">
@@ -67,7 +65,7 @@ $data = $sample;
                                 </div>
                                 <!-- Text -->
                                 <div class="flex flex-col gap-2 text-pri">
-                                    <p class="font-bold text-[28px] max-xl:text-[22px] max-md:text-[18px] leading-normal tracking-[-0.04em]">
+                                    <p class="font-bold text-[24px] max-xl:text-[22px] max-md:text-[18px] leading-normal tracking-[-0.04em]">
                                         <?php echo esc_html($item['title']); ?>
                                     </p>
                                     <p class="text-[16px] max-md:text-[14px] leading-normal tracking-[-0.04em]">

@@ -1,7 +1,7 @@
 $(document).ready(function () {
     initVideoGallery();
     initHoatDongGallery();
-
+    initAboutHoatDong();
 });
 
 
@@ -20,6 +20,34 @@ function initHoatDongGallery() {
                 },
             });
         });
+    });
+}
+
+function initAboutHoatDong() {
+    const section = document.querySelector('.section-about-hoat-dong');
+    if (!section) return;
+
+    const desc = section.querySelector('.mona-content');
+    const img  = section.querySelector('img');
+
+    if (desc) gsap.set(desc, { opacity: 0, y: 20 });
+    if (img)  gsap.set(img,  { opacity: 0, y: 60 });
+
+    const tl = gsap.timeline({ paused: true });
+
+    if (desc) {
+        tl.to(desc, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' });
+    }
+
+    if (img) {
+        tl.to(img, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }, '-=0.4');
+    }
+
+    ScrollTrigger.create({
+        trigger: section,
+        start: 'top 85%',
+        once: true,
+        onEnter: function () { tl.play(); },
     });
 }
 

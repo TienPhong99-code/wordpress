@@ -17,7 +17,7 @@ $items = [
         'desc'  => '
             <div class="text-center text-white text-[16px]">
                 <p class="font-semibold">Đối với Nhân viên:</p>
-                <p class="font-normal">Hòa hợp, chia sẻ, tạo điều kiện để phát huy sáng tạo và phát triển sự nghiệp</p>
+                <p class="font-normal">Hòa hợp, chia sẻ, tạo điều kiện để phát huy sáng tạo <br/> và phát triển sự nghiệp</p>
             </div>
             <div class="text-center text-white text-[16px]">
                 <p class="font-semibold">Đối với đối tác, Cổ đông:</p>
@@ -33,7 +33,7 @@ $items = [
         'icon'  => $tpl . '/assets/images/about/mission-icon-3.svg',
         'title' => 'Tầm nhìn',
         'bg'    => $tpl . '/assets/images/about/mission-bg-3.jpg',
-        'desc'  => '<p class="text-[16px] font-normal text-center text-white">Trở thành tập đoàn đẳng cấp quốc tế</p>',
+        'desc'  => '<p class="text-[16px] font-semibold text-center text-white">Trở thành tập đoàn đẳng cấp quốc tế</p>',
     ],
 ];
 ?>
@@ -59,10 +59,10 @@ $items = [
         <div class="relative z-2 flex h-full max-md:flex-col">
             <?php foreach ($items as $i => $item) : ?>
                 <div
-                    class="mission-col flex-1 flex flex-col justify-end p-12 max-xl:p-6 max-md:p-5 relative cursor-pointer<?= $i < count($items) - 1 ? ' border-r border-white/20 max-md:border-r-0 max-md:border-b' : '' ?>"
+                    class="mission-col flex-1 flex flex-col justify-end p-12 max-xl:p-6 max-md:p-5 relative<?= $i < count($items) - 1 ? ' border-r border-white/20 max-md:border-r-0 max-md:border-b' : '' ?>"
                     data-index="<?= $i ?>">
 
-                    <div class="mission-col-overlay absolute inset-0 bg-[#1a1a1a]/40 pointer-events-none transition-opacity duration-500 <?= $i === 0 ? 'opacity-100' : 'opacity-0' ?>"></div>
+                    <div class="mission-col-overlay absolute inset-0 bg-[#1a1a1a]/40 pointer-events-none opacity-0"></div>
 
                     <div class="relative z-1 flex flex-col gap-3 items-center">
                         <div class="size-11 max-md:size-8">
@@ -71,10 +71,10 @@ $items = [
                                 alt="<?= esc_attr($item['title']) ?>"
                                 class="block w-full h-full object-contain">
                         </div>
-                        <h3 class="font-black text-[36px] max-xl:text-[26px] max-md:text-[20px] text-white uppercase text-center m-0">
+                        <h3 class="mission-col-title font-black text-[36px] max-xl:text-[26px] max-md:text-[20px] text-white uppercase text-center m-0">
                             <?= esc_html($item['title']) ?>
                         </h3>
-                        <div class="mission-col-desc flex flex-col gap-2 w-full md:max-h-0 overflow-hidden md:opacity-0 transition-[max-height,opacity] duration-500 ease-in-out <?= $i === 0 ? 'is-active' : '' ?>">
+                        <div class="mission-col-desc flex flex-col gap-2 w-full overflow-hidden max-md:opacity-100">
                             <?= $item['desc'] ?>
                         </div>
                     </div>

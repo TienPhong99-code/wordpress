@@ -15,7 +15,16 @@ if (empty($items)) return;
             <h2 class="title-main text-center">
                LĨNH VỰC <span>TIÊN PHONG</span>
             </h2>
-            <p class="mt-2">“Kiến tạo giá trị bền vững từ con người đến không gian sống.”</p>
+            <?php if (is_page_template('page-template/template-about.php')) : ?>
+               <div class="max-w-151.75 mx-auto">
+                  <p class=”mt-2”>Các lĩnh vực hoạt cùng nằm trong một định hướng xuyên suốt: xây dựng những nền móng vững chắc cho
+                     sự phát triển dài hạn.Từ bất động sản, giáo dục đến xây dựng và dịch vụ, mỗi lĩnh vực đảm nhận một vai trò khác nhau, nhưng
+                     cùng hướng đến một điểm chung - kiến tạo nên những đô thị hiện đại, nơi con người có thể sống, phát triển
+                     và gắn bó lâu dài.</p>
+               </div>
+            <?php else : ?>
+               <p class=”mt-2”>Kiến tạo giá trị bền vững từ con người đến không gian sống.</p>
+            <?php endif; ?>
          </div>
          <div class="relative">
             <div class="row">

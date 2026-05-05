@@ -26,7 +26,11 @@ $sample = [
       ],
    ],
 ];
-$data = $sample;
+$group = get_field('section_about_info') ?: [];
+$data  = [
+   'image'      => $group['image']      ?? $sample['image'],
+   'paragraphs' => $group['paragraphs'] ?? $sample['paragraphs'],
+];
 ?>
 
 <section class="section-about-info relative section-pd-t z-1">
@@ -34,7 +38,7 @@ $data = $sample;
    <!-- Top: content group -->
    <div class="container">
       <div class="relative z-1">
-         <div class="about-info-content max-w-160 mx-auto text-center">
+         <div class="about-info-content max-w-168.75 mx-auto text-center">
             <!-- KIENA SVG logo (draw animation) -->
             <span class="max-w-175 mx-auto mb-6 block">
                <svg class="svg-title-about w-full" width="795" height="165" viewBox="0 0 795 165" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -61,19 +65,15 @@ $data = $sample;
             </span>
             <div class="pb-8">
                <!-- Paragraphs -->
-               <div class="text-[16px] text-pri">
+               <div class="text-[16px] text-pri mona-content">
                   <p class="mb-4">
-                     Được thành lập từ năm 1994, KIẾN Á GROUP phát triển đa ngành với
-                     trọng tâm là <span class="c-second font-bold">là bất động sản, giáo dục và xây dựng - dịch vụ,</span> Tập đoàn theo đuổi <span class="c-second font-bold">triết lý phát triển bền vững</span> lấy con người làm trung tâm, hướng đến kiến tạo những công trình không chỉ đáp ứng nhu cầu an cư - đầu tư mà còn góp phần hình thành chuẩn mực sống văn minh, lâu dài cho cộng đồng.
+                     Năm 1994, <span class="c-second font-semibold">Hành trình</span> bắt đầu từ một doanh nghiệp dịch vụ với quy mô khiêm tốn. Nhưng mục tiêu của chúng tôi không dừng lại ở việc “xây công trình”, mà là kiến tạo những giá trị có thể đi cùng thời gian. Hành trình ấy dần mở rộng, không theo cách phát triển đơn thuần về quy mô, mà bằng việc từng bước xác lập những <span class="c-second font-semibold">Nền móng</span> vững chắc. Từ bất động sản đến giáo dục, từ xây dựng đến dịch vụ - mỗi lĩnh vực không tách rời, mà cùng tạo nên một hệ sinh thái phát triển đồng bộ và bền vững.
                   </p>
                   <p class="mb-4">
-                     Trong lĩnh vực bất động sản và xây dựng - dịch vụ, Tập đoàn sở hữu <span class="c-second font-bold">năng lực phát triển dự án toàn diện</span> từ quy hoạch, thiết kế, thi công, pháp lý đến vận hành, bảo đảm tính thẩm mỹ, minh bạch và hiệu quả khai thác cho khách hàng và nhà đầu tư.
-                  </p>
-                  <p class="mb-4">
-                     Ở lĩnh vực giáo dục, KIẾN Á GROUP đầu tư <span>phát triển hệ thống trường học từ tiểu học đến trung cấp, đại học hướng đến tiêu chuẩn quốc tế,</span> thể hiện cam kết dài hạn trong việc nuôi dưỡng tri thức, con người và tương lai xã hội.
+                     Và khi những nền móng đủ vững, giá trị không dừng lại ở từng công trình riêng lẻ. Chúng kết nối với nhau để hình thành nên những <span class="c-second font-semibold">Cộng đồng</span> - nơi con người có thể sống, phát triển và gắn bó dài lâu.
                   </p>
                   <p>
-                     Xuyên suốt các hoạt động là văn hóa doanh nghiệp đề cao sự <span class="c-second font-bold">tận tâm, chuẩn mực, sáng tạo và trách nhiệm,</span> với mục tiêu tạo nên những giá trị bền vững cho cộng đồng và xã hội.
+                     Xuyên suốt toàn bộ hành trình đó là một hệ giá trị nhất quán: lấy con người làm trung tâm, lấy chất lượng làm nền tảng, và lấy <span class="c-second font-semibold">Phát triển</span> bền vững làm đích đến.
                   </p>
                </div>
             </div>

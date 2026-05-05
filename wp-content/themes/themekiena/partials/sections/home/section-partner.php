@@ -15,8 +15,8 @@ if (empty($items)) return;
          <h2 class="title-main">
             Đối tác <span>chiến lược</span>
          </h2>
-         <p class="mt-2">“Đồng hành cùng chúng tôi là những đối tác cùng chia sẻ một
-tiêu chuẩn về chất lượng, minh bạch và tầm nhìn dài hạn.”</p>
+         <p class="mt-2">Đồng hành cùng chúng tôi là những đối tác cùng chia sẻ một
+            tiêu chuẩn về chất lượng, minh bạch và tầm nhìn dài hạn.</p>
       </div>
 
 

@@ -14,7 +14,7 @@ $hero_content   = get_field('hero_content');
             <h1 class="text-[48px] max-xl:text-[36px] max-md:text-[28px] font-black uppercase text-pri tracking-[-0.04em] leading-normal">
                 <?php echo esc_html(get_the_title()); ?>
             </h1>
-            <div class="max-w-225 mx-auto text-center">
+            <div class="max-w-225 mx-auto text-center project-desc">
                 <?php if ($hero_content) : ?>
                     <div class="text-[16px] max-md:text-[14px] flex flex-col gap-4 leading-normal wysiwyg-content">
                         <?php echo wp_kses_post($hero_content); ?>
