@@ -47,7 +47,7 @@ $(document).ready(function () {
    // =============================================
    const $hd = $('.hd');
    $(window).on('scroll', function () {
-      if ($(this).scrollTop() > 0) {
+      if ($(this).scrollTop() > 100) {
          $hd.addClass('hd-sticky');
       } else {
          $hd.removeClass('hd-sticky');
@@ -151,15 +151,14 @@ function initTitleMainAnim() {
 
       if (!span) return;
 
-      // Span trượt từ phải vào + highlight màu đỏ, title đứng yên
       gsap.fromTo(span, {
-         x: 50,
+         scale: 1.45,
          opacity: 0,
       }, {
-         x: 0,
+         scale: 1,
          opacity: 1,
          color: '#ed1c24',
-         duration: 0.7,
+         duration: 0.6,
          ease: 'power3.out',
          scrollTrigger: {
             trigger: title,

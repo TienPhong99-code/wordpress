@@ -15,6 +15,8 @@ if (empty($items)) return;
          <h2 class="title-main">
             Đối tác <span>chiến lược</span>
          </h2>
+         <p class="mt-2">“Đồng hành cùng chúng tôi là những đối tác cùng chia sẻ một
+tiêu chuẩn về chất lượng, minh bạch và tầm nhìn dài hạn.”</p>
       </div>
 
 
@@ -22,7 +24,7 @@ if (empty($items)) return;
    </div>
    <div class="max-w-375 mx-auto px-4">
       <!-- Partner slider -->
-      <div class="slideSw">
+      <div class="slideSw mix-blend-darken">
          <div class="swiper-container overflow-hidden">
             <div class="swiper rows">
                <div class="swiper-wrapper">

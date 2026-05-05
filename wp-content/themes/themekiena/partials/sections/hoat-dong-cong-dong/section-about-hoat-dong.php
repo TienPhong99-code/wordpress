@@ -11,11 +11,11 @@ $image_url  = $image_id ? wp_get_attachment_image_url($image_id, 'full') : MONA_
     <div class="container">
         <div class="text-center relative z-1">
             <h2 class="title-main">
-                <?php echo esc_html($title); ?> <br> <span><?php echo esc_html($title_span); ?></span>
+                <?php echo esc_html($title); ?> <span><?php echo esc_html($title_span); ?></span>
             </h2>
 
             <?php if ($description) : ?>
-                <div class="max-w-148 mx-auto mt-4 text-[16px] text-pri text-center">
+                <div class="max-w-148 mx-auto mt-4 text-[16px] text-pri">
                     <div class="mona-content">
                         <?php echo wp_kses_post($description); ?>
                     </div>

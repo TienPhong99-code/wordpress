@@ -11,9 +11,12 @@ if (empty($items)) return;
 
    <div class="container">
       <div class="relative">
-         <h2 class="title-main text-center mb-6 max-xl:mb-4 max-md:mb-3">
-            LĨNH VỰC <span>HOẠT ĐỘNG</span>
-         </h2>
+         <div class="mb-6 max-xl:mb-4 max-md:mb-3 text-center">
+            <h2 class="title-main text-center">
+               LĨNH VỰC <span>TIÊN PHONG</span>
+            </h2>
+            <p class="mt-2">“Kiến tạo giá trị bền vững từ con người đến không gian sống.”</p>
+         </div>
          <div class="relative">
             <div class="row">
                <?php foreach ($items as $item) : ?>
@@ -27,7 +30,7 @@ if (empty($items)) return;
                               'loading' => 'lazy',
                            ]); ?>
                         </div>
-                        <p class="font-bold text-[28px] max-xl:text-[22px] text-center px-2 text-pri group-hover:text-sec transition-colors duration-300">
+                        <p class="font-bold text-[28px] max-xl:text-[22px] text-center px-2 text-pri group-hover:text-[#ED1C24] transition-colors duration-300">
                            <?php echo esc_html($item['title']); ?>
                         </p>
                      </div>

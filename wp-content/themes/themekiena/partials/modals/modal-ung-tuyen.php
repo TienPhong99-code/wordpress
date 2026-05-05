@@ -6,13 +6,13 @@
  *
  * Yêu cầu: tạo 1 form CF7 đặt tên "Ứng tuyển" trong WP Admin > Contact.
  * Fields CF7 cần có:
- *   [text vi-tri id:cf7-vi-tri readonly ""]   ← JS tự fill, không cần sửa tay
  *   [text* ho-ten placeholder "Nguyễn Văn An"]
  *   [email* email placeholder "Nhập email"]
  *   [tel* dien-thoai placeholder "Nhập số điện thoại của bạn"]
- *   [textarea gioi-thieu placeholder "Nhập giới thiệu về bản thân..."]
- *   [file* cv limit:2mb filetypes:pdf]
- *   [submit class:btn class:btn-pri "Ứng tuyển ngay"]
+ *   [textarea gioi-thieu placeholder "Giới thiệu về bản thân..."]
+ *   [file cv limit:3mb filetypes:pdf]
+ *   [hidden vi-tri "Vị trí ứng tuyển"]
+ *   [submit "Ứng tuyển ngay"]
  */
 
 defined('ABSPATH') || exit;

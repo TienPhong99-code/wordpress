@@ -45,7 +45,7 @@ $tin_tuc_page = get_page_by_path('tin-tuc');
     ],
 ]); ?>
 
-<section class="single-tin-tuc relative py-(--pd-sc)">
+<section class="single-tin-tuc relative py-8">
     <div class="container">
         <div class="row">
 
@@ -60,7 +60,7 @@ $tin_tuc_page = get_page_by_path('tin-tuc');
             <div class="col col-8 max-lg:w-full!">
 
                 <!-- Tiêu đề -->
-                <h1 class="text-pri text-[36px] font-bold leading-normal mb-2 max-md:text-[24px]">
+                <h1 class="text-sec text-[48px] font-bold leading-normal mb-2 max-md:text-[24px]">
                     <?php the_title(); ?>
                 </h1>
 

@@ -1,6 +1,6 @@
 <?php
 $title_1 = get_field('news_title_1') ?: 'Tin tức';
-$title_2 = get_field('news_title_2') ?: 'mới cập nhật';
+$title_2 = get_field('news_title_2') ?: 'cập nhật';
 
 $query = new WP_Query([
    'post_type'      => 'post',

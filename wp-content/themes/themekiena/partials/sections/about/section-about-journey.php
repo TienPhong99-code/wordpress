@@ -64,7 +64,7 @@ $data = [
          <?php foreach ($data['milestones'] as $i => $m) : ?>
             <div class="journey-slide w-full lg:shrink-0 lg:pl-[5%] lg:w-334.25! <?php echo $i === 0 ? 'active' : ''; ?>" data-index="<?php echo $i; ?>">
                <div class="relative">
-                  <div class="row items-center">
+                  <div class="row">
 
                      <!-- Content col: ~40% -->
                      <div class="col col-5 max-md:w-full!">

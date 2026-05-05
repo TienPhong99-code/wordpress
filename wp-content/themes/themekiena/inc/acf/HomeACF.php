@@ -33,8 +33,7 @@ add_action('acf/init', function () {
                 ->fields([
                     Image::make('Ảnh', 'image')
                         ->acceptedFileTypes(['jpg', 'jpeg', 'png', 'webp', 'avif'])
-                        ->format('id')
-                        ->required(),
+                        ->format('id'),
                     Text::make('Alt text', 'alt'),
                     File::make('Video (tuỳ chọn)', 'video')
                         ->helperText('Nếu có video, video sẽ được ưu tiên hiển thị thay ảnh. Định dạng: mp4, webm')

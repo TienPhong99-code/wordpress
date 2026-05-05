@@ -84,7 +84,7 @@ $data = [
       </div>
 
       <!-- Map -->
-      <?php if (!empty($data['map_url'])) : ?>
+      <!-- <?php if (!empty($data['map_url'])) : ?>
          <div class="mt-8  max-md:mt-6 h-80 max-md:h-52 rounded-lg overflow-hidden">
             <iframe
                src="<?php echo esc_url($data['map_url']); ?>"
@@ -94,10 +94,10 @@ $data = [
                referrerpolicy="no-referrer-when-downgrade">
             </iframe>
          </div>
-      <?php endif; ?>
+      <?php endif; ?> -->
 
       <!-- MONA branding -->
-      <div class="mt-8 max-md:mt-6 flex gap-1 items-center justify-center">
+      <div class="mt-8  pt-8 border-t border-white/10 max-md:mt-6 flex gap-1 items-center justify-center">
          <p class="text-[14px] text-white font-light flex items-center gap-2">
             Thiết kế bởi <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/icons/mona-soft.svg" class="block h-4" alt="MONA Media">
          </p>
