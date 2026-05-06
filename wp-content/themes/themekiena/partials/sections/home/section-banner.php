@@ -7,8 +7,7 @@ if (empty($items)) return;
 ?>
 
 <section class="section-banner"
-style="clip-path: inset(0 0 0 0);"
->
+   style="clip-path: inset(0 0 0 0);">
    <div class="slideFade pagination-pri">
       <div class="swiper-container overflow-hidden relative">
          <div class="swiper rows">
@@ -56,13 +55,12 @@ style="clip-path: inset(0 0 0 0);"
          <!-- Hero title overlay -->
          <div class="banner-hero-overlay absolute inset-0 z-5 flex items-center justify-center pointer-events-none">
             <div class="text-center px-4">
-               <p class="banner-hero-title uppercase font-black">Nhà phát triển <br class="md:hidden"> bất động sản</p>
-               <p class="banner-hero-title uppercase font-black">tốt nhất Việt Nam</p>
+               <p class="banner-hero-title uppercase font-black">Kiến tạo từ tâm</p>
             </div>
          </div>
 
          <!-- Caption bottom-left -->
-         <p class="banner-hero-caption absolute bottom-[2%] left-8 max-md:left-4 z-5 text-white text-[12px] italic tracking-[-0.48px] max-sm:hidden">* Được công nhận bởi PropertyGuru Vietnam Property Awards (VPA) 2019</p>
+         <!-- <p class="banner-hero-caption absolute bottom-[2%] left-8 max-md:left-4 z-5 text-white text-[12px] italic tracking-[-0.48px] max-sm:hidden">* Được công nhận bởi PropertyGuru Vietnam Property Awards (VPA) 2019</p> -->
 
          <!-- Pagination — centered bottom -->
          <!-- <div class="absolute bottom-[9%] left-1/2 -translate-x-1/2 z-10">
@@ -87,57 +85,50 @@ style="clip-path: inset(0 0 0 0);"
          </button> -->
 
          <!-- Clouds — 3 tầng, mỗi tầng 2 mây, không chồng nhau -->
-         <div class="banner-clouds absolute bottom-0 left-0 right-0 z-3 pointer-events-none overflow-hidden h-full">
+         <!-- <div class="banner-clouds absolute bottom-0 left-0 right-0 z-3 pointer-events-none overflow-hidden h-full">
 
-            <!-- Tầng 1 (sát đáy): bottom 0 → cao 18% — mây gần, rõ nhất -->
+        
             <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/cloud-1.png"
-                 alt="" aria-hidden="true"
-                 class="absolute bottom-0 h-[18%] w-auto opacity-[0.55] blur-[2px] mix-blend-screen"
-                 style="animation:cloudDrift 32s linear infinite -8s;">
+               alt="" aria-hidden="true"
+               class="absolute bottom-0 h-[18%] w-auto opacity-[0.55] blur-[2px] mix-blend-screen"
+               style="animation:cloudDrift 32s linear infinite -8s;">
 
             <div class="absolute bottom-0 h-[18%]" style="animation:cloudDrift 52s linear infinite -28s;">
                <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/cloud-1.png"
-                    alt="" aria-hidden="true"
-                    class="block h-full w-auto opacity-[0.40] blur-[3px] mix-blend-screen -scale-x-100">
+                  alt="" aria-hidden="true"
+                  class="block h-full w-auto opacity-[0.40] blur-[3px] mix-blend-screen -scale-x-100">
             </div>
 
-            <!-- Tầng 2 (giữa): bottom 22% → cao 15% — mây trung, mờ hơn -->
+          
             <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/cloud-1.png"
-                 alt="" aria-hidden="true"
-                 class="absolute bottom-[22%] h-[15%] w-auto opacity-[0.25] blur-[5px] mix-blend-screen"
-                 style="animation:cloudDrift 46s linear infinite -18s;">
+               alt="" aria-hidden="true"
+               class="absolute bottom-[22%] h-[15%] w-auto opacity-[0.25] blur-[5px] mix-blend-screen"
+               style="animation:cloudDrift 46s linear infinite -18s;">
 
             <div class="absolute bottom-[22%] h-[15%]" style="animation:cloudDrift 38s linear infinite -38s;">
                <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/cloud-1.png"
-                    alt="" aria-hidden="true"
-                    class="block h-full w-auto opacity-[0.18] blur-[6px] mix-blend-screen -scale-x-100">
+                  alt="" aria-hidden="true"
+                  class="block h-full w-auto opacity-[0.18] blur-[6px] mix-blend-screen -scale-x-100">
             </div>
 
-            <!-- Tầng 3 (cao): bottom 41% → cao 12% — mây xa, mờ nhất -->
+          
             <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/cloud-1.png"
-                 alt="" aria-hidden="true"
-                 class="absolute bottom-[41%] h-[12%] w-auto opacity-[0.12] blur-sm mix-blend-screen"
-                 style="animation:cloudDrift 60s linear infinite -5s;">
+               alt="" aria-hidden="true"
+               class="absolute bottom-[41%] h-[12%] w-auto opacity-[0.12] blur-sm mix-blend-screen"
+               style="animation:cloudDrift 60s linear infinite -5s;">
 
             <div class="absolute bottom-[41%] h-[12%]" style="animation:cloudDrift 44s linear infinite -32s;">
                <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/cloud-1.png"
-                    alt="" aria-hidden="true"
-                    class="block h-full w-auto opacity-[0.09] blur-[10px] mix-blend-screen -scale-x-100">
+                  alt="" aria-hidden="true"
+                  class="block h-full w-auto opacity-[0.09] blur-[10px] mix-blend-screen -scale-x-100">
             </div>
 
-         </div>
+         </div> -->
 
-         <style>
-            @keyframes cloudDrift {
-               from { transform: translateX(100vw); }
-               to   { transform: translateX(-100%); }
-            }
-         </style>
+
 
          <!-- Scroll down -->
-         <div class="banner-scroll-down  cursor-pointer absolute bottom-8 left-1/2 -translate-x-1/2 z-5 flex flex-col items-center gap-2 select-none"
-         
-         >
+         <div class="banner-scroll-down  cursor-pointer absolute bottom-8 left-1/2 -translate-x-1/2 z-5 flex flex-col items-center gap-2 select-none">
             <p class="text-white text-[16px] tracking-[-0.64px]">Xem thêm</p>
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                <rect x="6" y="1" width="20" height="30" rx="10" stroke="white" stroke-width="1.73" />

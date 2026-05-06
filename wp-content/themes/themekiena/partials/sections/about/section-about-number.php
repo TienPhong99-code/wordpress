@@ -61,7 +61,7 @@ $img  = MONA_THEME_PATH_URI . '/assets/images/';
                <img src="<?= $img . esc_attr($data['brands'][4]); ?>" alt=""
                   class="absolute bottom-[6%] left-[15%] w-[25%] h-auto pointer-events-none"> -->
                <span class="block absolute w-full h-full z-[-1] bg-[#fcf5de] ">
-                  <img src="<?= $img ?>about/bg-br2.png" class="block w-full h-full object-cover" alt="">
+                  <img src="<?= $img ?>about/bg-br2.jpg" class="block w-full h-full object-cover" alt="">
                </span>
                <div class="relative z-1 flex flex-col gap-2 text-pri text-center num-card-text">
                   <p class="countNum text-[80px] max-lg:text-[40px] max-sm:text-[60px] font-extrabold uppercase leading-none tracking-[-3.2px]" data-count="36+">36+</p>

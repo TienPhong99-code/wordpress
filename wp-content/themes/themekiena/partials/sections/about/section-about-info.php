@@ -6,7 +6,7 @@ defined('ABSPATH') || exit;
 // =============================================
 $sample = [
    'title_image' => 'home/title-bg-ab2.jpeg',
-   'image'       => 'about/building-citigrand.jpg',
+   'image'       => 'about/gioithieu.jpg',
    'paragraphs'  => [
       [
          'class'   => 'text-pri mb-4',
@@ -38,9 +38,9 @@ $data  = [
    <!-- Top: content group -->
    <div class="container">
       <div class="relative z-1">
-         <div class="about-info-content max-w-168.75 mx-auto text-center">
+         <div class="about-info-content max-w-175 mx-auto text-center">
             <!-- KIENA SVG logo (draw animation) -->
-            <span class="max-w-175 mx-auto mb-6 block">
+            <span class="w-full mx-auto mb-6 block">
                <svg class="svg-title-about w-full" width="795" height="165" viewBox="0 0 795 165" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <mask id="mask0_about_info" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="795" height="165">
                      <path d="M204.686 23.3794H235.04V164.041H187.791V40.2742C187.791 30.9505 195.362 23.3794 204.686 23.3794Z" fill="#283377" />
@@ -66,14 +66,17 @@ $data  = [
             <div class="pb-8">
                <!-- Paragraphs -->
                <div class="text-[16px] text-pri mona-content">
-                  <p class="mb-4">
-                     Năm 1994, <span class="c-second font-semibold">Hành trình</span> bắt đầu từ một doanh nghiệp dịch vụ với quy mô khiêm tốn. Nhưng mục tiêu của chúng tôi không dừng lại ở việc “xây công trình”, mà là kiến tạo những giá trị có thể đi cùng thời gian. Hành trình ấy dần mở rộng, không theo cách phát triển đơn thuần về quy mô, mà bằng việc từng bước xác lập những <span class="c-second font-semibold">Nền móng</span> vững chắc. Từ bất động sản đến giáo dục, từ xây dựng đến dịch vụ - mỗi lĩnh vực không tách rời, mà cùng tạo nên một hệ sinh thái phát triển đồng bộ và bền vững.
-                  </p>
-                  <p class="mb-4">
-                     Và khi những nền móng đủ vững, giá trị không dừng lại ở từng công trình riêng lẻ. Chúng kết nối với nhau để hình thành nên những <span class="c-second font-semibold">Cộng đồng</span> - nơi con người có thể sống, phát triển và gắn bó dài lâu.
+                  <p>
+                     Năm 1994, <span class="c-second font-semibold">Hành trình</span> bắt đầu từ một doanh nghiệp dịch vụ với quy mô khiêm tốn. Nhưng mục tiêu của chúng tôi không dừng lại ở việc “xây công trình”, mà là kiến tạo những giá trị có thể đi cùng thời gian.
                   </p>
                   <p>
-                     Xuyên suốt toàn bộ hành trình đó là một hệ giá trị nhất quán: lấy con người làm trung tâm, lấy chất lượng làm nền tảng, và lấy <span class="c-second font-semibold">Phát triển</span> bền vững làm đích đến.
+                     Hành trình ấy dần mở rộng, không theo cách phát triển đơn thuần về quy mô, <br class="max-md:hidden" /> mà bằng việc từng bước xác lập những <span class="c-second font-semibold">Nền móng</span> vững chắc. Từ bất động sản đến giáo dục, từ xây dựng đến dịch vụ - mỗi lĩnh vực không tách rời, mà cùng tạo nên một hệ sinh thái phát triển đồng bộ và bền vững.
+                  </p>
+                  <p>
+                     Và khi những nền móng đủ vững, giá trị không dừng lại ở từng công trình riêng lẻ. Chúng kết nối với nhau để hình thành nên những <span class="c-second font-semibold">Cộng đồng</span> - nơi con người <br class="max-md:hidden" /> có thể sống, phát triển và gắn bó dài lâu.
+                  </p>
+                  <p>
+                     Xuyên suốt toàn bộ hành trình đó là một hệ giá trị nhất quán: lấy con người <br class="max-md:hidden" /> làm trung tâm, lấy chất lượng làm nền tảng, và lấy <span class="c-second font-semibold">Phát triển</span> bền vững làm đích đến.
                   </p>
                </div>
             </div>

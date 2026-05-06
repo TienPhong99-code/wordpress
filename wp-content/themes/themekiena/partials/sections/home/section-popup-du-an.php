@@ -30,18 +30,18 @@ $btn_target = !empty($popup_link['target']) ? $popup_link['target'] : '_self';
 
       <!-- Left: nội dung -->
       <div class="row max-md:flex-col-reverse">
-         <div class="col col-5 max-md:w-full!">
+         <div class="col col-6 max-md:w-full!">
             <div class="flex flex-col gap-4 justify-center px-8 py-6 flex-1 min-w-0 max-md:p-4!">
 
                <div class="h-10 shrink-0 max-md:h-5.5! max-md:w-20">
-                  <img src="<?php echo esc_url(MONA_THEME_PATH_URI); ?>/assets/images/icons/header-logo.svg"
+                  <img src="<?php echo esc_url(MONA_THEME_PATH_URI); ?>/assets/images/icons/header-logo2.svg"
                      class="block h-full object-contain max-md:w-full" alt="KienA">
                </div>
 
                <?php if ($popup_title_1 || $popup_title_2) : ?>
-                  <h3 class="font-bold text-[#283377] text-[28px] max-md:text-[20px]">
+                  <h3 class="font-bold text-[#283377] text-[28px] max-md:text-[4.5vw]!">
                      <?php if ($popup_title_1) : ?>
-                        <?php echo esc_html($popup_title_1); ?>&nbsp;
+                        <?php echo nl2br(esc_html($popup_title_1)); ?> <br class="md:hidden" />
                      <?php endif; ?>
                      <?php if ($popup_title_2) : ?>
                         <span class="text-[#ed1c24]"><?php echo esc_html($popup_title_2); ?></span>
@@ -67,7 +67,7 @@ $btn_target = !empty($popup_link['target']) ? $popup_link['target'] : '_self';
 
          <!-- Right: ảnh dự án -->
          <?php if ($img_src) : ?>
-            <div class="col col-7 max-md:w-full!">
+            <div class="col col-6 max-md:w-full!">
                <div class="relative h-full max-md:w-full">
                   <img src="<?php echo esc_url($img_src); ?>"
                      class="block w-full h-full object-cover"

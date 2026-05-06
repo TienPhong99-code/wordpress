@@ -115,6 +115,21 @@ $tin_tuc_page = get_page_by_path('tin-tuc');
                     </div>
                 </div>
 
+                <!-- Tác giả -->
+                <div class="flex items-center gap-3 mt-8 pt-6 border-t border-[#e8e8e8]">
+                    <?php $author_avatar = get_avatar_url(get_the_author_meta('ID'), ['size' => 48]); ?>
+                    <?php if ($author_avatar) : ?>
+                        <img src="<?php echo esc_url($author_avatar); ?>"
+                            class="w-12 h-12 rounded-full object-cover shrink-0" alt="">
+                    <?php endif; ?>
+                    <div>
+                        <p class="text-[12px] text-[#ababab]">Tác giả</p>
+                        <p class="text-[15px] font-semibold text-[#121214]">
+                            <?php echo esc_html(get_the_author()); ?>
+                        </p>
+                    </div>
+                </div>
+
             </div>
 
             <!-- ── Right: Có thể bạn quan tâm ── -->

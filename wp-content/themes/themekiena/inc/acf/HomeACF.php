@@ -7,6 +7,7 @@ use Extended\ACF\Fields\Repeater;
 use Extended\ACF\Fields\Taxonomy;
 use Extended\ACF\Fields\Tab;
 use Extended\ACF\Fields\Text;
+use Extended\ACF\Fields\Textarea;
 use Extended\ACF\Fields\TrueFalse;
 use Extended\ACF\Location;
 
@@ -98,7 +99,9 @@ add_action('acf/init', function () {
             TrueFalse::make('Hiển thị popup', 'popup_show')
                 ->stylized()
                 ->default(0),
-            Text::make('Tiêu đề (phần thường)', 'popup_title_1')
+            Textarea::make('Tiêu đề (phần thường)', 'popup_title_1')
+                ->helperText('Nhấn Enter để xuống hàng trong tiêu đề.')
+                ->rows(2)
                 ->default('Ra mắt dự án khu căn hộ cao cấp'),
             Text::make('Tiêu đề (phần nổi bật — màu đỏ)', 'popup_title_2')
                 ->default('ARCADIA AT LAVILA'),

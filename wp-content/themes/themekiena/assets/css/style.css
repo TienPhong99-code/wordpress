@@ -552,7 +552,7 @@ form .wpcf7-not-valid-tip {
 
 @media (max-width: 1024px) {
   .title-main {
-    font-size: 28px;
+    font-size: 24px;
     letter-spacing: -1.12px;
   }
 }
@@ -665,6 +665,7 @@ form .wpcf7-not-valid-tip {
   position: sticky;
   top: 0;
 }
+
 @media (max-width: 768px) {
   .btn-pri,
   .btn-white,
@@ -676,6 +677,12 @@ form .wpcf7-not-valid-tip {
   }
   .section-banner {
     position: relative;
+  }
+  .project-desc br {
+    display: none;
+  }
+  .wysiwyg-content br {
+    display: none;
   }
 }
 
@@ -1219,7 +1226,7 @@ div#ez-toc-container ul li:not(:last-child) {
   }
 }
 .banner-hero-title {
-  font-size: clamp(24px, 3.5vw, 48px);
+  font-size: 60px;
   background: linear-gradient(
     90deg,
     #d8b166 1%,
@@ -1246,10 +1253,18 @@ div#ez-toc-container ul li:not(:last-child) {
     margin: 0;
   }
   .banner-hero-title {
-    font-size: 7.9vw;
+    font-size: 8vw;
   }
   .item-prj br {
     display: none;
+  }
+  .mona-content br {
+    display: none;
+  }
+}
+@media (max-width: 400px) {
+  .title-main {
+    font-size: 6vw;
   }
 }
 
@@ -1313,6 +1328,7 @@ div#ez-toc-container ul li:not(:last-child) {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  padding: 0 2px;
 }
 
 /* Home banner intro: hidden before GSAP animation takes over */
@@ -1395,14 +1411,14 @@ div#ez-toc-container ul li:not(:last-child) {
   fill: #fff;
   transition: fill 0.2s ease;
 }
+.section-about-journey .container {
+  max-width: 1280px;
+}
 @media (max-width: 767px) {
   #backToTop {
     bottom: 20px;
     right: 16px;
   }
-}
-.journey-slide li {
-  list-style: circle;
 }
 .journey-slide ul,
 .journey-slide ol {
@@ -1410,8 +1426,8 @@ div#ez-toc-container ul li:not(:last-child) {
   flex-direction: column;
   gap: 10px;
 }
-.journey-slide .b-content {
-  padding-left: 40px;
+.journey-slide .b-content .c-second {
+  color: var(--color-pri);
 }
 .journey-slide br {
   display: none;

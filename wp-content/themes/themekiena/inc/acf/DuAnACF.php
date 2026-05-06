@@ -94,8 +94,11 @@ add_action('acf/init', function () {
                 ->helperText('Link tới trang chi tiết. Để trống nếu chưa có.'),
 
             // ── Giáo dục / Dịch vụ ───────────────────────
-            Textarea::make('Mô tả', 'description')
-                ->helperText('Mô tả ngắn về dự án.')
+            WYSIWYGEditor::make('Mô tả', 'description')
+                ->helperText('Mô tả ngắn về dự án. Dùng Enter để xuống hàng.')
+                ->toolbar(['bold', 'italic', 'bullist', 'numlist', '|', 'removeformat', '|', 'undo', 'redo'])
+                ->tabs('visual')
+                ->disableMediaUpload()
                 ->conditionalLogic([
                     ConditionalLogic::where('loai_du_an', '==', 'giao-duc'),
                 ])

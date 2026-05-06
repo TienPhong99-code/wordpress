@@ -132,6 +132,25 @@ $(document).ready(function () {
 
       update();
    }
+
+   // ── Hash navigation: scroll + activate BDS item from external link ──
+   (function () {
+      var hash = window.location.hash;
+      if (!hash || !hash.startsWith('#bds-')) return;
+      var slug = hash.slice(5);
+      var btn = document.querySelector('.js-bds-item[data-item-slug="' + slug + '"]');
+      if (!btn) return;
+      var swiperWrap = btn.closest('.sec-bds-projects .swiper');
+      if (swiperWrap) {
+         var slide = btn.closest('.swiper-slide');
+         var slides = swiperWrap.querySelectorAll(':scope > .swiper-wrapper > .swiper-slide');
+         var slideIndex = Array.from(slides).indexOf(slide);
+         if (slideIndex > 0 && swiperWrap.swiper) swiperWrap.swiper.slideTo(slideIndex);
+      }
+      bdsActivateItem(btn, false);
+      var section = btn.closest('.sec-bds-projects');
+      if (section) setTimeout(function () { section.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 400);
+   })();
    // ────────────────────────────────────────────────────────────────
       functionSlider('.slideFade', {
       speed: 1200,
@@ -149,11 +168,35 @@ $(document).ready(function () {
       var section = document.querySelector('.section-about-journey');
       if (!section) return;
 
-      var swiperEl = section.querySelector('.journey-swiper');
-      var tlItems  = section.querySelectorAll('.journey-tl-item');
-      var fillEl   = section.querySelector('.journey-progress-fill');
+      var swiperEl  = section.querySelector('.journey-swiper');
+      var tlItems   = section.querySelectorAll('.journey-tl-item');
+      var fillEl    = section.querySelector('.journey-progress-fill');
+      var tlInner   = section.querySelector('.journey-tl-inner');
+      var tlTrack   = tlInner ? tlInner.querySelector('.flex') : null;
+      var hasNav    = section.querySelector('.journey-timeline.has-tl-nav');
+      var tlNavPrev = section.querySelector('.journey-tl-nav-prev');
+      var tlNavNext = section.querySelector('.journey-tl-nav-next');
 
       if (!swiperEl) return;
+
+      function scrollActiveIntoView(activeIndex) {
+         if (!tlInner || !tlTrack) return;
+         var activeItem = tlTrack.children[activeIndex];
+         if (!activeItem) return;
+         var innerRect = tlInner.getBoundingClientRect();
+         var itemRect  = activeItem.getBoundingClientRect();
+         var offset    = activeItem.offsetLeft - tlInner.scrollLeft;
+         var center    = offset - (innerRect.width / 2) + (itemRect.width / 2);
+         tlInner.scrollTo({ left: tlInner.scrollLeft + center, behavior: 'smooth' });
+      }
+
+      function updateNavState() {
+         if (!hasNav || !tlInner) return;
+         var atStart = tlInner.scrollLeft <= 2;
+         var atEnd   = tlInner.scrollLeft + tlInner.clientWidth >= tlInner.scrollWidth - 2;
+         if (tlNavPrev) tlNavPrev.style.opacity = atStart ? '0.35' : '1';
+         if (tlNavNext) tlNavNext.style.opacity = atEnd   ? '0.35' : '1';
+      }
 
       function syncTimeline(sw, activeIndex) {
          tlItems.forEach(function (item) {
@@ -164,6 +207,26 @@ $(document).ready(function () {
             var pct   = total > 1 ? (activeIndex / (total - 1)) * 100 : 0;
             fillEl.style.width = pct + '%';
          }
+         if (hasNav) scrollActiveIntoView(activeIndex);
+      }
+
+      // Setup nav scroll buttons
+      if (hasNav && tlInner) {
+         var scrollStep = function () {
+            return tlInner.clientWidth * 0.6;
+         };
+         if (tlNavPrev) {
+            tlNavPrev.addEventListener('click', function () {
+               tlInner.scrollBy({ left: -scrollStep(), behavior: 'smooth' });
+            });
+         }
+         if (tlNavNext) {
+            tlNavNext.addEventListener('click', function () {
+               tlInner.scrollBy({ left: scrollStep(), behavior: 'smooth' });
+            });
+         }
+         tlInner.addEventListener('scroll', updateNavState);
+         updateNavState();
       }
 
       var swiper = new Swiper(swiperEl, {
@@ -238,22 +301,27 @@ function initMissionCardsAnim() {
       currentIndex = idx;
    }
 
-   function startCycle() {
+   function initHover() {
       activate(0);
-      setInterval(function () {
-         activate((currentIndex + 1) % cols.length);
-      }, 3500);
+      cols.forEach(function (col, i) {
+         col.addEventListener('mouseenter', function () {
+            activate(i);
+         });
+      });
+      section.addEventListener('mouseleave', function () {
+         activate(0);
+      });
    }
 
    var rect = section.getBoundingClientRect();
    if (rect.top < window.innerHeight * 0.9) {
-      setTimeout(startCycle, 200);
+      setTimeout(initHover, 200);
    } else {
       ScrollTrigger.create({
          trigger: section,
          start: 'top 85%',
          once: true,
-         onEnter: startCycle,
+         onEnter: initHover,
       });
    }
 }
@@ -459,3 +527,40 @@ function initDuAnCategoryHero() {
       }
     });
   })();
+
+  // ── CF7 lien-he — hiện tên trường lỗi trong response output ──────────
+  document.addEventListener('wpcf7invalid', function (e) {
+
+    var form = e.target;
+    if (!form.closest('.cf7-lien-he') && !form.closest('.cf7-ung-tuyen')) return;
+
+    var output = form.querySelector('.wpcf7-response-output');
+    if (output) output.style.visibility = 'hidden';
+
+    setTimeout(function () {
+      var invalids = form.querySelectorAll('.wpcf7-not-valid');
+      var names = [];
+
+      invalids.forEach(function (input) {
+        var label = null;
+
+        var group = input.closest('.cf7-field-group');
+        if (group) label = group.querySelector('label');
+
+        if (!label && input.id) {
+          label = form.querySelector('label[for="' + input.id + '"]');
+        }
+
+        if (!label) return;
+        var text = label.textContent.replace(/\*/g, '').replace(/:$/, '').trim();
+        if (text) names.push('"' + text + '"');
+      });
+
+      if (output) {
+        if (names.length) {
+          output.textContent = 'Vui lòng nhập đầy đủ thông tin: ' + names.join(', ') + '.';
+        }
+        output.style.visibility = '';
+      }
+    }, 50);
+  });

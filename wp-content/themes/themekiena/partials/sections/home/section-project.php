@@ -18,8 +18,8 @@ if (empty($items)) return;
             <p class="text-[16px] max-md:text-[14px] text-pri">Tất cả lĩnh vực hoạt động của Tập đoàn đều hướng <span class="c-second font-bold">đến tầm nhìn dài hạn:
                   kiến tạo giá trị bền vững </span> và góp phần thúc đẩy sự <span class="c-second font-bold">phát triển</span> của các khu <span class="c-second font-bold">đô thị</span> hiện đại.</p>
          </div> -->
-         <p class="mt-2">“Mỗi dự án không chỉ là một công trình, mà là một bước tiến
-trong hành trình định hình chuẩn mực sống mới.”</p>
+         <p class="mt-2">Mỗi dự án không chỉ là một công trình, mà là một bước tiến
+            trong hành trình định hình chuẩn mực sống mới.</p>
       </div>
    </div>
 
@@ -55,6 +55,10 @@ trong hành trình định hình chuẩn mực sống mới.”</p>
                   <?php foreach ($items as $item) :
                      $link = $item['link'] ?? [];
                      $link_url = $link['url'] ?? '#';
+                     $title_slug = sanitize_title($item['title'] ?? '');
+                     if ($link_url !== '#' && $title_slug) {
+                        $link_url = rtrim($link_url, '/') . '#bds-' . $title_slug;
+                     }
                   ?>
                      <div class="swiper-slide col col-12">
                         <div class="relative">

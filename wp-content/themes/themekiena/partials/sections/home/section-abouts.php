@@ -17,16 +17,16 @@ $sample = [
       'bold' => 'triết lý phát triển bền vững: ',
       'text' => 'Lấy con người làm trung tâm, hướng đến kiến tạo các công trình và hệ sinh thái có giá trị lâu dài cho cộng đồng.'
    ],
-   'image'   => 'home/about-citigrand4.png',
+   'image'   => 'home/about-citigrand6.png',
    'title-image' => 'title-bg-ab2.jpeg',
 ];
 $data = $sample;
 ?>
 
 <section class="section-abouts relative section-pd-t z-1 max-md:bg-white">
-   <!-- <span class="absolute bottom-full left-0 w-full translate-y-1/2">
+   <span class="absolute bottom-full left-0 w-full translate-y-1/2">
       <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/home/cloude-dc.png" class="block w-full" alt="">
-   </span> -->
+   </span>
    <span class="absolute inset-0 md:bg-linear-to-b from-[#ffffff] to-[#e0f6ff] z-[-1] "></span>
 
    <!-- Top: content group -->
@@ -65,11 +65,11 @@ $data = $sample;
                </span>
                <div class="max-w-180 mx-auto">
                   <p class="text-[16px] text-pri mb-4">
-                     <span class="font-bold">“Hơn 30 năm trước, chúng tôi bắt đầu từ một câu hỏi đơn giản:
-Một nơi để sống - cần bao nhiêu lâu để trở thành một nơi đáng sống?</span>
-<br>
-Hôm nay, câu trả lời ấy được hiện thực hóa qua từng đô thị, từng ngôi trường, từng công trình và từng cộng
-đồng mà KIẾN Á kiến tạo.”
+                     <span class="font-bold">Hơn 30 năm trước, chúng tôi bắt đầu từ một câu hỏi đơn giản:
+                        Một nơi để sống - cần bao nhiêu lâu để trở thành một nơi đáng sống?</span>
+                     <br>
+                     Hôm nay, câu trả lời ấy được hiện thực hóa qua từng đô thị, từng ngôi trường, <br class="max-md:hidden" /> từng công trình và từng cộng
+                     đồng mà KIẾN Á kiến tạo.
                   </p>
                </div>
             </div>

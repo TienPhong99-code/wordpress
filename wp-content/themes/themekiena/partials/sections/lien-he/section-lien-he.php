@@ -37,15 +37,6 @@ $socials = get_field('footer_socials', 'option') ?: [];
                                         <p class="text-white font-bold text-[16px]"><?php echo esc_html($phone); ?></p>
                                     </div>
                                 <?php endif; ?>
-                                <?php if ($email) : ?>
-                                    <div class="flex gap-2 items-center">
-                                        <div class="w-4 h-4 shrink-0">
-                                            <img src="<?php echo MONA_THEME_PATH_URI; ?>/assets/images/icons/ic-email.svg"
-                                                class="block w-full h-full object-contain" alt="">
-                                        </div>
-                                        <p class="text-white font-bold text-[16px]"><?php echo esc_html($email); ?></p>
-                                    </div>
-                                <?php endif; ?>
                                 <?php if ($address) : ?>
                                     <div class="flex gap-2 items-start">
                                         <div class="w-4 h-4 shrink-0 mt-1">

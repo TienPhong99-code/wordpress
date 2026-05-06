@@ -25,7 +25,7 @@ if (empty($projects) && !in_array($term_slug, ['bat-dong-san', 'xay-dung'], true
 if (in_array($term_slug, ['giao-duc', 'dich-vu'], true)) :
 ?>
 
-    <section class="sec-du-an-category-projects bg-[#f4f5f8] mb-px">
+    <section class="sec-du-an-category-projects bg-[#f4f5f8]">
         <div class="relative">
             <?php
             $icons_base = get_template_directory_uri() . '/assets/images/icons/';
@@ -46,13 +46,13 @@ if (in_array($term_slug, ['giao-duc', 'dich-vu'], true)) :
                             <div class="relative flex gap-4 md:gap-10 overflow-hidden max-md:flex-col">
                                 <!-- Text column -->
                                 <div class="shrink-0 w-lg max-md:w-full py-4 justify-center <?php echo esc_attr($text_pad); ?> flex flex-col gap-4">
-                                    <h3 class="text-[36px] max-xl:text-[28px] max-md:text-[24px] font-bold text-pri leading-normal tracking-[-0.04em]">
+                                    <h3 class="text-[36px] max-xl:text-[28px] max-md:text-[20px] font-bold text-pri leading-normal tracking-[-0.04em]">
                                         <?php echo esc_html($project->post_title); ?>
                                     </h3>
                                     <?php if ($description) : ?>
-                                        <p class="text-[16px] max-md:text-[14px] text-pri">
-                                            <?php echo nl2br(esc_html($description)); ?>
-                                        </p>
+                                        <div class="text-[16px] max-md:text-[14px] text-pri wysiwyg-content">
+                                            <?php echo wp_kses_post($description); ?>
+                                        </div>
                                     <?php endif; ?>
                                     <?php if ($location || $area || $scale) : ?>
                                         <div class="flex flex-col gap-1">
@@ -199,8 +199,8 @@ elseif ($term_slug === 'xay-dung') :
                             <div class="relative flex gap-4 md:gap-10 overflow-hidden max-md:flex-col">
 
                                 <!-- Text column -->
-                                <div class="shrink-0 w-lg max-md:w-full py-10 max-md:py-6 justify-center <?php echo esc_attr($text_pad); ?> flex flex-col gap-5">
-                                    <h3 class="text-[36px] max-xl:text-[28px] max-md:text-[24px] font-bold text-pri leading-normal tracking-[-0.04em]">
+                                <div class="shrink-0 w-136 max-md:w-full py-10 max-md:py-6 justify-center <?php echo esc_attr($text_pad); ?> flex flex-col gap-5">
+                                    <h3 class="text-[32px] max-xl:text-[28px] max-md:text-[24px] font-bold text-pri leading-normal tracking-[-0.04em]">
                                         <?php echo esc_html($tab['title']); ?>
                                     </h3>
                                     <?php if (!empty($tab['items'])) : ?>
@@ -340,6 +340,7 @@ elseif ($term_slug === 'bat-dong-san') :
                                                    transition-colors duration-200
                                                    <?php echo $is_active ? ($swiper_index % 2 !== 0 ? 'bg-white text-pri' : 'bg-pri text-white') : ''; ?>"
                                                             data-index="<?php echo $ii; ?>"
+                                                            data-item-slug="<?php echo esc_attr(sanitize_title($item['name'])); ?>"
                                                             data-image="<?php echo esc_attr($item['image_url']); ?>"
                                                             data-name="<?php echo esc_attr($item['name']); ?>"
                                                             data-description="<?php echo esc_attr($item['description']); ?>"

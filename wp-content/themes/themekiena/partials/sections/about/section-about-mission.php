@@ -43,7 +43,7 @@ $items = [
             Thông điệp <span>thương hiệu</span>
         </h2>
     </div>
-    <div class="relative h-200 max-xl:h-162.5 max-md:h-auto overflow-hidden">
+    <div class="relative h-200 max-xl:h-162.5 max-md:h-175 overflow-hidden">
         <?php foreach ($items as $i => $item) : ?>
             <div class="mission-bg absolute inset-0 transition-opacity duration-700 ease-in-out <?= $i === 0 ? 'opacity-100' : 'opacity-0' ?>" data-index="<?= $i ?>">
                 <img
@@ -56,15 +56,15 @@ $items = [
 
         <div class="absolute inset-0 bg-[#1a1a1a]/40 z-1 pointer-events-none"></div>
 
-        <div class="relative z-2 flex h-full max-md:flex-col">
+        <div class="relative z-2 flex justify-center h-full max-md:flex-col">
             <?php foreach ($items as $i => $item) : ?>
                 <div
-                    class="mission-col flex-1 flex flex-col justify-end p-12 max-xl:p-6 max-md:p-5 relative<?= $i < count($items) - 1 ? ' border-r border-white/20 max-md:border-r-0 max-md:border-b' : '' ?>"
+                    class="mission-col flex-1 flex flex-col h-full justify-center p-12 max-xl:p-6 max-md:p-5 relative<?= $i < count($items) - 1 ? ' border-r border-white/20 max-md:border-r-0 max-md:border-b' : '' ?>"
                     data-index="<?= $i ?>">
 
-                    <div class="mission-col-overlay absolute inset-0 bg-[#1a1a1a]/40 pointer-events-none opacity-0"></div>
+                    <div class="mission-col-overlay absolute inset-0  bg-[#1a1a1a]/40 pointer-events-none opacity-0"></div>
 
-                    <div class="relative z-1 flex flex-col gap-3 items-center">
+                    <div class="relative z-1 flex flex-col gap-3 items-center ">
                         <div class="size-11 max-md:size-8">
                             <img
                                 src="<?= esc_url($item['icon']) ?>"

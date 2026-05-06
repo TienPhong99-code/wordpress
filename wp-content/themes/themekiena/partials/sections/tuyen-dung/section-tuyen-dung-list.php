@@ -35,7 +35,7 @@ if (! is_wp_error($terms)) {
 // ── Query jobs ──
 $args = [
     'post_type'      => 'tuyen_dung',
-    'posts_per_page' => 6,
+    'posts_per_page' => 8,
     'paged'          => $paged,
     'orderby'        => 'date',
     'order'          => $sort === 'oldest' ? 'ASC' : 'DESC',

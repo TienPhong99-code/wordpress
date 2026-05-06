@@ -28,12 +28,15 @@ $sample = [
       ['year' => '2021', 'image' => $_img('about/journey/img-2021-1.jpg'), 'items' => ['Vốn điều lệ: 3,000 tỷ đồng', 'Dự án ALILA BÃI ÔM (Phú Yên cũ)']],
       ['year' => '2024', 'image' => '',                                    'items' => ['Dự án Khu căn hộ cao cấp ARCADIA AT LAVILA']],
       ['year' => '2025', 'image' => $_img('about/journey/img-2025-1.jpg'), 'items' => ['Dự án Khu biệt thự biệt lập LAVILA ISLAND']],
+      ['year' => '2026', 'image' => $_img('about/journey/img-2026-1.jpg'), 'items' => ['Dự án Khu biệt thự biệt lập LAVILA ISLAND']],
    ],
 ];
 $group = get_field('section_journey') ?: [];
 
 $data = [
-   'milestones' => array_map(fn($m) => [
+   'title'           => $group['title'] ?? '',
+   'title_highlight' => $group['title_highlight'] ?? '',
+   'milestones'      => array_map(fn($m) => [
       'year'  => $m['year'] ?? '',
       'items' => array_column($m['items'] ?? [], 'content'),
       'image' => $m['image'] ? wp_get_attachment_image_url($m['image'], 'large') : '',
@@ -44,6 +47,8 @@ $data = [
 if (empty($data['milestones'])) {
    $data['milestones'] = $sample['milestones'];
 }
+if (empty($data['title']))           $data['title']           = $sample['title'];
+if (empty($data['title_highlight'])) $data['title_highlight'] = $sample['title_highlight'];
 
 $total       = count($data['milestones']);
 $highlighted = ['1994', '2001', '2016', '2018', '2021'];
@@ -57,10 +62,15 @@ $highlighted = ['1994', '2001', '2016', '2018', '2021'];
       <!-- Title -->
       <div class="container">
          <div class="pb-10 max-lg:pb-6">
-            <h2 class="title-main text-center">
-               Hành trình
-               <span>Phát triển</span>
-            </h2>
+            <div class="flex flex-col text-center">
+               <h2 class="title-main ">
+                  <?php echo esc_html($data['title']); ?>
+                  <span><?php echo esc_html($data['title_highlight']); ?></span>
+               </h2>
+               <p>
+                  Từ chỉ 18 nhân viên đầu tiên vào năm 1994, KIẾN Á đã đi qua một hành trình không ngừng mở rộng và phát triển.
+               </p>
+            </div>
          </div>
       </div>
 
@@ -91,15 +101,15 @@ $highlighted = ['1994', '2001', '2016', '2018', '2021'];
                            <div class="row min-h-120 max-lg:min-h-0 py-6 max-lg:py-4 max-md:flex-col max-md:gap-6">
 
                               <!-- Content col -->
-                              <div class="col col-5 md:mb-0! max-md:w-full!">
+                              <div class="col col-6 md:mb-0! max-md:w-full!">
                                  <div class="flex flex-col gap-3 b-content">
-                                    <p class="text-[64px] max-lg:text-[40px] max-md:text-[32px] font-extrabold text-sec uppercase leading-none">
-                                       <?php echo esc_html($m['year']); ?>:
+                                    <p class="text-[64px] max-lg:text-[40px] max-md:text-[24px] font-extrabold text-sec uppercase leading-none">
+                                       <?php echo esc_html($m['year']); ?>
                                     </p>
                                     <div class="flex flex-col gap-2">
                                        <?php foreach ($m['items'] as $item) : ?>
-                                          <div class="text-[28px] max-lg:text-[20px] max-md:text-[18px] font-bold text-pri">
-                                             <?php echo nl2br(wp_kses_post($item)); ?>
+                                          <div class="text-[18px] md:text-[22px] font-bold text-pri">
+                                             <?php echo wp_kses_post($item); ?>
                                           </div>
                                        <?php endforeach; ?>
                                     </div>
@@ -107,7 +117,7 @@ $highlighted = ['1994', '2001', '2016', '2018', '2021'];
                               </div>
 
                               <!-- Image col -->
-                              <div class="col col-7 md:mb-0! max-md:w-full!">
+                              <div class="col col-6 md:mb-0! max-md:w-full!">
                                  <div class="relative aspect-4/3 max-md:aspect-3/2">
 
                                     <?php if (!empty($m['image'])) : ?>
@@ -133,35 +143,53 @@ $highlighted = ['1994', '2001', '2016', '2018', '2021'];
 
       <!-- Timeline pagination — desktop -->
       <div class="w-full max-md:hidden mt-8">
-         <!-- <span class="bg-line-sm"></span> -->
          <div class="container">
-            <div class="journey-timeline">
-               <div class="flex justify-between items-end border-b border-[#cecfd2]">
-                  <?php foreach ($data['milestones'] as $i => $m) :
-                     $is_key = in_array($m['year'], $highlighted);
-                  ?>
-                     <button class="journey-tl-item flex flex-col items-center cursor-pointer group" data-index="<?php echo $i; ?>" aria-label="<?php echo esc_attr($m['year']); ?>">
+            <div class="journey-timeline<?php echo $total > 20 ? ' has-tl-nav' : ''; ?> relative">
 
-                        <?php if ($is_key) : ?>
-                           <!-- Icon phát triển cho mốc nổi bật -->
-                           <span class="journey-tl-icon text-[#cecfd2] transition-colors duration-300 mb-0.5">
-                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                 <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
-                                 <polyline points="17 6 23 6 23 12" />
-                              </svg>
-                           </span>
-                           <span class="journey-tl-year text-[20px] font-bold text-pri py-2 block transition-all duration-300 group-[.is-active]:text-sec">
-                              <?php echo esc_html($m['year']); ?>
-                           </span>
-                        <?php else : ?>
-                           <span class="journey-tl-year text-[16px] text-[#9e9e9e] py-2 pb-1.5 block transition-all duration-300 group-[.is-active]:text-sec group-[.is-active]:font-bold">
-                              <?php echo esc_html($m['year']); ?>
-                           </span>
-                        <?php endif; ?>
+               <?php if ($total > 20) : ?>
+                  <button class="journey-tl-nav-prev absolute right-full top-1/2 -translate-y-1/2 z-10 tts-btn w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition" aria-label="Trước">
+                     <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                        <path d="M5 8c0 .128.049.256.146.354l5 5a.5.5 0 0 0 .708-.708L6.207 8l4.647-4.646a.5.5 0 1 0-.708-.708l-5 5A.497.497 0 0 0 5 8Z" fill="currentColor" />
+                     </svg>
+                  </button>
+               <?php endif; ?>
 
-                     </button>
-                  <?php endforeach; ?>
+               <div class="journey-tl-inner overflow-hidden">
+                  <div class="flex items-end border-b border-[#cecfd2]<?php echo $total > 20 ? ' gap-0' : ' justify-between'; ?>">
+                     <?php foreach ($data['milestones'] as $i => $m) :
+                        $is_key = in_array($m['year'], $highlighted);
+                     ?>
+                        <button class="journey-tl-item flex flex-col items-center cursor-pointer group<?php echo $total > 20 ? ' shrink-0 px-3' : ''; ?>" data-index="<?php echo $i; ?>" aria-label="<?php echo esc_attr($m['year']); ?>">
+
+                           <?php if ($is_key) : ?>
+                              <span class="journey-tl-icon text-[#cecfd2] transition-colors duration-300 mb-0.5">
+                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                                    <polyline points="17 6 23 6 23 12" />
+                                 </svg>
+                              </span>
+                              <span class="journey-tl-year text-[20px] font-bold text-pri py-2 block transition-all duration-300 group-[.is-active]:text-sec">
+                                 <?php echo esc_html($m['year']); ?>
+                              </span>
+                           <?php else : ?>
+                              <span class="journey-tl-year text-[16px] text-[#9e9e9e] py-2 pb-1.5 block transition-all duration-300 group-[.is-active]:text-sec group-[.is-active]:font-bold">
+                                 <?php echo esc_html($m['year']); ?>
+                              </span>
+                           <?php endif; ?>
+
+                        </button>
+                     <?php endforeach; ?>
+                  </div>
                </div>
+
+               <?php if ($total > 20) : ?>
+                  <button class="journey-tl-nav-next absolute left-full top-1/2 -translate-y-1/2 z-10 tts-btn w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition" aria-label="Tiếp theo">
+                     <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                        <path d="M11 8a.497.497 0 0 0-.146-.354l-5-5a.5.5 0 1 0-.708.708L9.793 8l-4.647 4.646a.5.5 0 0 0 .708.708l5-5A.497.497 0 0 0 11 8Z" fill="currentColor" />
+                     </svg>
+                  </button>
+               <?php endif; ?>
+
             </div>
          </div>
       </div>

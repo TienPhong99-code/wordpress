@@ -5,7 +5,7 @@ use Extended\ACF\Fields\Image;
 use Extended\ACF\Fields\Repeater;
 use Extended\ACF\Fields\Tab;
 use Extended\ACF\Fields\Text;
-use Extended\ACF\Fields\Textarea;
+use Extended\ACF\Fields\WYSIWYGEditor;
 use Extended\ACF\Fields\URL;
 use Extended\ACF\Location;
 
@@ -36,8 +36,10 @@ add_action('acf/init', function () {
                 ->helperText('Dòng thứ hai tiêu đề — màu đỏ. Ví dụ: cộng đồng')
                 ->default('cộng đồng'),
 
-            Textarea::make('Nội dung mô tả (HTML)', 'description')
-                ->rows(10),
+            WYSIWYGEditor::make('Nội dung mô tả', 'description')
+                ->tabs('all')
+                ->toolbar('full')
+                ->disableMediaUpload(),
 
             Image::make('Ảnh minh hoạ', 'image')
                 ->helperText('Ảnh full-width phía dưới mô tả. Kích thước đề xuất: 1728x741px.')

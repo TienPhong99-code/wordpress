@@ -37,7 +37,7 @@ add_action('acf/init', function () {
                                 ->fields([
                                     WYSIWYGEditor::make('Nội dung', 'content')
                                         ->disableMediaUpload()
-                                        ->tabs('text'),
+                                        ->tabs('visual'),
                                 ]),
                             Image::make('Hình ảnh', 'image')
                                 ->helperText('Kích thước đề xuất: 697×523px')
