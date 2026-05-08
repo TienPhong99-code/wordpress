@@ -4,6 +4,12 @@ defined('ABSPATH') || exit;
 $items = get_field('partners', get_option('page_on_front')) ?: [];
 
 if (empty($items)) return;
+
+usort($items, function ($a, $b) {
+   $a_order = isset($a['thu_tu']) && $a['thu_tu'] !== '' ? (int) $a['thu_tu'] : PHP_INT_MAX;
+   $b_order = isset($b['thu_tu']) && $b['thu_tu'] !== '' ? (int) $b['thu_tu'] : PHP_INT_MAX;
+   return $a_order - $b_order;
+});
 ?>
 
 <section class="section-partner relative section-pd">
@@ -16,12 +22,10 @@ if (empty($items)) return;
             Đối tác <span>chiến lược</span>
          </h2>
          <p class="mt-2">Đồng hành cùng chúng tôi là những đối tác cùng chia sẻ một
-            tiêu chuẩn về chất lượng, minh bạch và tầm nhìn dài hạn.</p>
+            tiêu chuẩn về chất lượng, minh bạch và tầm nhìn dài hạn</p>
       </div>
-
-
-
    </div>
+
    <div class="max-w-375 mx-auto px-4">
       <!-- Partner slider -->
       <div class="slideSw mix-blend-darken">

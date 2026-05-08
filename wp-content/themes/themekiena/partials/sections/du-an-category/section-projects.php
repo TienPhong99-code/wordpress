@@ -271,6 +271,7 @@ elseif ($term_slug === 'bat-dong-san') :
                         'location'    => $row['location'] ?? '',
                         'area'        => $row['area'] ?? '',
                         'scale'       => $row['scale'] ?? '',
+                        'status'      => $row['status'] ?? '',
                     ];
                 }
                 $groups[] = ['title' => $slide_row['title'] ?? '', 'items' => $items];
@@ -324,11 +325,11 @@ elseif ($term_slug === 'bat-dong-san') :
                                         <div class="relative flex gap-10 overflow-hidden max-lg:flex-col max-md:gap-0! ">
 
                                             <!-- LEFT COLUMN -->
-                                            <div class="bds-slide-left py-10 shrink-0 w-120 max-lg:w-full justify-center right flex flex-col gap-4 <?php echo ($swiper_index % 2 !== 0) ? 'text-white' : ''; ?>">
+                                            <div class="bds-slide-left py-10 shrink-0 w-132 max-lg:w-full justify-center right flex flex-col gap-4 <?php echo ($swiper_index % 2 !== 0) ? 'text-white' : ''; ?>">
 
                                                 <h3 class="font-bold text-[36px] max-xl:text-[28px] max-md:text-[22px]
                                            <?php echo ($swiper_index % 2 !== 0) ? 'text-white' : 'text-pri'; ?> tracking-[-0.04em] leading-normal w-[86%]">
-                                                    <?php echo esc_html($group['title']); ?>
+                                                    <?php echo wp_kses_post($group['title']); ?>
                                                 </h3>
 
                                                 <div class="flex flex-col gap-0.5 overflow-y-auto flex-1 pr-1 max-xl:max-h-60">
@@ -346,7 +347,8 @@ elseif ($term_slug === 'bat-dong-san') :
                                                             data-description="<?php echo esc_attr($item['description']); ?>"
                                                             data-location="<?php echo esc_attr($item['location']); ?>"
                                                             data-area="<?php echo esc_attr($item['area']); ?>"
-                                                            data-scale="<?php echo esc_attr($item['scale']); ?>">
+                                                            data-scale="<?php echo esc_attr($item['scale']); ?>"
+                                                            data-status="<?php echo esc_attr($item['status']); ?>">
                                                             <span class="text-[16px] max-md:text-[14px] tracking-[-0.04em] leading-normal
                                                          <?php echo $is_active ? 'font-bold' : 'font-normal'; ?>">
                                                                 <?php echo esc_html($item['name']); ?>
@@ -390,8 +392,22 @@ elseif ($term_slug === 'bat-dong-san') :
                                                                         <span class="font-bold"><?php echo esc_html($meta['label']); ?>:</span>
                                                                         <span class="js-bds-meta-value"><?php echo esc_html($val); ?></span>
                                                                     </p>
+
                                                                 </div>
                                                             <?php endforeach; ?>
+                                                            <?php
+                                                            $status = $first['status'] ?? '';
+                                                            $status_colors = [
+                                                                'Đã bàn giao'     => '#22c55e',
+                                                                'Sắp ra mắt'      => '#f59e0b',
+                                                                'Đang phát triển' => '#3b82f6',
+                                                            ];
+                                                            $status_bg = $status_colors[$status] ?? '#6b7280';
+                                                            ?>
+                                                            <span class="js-bds-status mt-1 inline-flex items-center px-3 py-1 rounded-full text-white text-[12px] font-semibold w-fit"
+                                                                style="background-color:<?php echo esc_attr($status_bg); ?>;<?php echo !$status ? 'display:none' : ''; ?>">
+                                                                <?php echo esc_html($status); ?>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                     <div class="aspect-1024/738 relative overflow-hidden">

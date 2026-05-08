@@ -19,7 +19,7 @@ if (empty($items)) return;
                   kiến tạo giá trị bền vững </span> và góp phần thúc đẩy sự <span class="c-second font-bold">phát triển</span> của các khu <span class="c-second font-bold">đô thị</span> hiện đại.</p>
          </div> -->
          <p class="mt-2">Mỗi dự án không chỉ là một công trình, mà là một bước tiến
-            trong hành trình định hình chuẩn mực sống mới.</p>
+            trong hành trình định hình chuẩn mực sống mới</p>
       </div>
    </div>
 
@@ -64,7 +64,7 @@ if (empty($items)) return;
                         <div class="relative">
 
                            <!-- Background image -->
-                           <div class="parallax-img-wrap overflow-hidden block min-h-120 max-xl:min-h-80 max-md:h-70 max-md:min-h-unset">
+                           <div class="overflow-hidden block min-h-120 max-xl:min-h-80 max-md:h-70 max-md:min-h-unset">
                               <?php echo mona_get_image_by_id($item['image'], 'full', false, [
                                  'class' => 'block w-full h-full object-cover',
                               ]); ?>

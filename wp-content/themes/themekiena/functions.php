@@ -29,3 +29,8 @@ define('MONA_POSTS_PER_PAGE', get_option('posts_per_page', 6));
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/inc/init.php';
+
+// Remove hardcoded inline width from wp-caption wrappers
+add_filter('the_content', function (string $content): string {
+	return preg_replace('/(<div[^>]+class="[^"]*wp-caption[^"]*")[^>]*style="[^"]*width:\s*\d+px[^"]*"/i', '$1', $content) ?? $content;
+});

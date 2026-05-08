@@ -6,6 +6,7 @@ use Extended\ACF\Fields\Repeater;
 use Extended\ACF\Fields\Tab;
 use Extended\ACF\Fields\Text;
 use Extended\ACF\Fields\WYSIWYGEditor;
+use Extended\ACF\Fields\File;
 use Extended\ACF\Fields\URL;
 use Extended\ACF\Location;
 
@@ -95,9 +96,13 @@ add_action('acf/init', function () {
                     Text::make('Tiêu đề', 'video_item_title')
                         ->required(),
 
-                    URL::make('Link video', 'video_item_url')
-                        ->helperText('YouTube URL (https://www.youtube.com/watch?v=...) hoặc đường dẫn file .mp4')
-                        ->required(),
+                    URL::make('Link video (YouTube / URL)', 'video_item_url')
+                        ->helperText('YouTube URL hoặc đường dẫn file. Bỏ trống nếu dùng upload bên dưới.'),
+
+                    File::make('Hoặc upload file video (mp4, mov)', 'video_item_file')
+                        ->helperText('Upload từ thư viện WordPress. Ưu tiên cao hơn link nhập tay.')
+                        ->acceptedFileTypes(['mp4', 'mov'])
+                        ->format('url'),
 
                     Image::make('Ảnh thumbnail (tuỳ chọn)', 'video_item_thumb')
                         ->helperText('Để trống → tự lấy thumbnail YouTube. Kích thước đề xuất: 800x450px (16:9).')

@@ -142,6 +142,15 @@ iframe {
 .hd-home:not(.hd-sticky) .hd-logo {
   filter: brightness(0) invert(1);
 }
+.hd-home .hd-logo {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+@media (max-width: 768px) {
+  .hd-home .hd-logo {
+    opacity: 1;
+  }
+}
 /* Mobile nav drawer */
 .hd-nav {
   position: fixed;
@@ -187,6 +196,114 @@ iframe {
 .hd-home:not(.hd-sticky) .hd-lang .lang-active {
   color: #fff;
 }
+
+/* ── Desktop dropdown ── */
+@media (min-width: 1201px) {
+  .menu-item.dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+.dd-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--color-pri);
+  transition: transform 0.25s;
+  pointer-events: none;
+}
+.hd.hd-home:not(.hd-sticky) .dd-arrow {
+  color: #fff;
+}
+.menu-item.dropdown:hover > .dd-arrow {
+  transform: rotate(180deg);
+}
+.menu-item.dropdown > .child.js-child0 {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  background: #fff;
+  min-width: 200px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  padding: 8px 0;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.25s,
+    visibility 0.25s,
+    transform 0.25s;
+  z-index: 50;
+  list-style: none;
+}
+.menu-item.dropdown:hover > .child.js-child0 {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.child.js-child0 > .menu-item > .menu-link {
+  display: block;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-pri);
+  white-space: nowrap;
+  transition:
+    color 0.2s,
+    background 0.2s;
+  text-transform: uppercase;
+}
+.child.js-child0 > .menu-item > .menu-link:hover {
+  color: var(--color-sec);
+  background: #f5f7ff;
+}
+
+/* ── Mobile dropdown ── */
+#hd-nav .dd-header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+#hd-nav .dd-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  flex-shrink: 0;
+  color: var(--color-pri);
+  cursor: pointer;
+  transition: transform 0.25s;
+  background: none;
+  border: none;
+  padding: 0;
+}
+#hd-nav .dropdown.is-open > .dd-header > .dd-toggle {
+  transform: rotate(180deg);
+}
+#hd-nav .menu-list .menu-list {
+  display: none;
+  padding-left: 16px;
+  list-style: none;
+}
+#hd-nav .dropdown.is-open > .menu-list {
+  display: block;
+}
+#hd-nav .menu-list .menu-list .menu-link {
+  display: block;
+  padding: 10px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-pri);
+  text-transform: uppercase;
+  border-bottom: 1px solid #f0f0f0;
+  transition: color 0.2s;
+}
+#hd-nav .menu-list .menu-list .menu-link:hover {
+  color: var(--color-sec);
+}
+
 .section-pd {
   padding: var(--pd-sc) 0;
 }
@@ -1115,8 +1232,8 @@ div#ez-toc-container ul li:not(:last-child) {
 }
 .mission-col-desc {
   transition:
-    max-height 0.8s ease,
-    opacity 0.8s ease;
+    max-height 0.25s ease,
+    opacity 0.25s ease;
 }
 .section-about-awards:before {
   content: "";
@@ -1226,18 +1343,8 @@ div#ez-toc-container ul li:not(:last-child) {
   }
 }
 .banner-hero-title {
-  font-size: 60px;
-  background: linear-gradient(
-    90deg,
-    #d8b166 1%,
-    #e7c879 13%,
-    #f3da88 34%,
-    #f8eac1 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
+  font-size: 2.6vw;
+  color: #fff;
 }
 
 @media (max-width: 767px) {
@@ -1253,7 +1360,7 @@ div#ez-toc-container ul li:not(:last-child) {
     margin: 0;
   }
   .banner-hero-title {
-    font-size: 8vw;
+    font-size: 5vw;
   }
   .item-prj br {
     display: none;
@@ -1324,10 +1431,6 @@ div#ez-toc-container ul li:not(:last-child) {
 /* Each split char keeps its own gradient */
 .banner-char {
   display: inline-block;
-  background: linear-gradient(90deg, #d8b166 0%, #f8eac1 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
   padding: 0 2px;
 }
 
@@ -1441,4 +1544,19 @@ div#ez-toc-container ul li:not(:last-child) {
   height: 100%;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #666666 35%);
   z-index: 1;
+}
+
+/* mona-content: responsive images in post content */
+.mona-content img {
+  max-width: 100%;
+  height: auto;
+}
+.mona-content .wp-caption {
+  max-width: 100% !important;
+  width: auto !important;
+}
+.mona-content .wp-caption img {
+  max-width: 100%;
+  height: auto;
+  width: auto;
 }

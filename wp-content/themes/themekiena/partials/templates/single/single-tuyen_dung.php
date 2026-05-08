@@ -232,7 +232,7 @@ $tuyen_dung_page = get_page_by_path('tuyen-dung');
             </div>
 
             <!-- ── SIDEBAR: Có thể bạn quan tâm ── -->
-            <div class="w-[384px] shrink-0 max-xl:w-full">
+            <!-- <div class="w-[384px] shrink-0 max-xl:w-full">
                 <div class="sticky top-24 flex flex-col gap-4 sidebar-td">
 
                     <h2 class="text-[20px] font-bold text-pri">Có thể bạn quan tâm</h2>
@@ -248,7 +248,7 @@ $tuyen_dung_page = get_page_by_path('tuyen-dung');
                     <?php endforeach; ?>
 
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>

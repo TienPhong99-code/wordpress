@@ -116,7 +116,7 @@ $tin_tuc_page = get_page_by_path('tin-tuc');
                 </div>
 
                 <!-- Tác giả -->
-                <div class="flex items-center gap-3 mt-8 pt-6 border-t border-[#e8e8e8]">
+                <!-- <div class="flex items-center gap-3 mt-8 pt-6 border-t border-[#e8e8e8]">
                     <?php $author_avatar = get_avatar_url(get_the_author_meta('ID'), ['size' => 48]); ?>
                     <?php if ($author_avatar) : ?>
                         <img src="<?php echo esc_url($author_avatar); ?>"
@@ -128,7 +128,7 @@ $tin_tuc_page = get_page_by_path('tin-tuc');
                             <?php echo esc_html(get_the_author()); ?>
                         </p>
                     </div>
-                </div>
+                </div> -->
 
             </div>
 

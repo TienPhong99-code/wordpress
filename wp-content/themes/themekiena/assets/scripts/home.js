@@ -6,6 +6,7 @@ $(document).ready(function () {
    initProjectParallax();
    initPopupDuAn();
    initScrollDown();
+   initLogoFlyToHeader();
 });
 
 function initScrollDown() {
@@ -22,9 +23,18 @@ function initPopupDuAn() {
    var STORAGE_KEY = 'kiena_popup_du_an_seen';
    if (sessionStorage.getItem(STORAGE_KEY)) return;
    sessionStorage.setItem(STORAGE_KEY, '1');
-   setTimeout(function () {
-      if (window.modalOpen) window.modalOpen('popup-du-an');
-   }, 800);
+
+   function showPopup() {
+      setTimeout(function () {
+         if (window.modalOpen) window.modalOpen('popup-du-an');
+      }, 400);
+   }
+
+   if (document.querySelector('.section-banner')) {
+      document.addEventListener('bannerIntroComplete', showPopup, { once: true });
+   } else {
+      showPopup();
+   }
 }
 
 function initProjectParallax() {
@@ -72,7 +82,6 @@ function initAboutsTimeline() {
       } catch (e) {}
    });
    gsap.set(aboutWords, { opacity: 0, y: 20 });
-   gsap.set('.about-img-bot', { y: 80, opacity: 0 });
 
    const tl = gsap.timeline({ paused: true });
 
@@ -103,17 +112,33 @@ function initAboutsTimeline() {
       ease: 'power2.out',
    }, '-=0.3');
 
-   tl.to('.about-img-bot', {
-      y: 0,
-      opacity: 1,
-      duration: 1,
-      ease: 'power2.out',
-   }, '-=0.5');
 
    ScrollTrigger.create({
       trigger: abouts,
       start: 'top 80%',
       once: true,
       onEnter: function () { tl.play(); },
+   });
+}
+
+function initLogoFlyToHeader() {
+   var hdLogoEl = document.querySelector('.hd-logo');
+   var secAbouts = document.querySelector('.section-abouts');
+   var hdEl = document.querySelector('.hd');
+   if (!hdLogoEl || !secAbouts) return;
+
+   var hdH = hdEl ? hdEl.offsetHeight : 0;
+
+   ScrollTrigger.create({
+      trigger: secAbouts,
+      start:   'bottom top+=' + hdH,
+      once:    true,
+      onEnter: function () {
+         gsap.to(hdLogoEl, {
+            opacity: 1,
+            duration: 0.5,
+            ease: 'power2.out',
+         });
+      },
    });
 }

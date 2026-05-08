@@ -8,6 +8,7 @@ use Extended\ACF\Fields\Taxonomy;
 use Extended\ACF\Fields\Tab;
 use Extended\ACF\Fields\Text;
 use Extended\ACF\Fields\Textarea;
+use Extended\ACF\Fields\Number;
 use Extended\ACF\Fields\TrueFalse;
 use Extended\ACF\Location;
 
@@ -74,6 +75,9 @@ add_action('acf/init', function () {
                         ->format('id')
                         ->required(),
                     Text::make('Tên đối tác', 'name'),
+                    Number::make('Thứ tự hiển thị', 'thu_tu')
+                        ->helperText('Số nhỏ hơn xuất hiện trước. Để trống = xuất hiện sau cùng.')
+                        ->min(1),
                 ]),
 
             Tab::make('Dự án')

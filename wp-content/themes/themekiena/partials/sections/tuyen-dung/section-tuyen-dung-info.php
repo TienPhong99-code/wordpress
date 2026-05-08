@@ -1,7 +1,6 @@
 <?php
 $sample = [
     'title'      => 'Môi trường làm việc',
-    'title_span' => 'tại KIẾN Á',
     'items'      => [
         [
             'title' => 'Lộ trình phát triển rõ ràng',
@@ -30,10 +29,10 @@ $data = $sample;
         <div class=" relative mb-8 text-center">
             <h2 class="title-main ">
                 <?php echo esc_html($data['title']); ?><br>
-                <span><?php echo esc_html($data['title_span']); ?></span>
+
             </h2>
             <p class="mt-4">
-                Tại KIẾN Á, chúng tôi tìm kiếm những người muốn cùng đồng hành xây dựng một hành trình dài hạn.
+                Tại KIẾN Á, chúng tôi tìm kiếm những người muốn cùng đồng hành xây dựng một hành trình dài hạn
             </p>
         </div>
 

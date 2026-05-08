@@ -19,7 +19,7 @@ $lang_en = '#';
    <div class="h-full flex items-center justify-between px-8 max-xl:px-6 max-md:px-4 ">
 
       <!-- Logo -->
-      <a href="<?php echo esc_url(home_url('/')); ?>" class="block shrink-0 hd-logo">
+      <a href="<?php echo esc_url(home_url('/')); ?>" class="block relative z-1 shrink-0 hd-logo">
          <?php
          $custom_logo_id = get_theme_mod('custom_logo');
          $logo_url = $custom_logo_id
@@ -31,29 +31,32 @@ $lang_en = '#';
       </a>
 
       <!-- Right: Nav + Language (desktop) -->
-      <div class="flex items-center gap-6 max-xl:hidden">
+      <div class="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 max-xl:hidden">
+         <div class="flex justify-center items-center gap-6 ">
 
-         <!-- Nav items -->
-         <?php wp_nav_menu([
-            'theme_location' => 'header-menu-pc',
-            'container'      => 'nav',
-            'container_class' => 'flex items-center gap-6',
-            'menu_class'     => 'menu-list flex items-center gap-6',
-            'link_class'     => 'hd-nav-link',
-            'depth'          => 1,
-            'fallback_cb'    => false,
-         ]); ?>
+            <!-- Nav items -->
+            <?php wp_nav_menu([
+               'theme_location' => 'header-menu-pc',
+               'container'      => 'nav',
+               'container_class' => 'flex items-center gap-6',
+               'menu_class'     => 'menu-list flex items-center gap-6',
+               'link_class'     => 'hd-nav-link',
+               'depth'          => 2,
+               'fallback_cb'    => false,
+               'walker'         => new Mona_Walker_Nav_Menu_Desktop(),
+            ]); ?>
 
-         <!-- Divider -->
-         <span class="block w-px h-6 bg-[#d9d9d9] shrink-0"></span>
+            <!-- Divider -->
+            <span class="block w-px h-6 bg-[#d9d9d9] shrink-0"></span>
 
-         <!-- Language switcher -->
-         <div class="flex items-center gap-2 hd-lang">
-            <a href="<?php echo esc_url($lang_vi); ?>" class="font-bold text-[14px] uppercase lang-active">VI</a>
-            <span class="block w-px h-4 bg-[#d9d9d9]"></span>
-            <a href="<?php echo esc_url($lang_en); ?>" class="font-bold text-[14px] uppercase">EN</a>
+            <!-- Language switcher -->
+            <div class="flex items-center gap-2 hd-lang">
+               <a href="<?php echo esc_url($lang_vi); ?>" class="font-bold text-[14px] uppercase lang-active">VI</a>
+               <span class="block w-px h-4 bg-[#d9d9d9]"></span>
+               <a href="<?php echo esc_url($lang_en); ?>" class="font-bold text-[14px] uppercase">EN</a>
+            </div>
+
          </div>
-
       </div>
 
       <!-- Hamburger (mobile) -->
@@ -94,8 +97,9 @@ $lang_en = '#';
       'container_class' => 'flex flex-col p-2',
       'menu_class'     => 'menu-list flex flex-col',
       'link_class'     => 'hd-nav-item font-bold text-[14px] block uppercase py-3 border-b border-[#f0f0f0] text-pri',
-      'depth'          => 1,
+      'depth'          => 2,
       'fallback_cb'    => false,
+      'walker'         => new Mona_Walker_Nav_Menu_Mobile(),
    ]); ?>
 
    <!-- Language switcher -->

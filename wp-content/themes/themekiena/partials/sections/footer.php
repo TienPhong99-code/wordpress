@@ -24,19 +24,11 @@ $data = [
          <div class="col col-5 max-md:w-full!">
             <div class="flex flex-col gap-4">
                <a href="<?php echo esc_url(home_url('/')); ?>">
-                  <div class="w-57.5 max-md:w-44">
+                  <div class="w-95 max-md:w-44">
                      <?php echo mona_get_image_by_id($data['logo'], 'full', false, ['class' => 'block w-full', 'alt' => esc_attr($data['name'])]); ?>
                   </div>
                </a>
-               <div class="flex flex-col gap-1 max-w-110">
-                  <p class="font-bold text-[20px]  text-white tracking-[-0.04em] leading-normal">
-                     <?php echo esc_html($data['name']); ?>
-                  </p>
-                  <!-- <p class="text-[14px] max-md:text-[13px] text-white">
-                     <span class="font-bold">Mã số thuế:</span>
-                     <span class="font-normal"> <?php echo esc_html($data['tax']); ?></span>
-                  </p> -->
-               </div>
+
             </div>
          </div>
 

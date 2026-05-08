@@ -145,8 +145,11 @@ add_action('acf/init', function () {
                         ->helperText('Add Row ở đây = thêm 1 slide trong Swiper này.')
                         ->layout('block')
                         ->fields([
-                            Text::make('Tiêu đề nhóm', 'title')
-                                ->helperText('Hiển thị ở cột trái. Ví dụ: Khu đô thị Cát Lái')
+                            WYSIWYGEditor::make('Tiêu đề nhóm', 'title')
+                                ->helperText('Hiển thị ở cột trái. Dùng màu chữ để highlight từ khoá.')
+                                ->toolbar(['bold', 'italic', 'forecolor', 'removeformat', '|', 'undo', 'redo'])
+                                ->tabs('visual')
+                                ->disableMediaUpload()
                                 ->required(),
                             Repeater::make('Danh sách dự án', 'items')
                                 ->helperText('Add Row ở đây = thêm 1 dự án con trong slide.')
@@ -165,6 +168,15 @@ add_action('acf/init', function () {
                                         ->helperText('Ví dụ: 1,55 ha'),
                                     Text::make('Quy mô', 'scale')
                                         ->helperText('Ví dụ: 751 căn hộ'),
+                                    Select::make('Trạng thái dự án', 'status')
+                                        ->choices([
+                                            'Đã bàn giao'     => 'Đã bàn giao',
+                                            'Sắp bàn giao'    => 'Sắp bàn giao',
+                                            'Sắp ra mắt'      => 'Sắp ra mắt',
+                                            'Đang phát triển' => 'Đang phát triển',
+                                        ])
+                                        ->nullable()
+                                        ->helperText('Hiển thị tag màu dưới phần Quy mô. Để trống nếu không cần.'),
                                 ]),
                         ]),
                 ]),

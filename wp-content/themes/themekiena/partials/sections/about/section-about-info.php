@@ -67,16 +67,16 @@ $data  = [
                <!-- Paragraphs -->
                <div class="text-[16px] text-pri mona-content">
                   <p>
-                     Năm 1994, <span class="c-second font-semibold">Hành trình</span> bắt đầu từ một doanh nghiệp dịch vụ với quy mô khiêm tốn. Nhưng mục tiêu của chúng tôi không dừng lại ở việc “xây công trình”, mà là kiến tạo những giá trị có thể đi cùng thời gian.
+                     Năm 1994, <span class="c-second font-semibold">hành trình</span> bắt đầu từ một doanh nghiệp thương mại dịch vụ, với trọng tâm là phân phối gạch men và két sắt. Nhưng mục tiêu của chúng tôi không dừng lại ở việc “xây công trình”, mà là kiến tạo những giá trị có thể đi cùng thời gian.
                   </p>
                   <p>
-                     Hành trình ấy dần mở rộng, không theo cách phát triển đơn thuần về quy mô, <br class="max-md:hidden" /> mà bằng việc từng bước xác lập những <span class="c-second font-semibold">Nền móng</span> vững chắc. Từ bất động sản đến giáo dục, từ xây dựng đến dịch vụ - mỗi lĩnh vực không tách rời, mà cùng tạo nên một hệ sinh thái phát triển đồng bộ và bền vững.
+                     Hành trình ấy dần mở rộng, không theo cách phát triển đơn thuần về quy mô, <br class="max-md:hidden" /> mà bằng việc từng bước xác lập những <span class="c-second font-semibold">nền móng</span> vững chắc. Từ bất động sản đến giáo dục, từ xây dựng đến dịch vụ - mỗi lĩnh vực không tách rời, mà cùng tạo nên một hệ sinh thái phát triển đồng bộ và bền vững.
                   </p>
                   <p>
-                     Và khi những nền móng đủ vững, giá trị không dừng lại ở từng công trình riêng lẻ. Chúng kết nối với nhau để hình thành nên những <span class="c-second font-semibold">Cộng đồng</span> - nơi con người <br class="max-md:hidden" /> có thể sống, phát triển và gắn bó dài lâu.
+                     Và khi những nền móng đủ vững, giá trị không dừng lại ở từng công trình riêng lẻ. Chúng kết nối với nhau để hình thành nên những <span class="c-second font-semibold">cộng đồng</span> - nơi con người <br class="max-md:hidden" /> có thể sống, phát triển và gắn bó dài lâu.
                   </p>
                   <p>
-                     Xuyên suốt toàn bộ hành trình đó là một hệ giá trị nhất quán: lấy con người <br class="max-md:hidden" /> làm trung tâm, lấy chất lượng làm nền tảng, và lấy <span class="c-second font-semibold">Phát triển</span> bền vững làm đích đến.
+                     Xuyên suốt toàn bộ hành trình đó là một hệ giá trị nhất quán: lấy con người <br class="max-md:hidden" /> làm trung tâm, lấy chất lượng làm nền tảng, và lấy <span class="c-second font-semibold">phát triển</span> bền vững làm đích đến.
                   </p>
                </div>
             </div>

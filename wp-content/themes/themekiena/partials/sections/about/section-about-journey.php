@@ -68,7 +68,7 @@ $highlighted = ['1994', '2001', '2016', '2018', '2021'];
                   <span><?php echo esc_html($data['title_highlight']); ?></span>
                </h2>
                <p>
-                  Từ chỉ 18 nhân viên đầu tiên vào năm 1994, KIẾN Á đã đi qua một hành trình không ngừng mở rộng và phát triển.
+                  Từ chỉ 18 nhân viên đầu tiên vào năm 1994, KIẾN Á đã đi qua một hành trình không ngừng mở rộng và phát triển
                </p>
             </div>
          </div>

@@ -41,12 +41,12 @@ if (empty($items)) return;
                   <path id="banner-logo-path" d="M238.226 96H155.393V73.1328H238.226V96ZM464.64 89.417L426.719 0.0195312H405.657C401.309 0.0195312 397.392 2.625 395.69 6.60156L357.749 95.9785H379.734C383.446 95.9785 386.81 93.7637 388.266 90.3398L412.589 33.0391L429.611 73.1328H402.827L412.527 96H460.291C463.675 96 465.972 92.5332 464.64 89.417ZM320.137 13.6797V59.0645L283.837 13.6797H263.923C259.657 13.6797 256.191 17.1445 256.191 21.4102V95.9785H283.837V50.5938L320.137 95.9785H340.05C344.316 95.9785 347.782 92.5137 347.782 88.248V13.6797H320.137ZM163.124 13.6797C158.858 13.6797 155.393 17.1445 155.393 21.4102V63.9863H219.912V45.6719H183.038V36.5254H238.226V13.6797H163.124ZM99.8146 0.0195312H63.2275L27.6454 35.5V0H7.73169C3.46594 0 0 3.46582 0 7.73145V95.9785H27.6454V60.5L63.2275 95.9785H99.8146L51.7018 47.9883L99.8351 0L99.8146 0.0195312ZM114.355 13.6797H137.448V95.9785H109.802V18.2324C109.802 15.7305 111.833 13.6797 114.355 13.6797Z" fill="url(#paint0_linear_395_2885)" />
                   <defs>
                      <linearGradient id="paint0_linear_395_2885" x1="1.37406" y1="48" x2="467.798" y2="48" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#E3C173" />
-                        <stop offset="0.09" stop-color="#E8C879" />
-                        <stop offset="0.3" stop-color="#F0D584" />
-                        <stop offset="0.5" stop-color="#F3DA88" />
-                        <stop offset="0.71" stop-color="#F4DE96" />
-                        <stop offset="1" stop-color="#F7E6B2" />
+                        <stop stop-color="#fff" />
+                        <stop offset="0.09" stop-color="#fff" />
+                        <stop offset="0.3" stop-color="#fff" />
+                        <stop offset="0.5" stop-color="#fff" />
+                        <stop offset="0.71" stop-color="#fff" />
+                        <stop offset="1" stop-color="#fff" />
                      </linearGradient>
                   </defs>
                </svg>
@@ -54,8 +54,8 @@ if (empty($items)) return;
          </div>
          <!-- Hero title overlay -->
          <div class="banner-hero-overlay absolute inset-0 z-5 flex items-center justify-center pointer-events-none">
-            <div class="text-center px-4">
-               <p class="banner-hero-title uppercase font-black">Kiến tạo từ tâm</p>
+            <div class="text-center ">
+               <p class="banner-hero-title uppercase font-medium">Hướng tới <br> <span class="font-black">Nhà kiến tạo môi trường sống</span> <br> hàng đầu Việt Nam</p>
             </div>
          </div>
 

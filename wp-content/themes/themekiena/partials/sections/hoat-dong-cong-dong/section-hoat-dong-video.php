@@ -54,7 +54,8 @@ function kiena_get_video_thumb(string $thumb, string $video): string
                 <div class="swiper-wrapper">
                     <?php foreach ($videos as $index => $item) :
                         $item_title = $item['video_item_title'] ?? '';
-                        $item_url   = $item['video_item_url']   ?? '';
+                        $item_file  = $item['video_item_file']  ?? '';
+                        $item_url   = $item_file ?: ($item['video_item_url'] ?? '');
                         $item_thumb = $item['video_item_thumb'] ?? '';
                         $thumb      = kiena_get_video_thumb($item_thumb, $item_url);
 

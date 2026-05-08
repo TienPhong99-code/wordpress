@@ -45,6 +45,11 @@ $(document).ready(function () {
       if (e.key === 'Escape') closeNav();
    });
 
+   // Mobile dropdown toggle — click icon only, link still navigates
+   $(document).on('click', '#hd-nav .dd-toggle', function () {
+      $(this).closest('.dropdown').toggleClass('is-open');
+   });
+
    // =============================================
    // Header sticky on scroll
    // =============================================
@@ -128,6 +133,14 @@ $(document).ready(function () {
             if (valEl) valEl.textContent = val;
             m.style.display = val ? '' : 'none';
          });
+         var statusEl = right.querySelector('.js-bds-status');
+         if (statusEl) {
+            var status = btn.dataset.status || '';
+            var statusColors = { 'Đã bàn giao': '#22c55e', 'Sắp bàn giao': '#16a34a', 'Sắp ra mắt': '#f59e0b', 'Đang phát triển': '#3b82f6' };
+            statusEl.textContent = status;
+            statusEl.style.backgroundColor = statusColors[status] || '#6b7280';
+            statusEl.style.display = status ? '' : 'none';
+         }
       }
 
       update();
@@ -285,15 +298,15 @@ function initMissionCardsAnim() {
          var desc    = col.querySelector('.mission-col-desc');
          var title   = col.querySelector('.mission-col-title');
 
-         if (bg) gsap.to(bg, { opacity: isActive ? 1 : 0, duration: 0.7, ease: 'power2.inOut' });
-         if (overlay) gsap.to(overlay, { opacity: isActive ? 1 : 0, duration: 0.5 });
-         if (title) gsap.to(title, { color: isActive ? '#f4de96' : '#ffffff', duration: 0.4 });
+         if (bg) gsap.to(bg, { opacity: isActive ? 1 : 0, duration: 0.35, ease: 'power2.inOut' });
+         if (overlay) gsap.to(overlay, { opacity: isActive ? 1 : 0, duration: 0.25 });
+         if (title) gsap.to(title, { color: isActive ? '#f4de96' : '#ffffff', duration: 0.2 });
 
          if (!isMobile && desc) {
             gsap.to(desc, {
                maxHeight: isActive ? 300 : 0,
                opacity:   isActive ? 1 : 0,
-               duration:  isActive ? 0.5 : 0.35,
+               duration:  isActive ? 0.25 : 0.18,
                ease:      isActive ? 'power2.out' : 'power2.in',
             });
          }

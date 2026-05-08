@@ -16,15 +16,15 @@ $items = [
         'bg'    => $tpl . '/assets/images/about/mission-bg-2.jpg',
         'desc'  => '
             <div class="text-center text-white text-[16px]">
-                <p class="font-semibold">Đối với Nhân viên:</p>
+                <p class="font-semibold">Đối với Nhân viên</p>
                 <p class="font-normal">Hòa hợp, chia sẻ, tạo điều kiện để phát huy sáng tạo <br/> và phát triển sự nghiệp</p>
             </div>
             <div class="text-center text-white text-[16px]">
-                <p class="font-semibold">Đối với đối tác, Cổ đông:</p>
+                <p class="font-semibold">Đối với Đối tác, Cổ đông</p>
                 <p class="font-normal">Chuyên nghiệp, tôn trọng - Tin tưởng, đồng hành</p>
             </div>
             <div class="text-center text-white text-[16px]">
-                <p class="font-semibold">Đối với Khách hàng:</p>
+                <p class="font-semibold">Đối với Khách hàng</p>
                 <p class="font-normal">Tạo sản phẩm có giá trị bền vững</p>
             </div>
         ',
@@ -32,7 +32,7 @@ $items = [
     [
         'icon'  => $tpl . '/assets/images/about/mission-icon-3.svg',
         'title' => 'Tầm nhìn',
-        'bg'    => $tpl . '/assets/images/about/mission-bg-3.jpg',
+        'bg'    => $tpl . '/assets/images/about/mission-bg-4.jpg',
         'desc'  => '<p class="text-[16px] font-semibold text-center text-white">Trở thành tập đoàn đẳng cấp quốc tế</p>',
     ],
 ];
@@ -45,7 +45,7 @@ $items = [
     </div>
     <div class="relative h-200 max-xl:h-162.5 max-md:h-175 overflow-hidden">
         <?php foreach ($items as $i => $item) : ?>
-            <div class="mission-bg absolute inset-0 transition-opacity duration-700 ease-in-out <?= $i === 0 ? 'opacity-100' : 'opacity-0' ?>" data-index="<?= $i ?>">
+            <div class="mission-bg absolute inset-0 transition-opacity duration-200 ease-in-out <?= $i === 0 ? 'opacity-100' : 'opacity-0' ?>" data-index="<?= $i ?>">
                 <img
                     src="<?= esc_url($item['bg']) ?>"
                     alt=""
@@ -59,7 +59,7 @@ $items = [
         <div class="relative z-2 flex justify-center h-full max-md:flex-col">
             <?php foreach ($items as $i => $item) : ?>
                 <div
-                    class="mission-col flex-1 flex flex-col h-full justify-center p-12 max-xl:p-6 max-md:p-5 relative<?= $i < count($items) - 1 ? ' border-r border-white/20 max-md:border-r-0 max-md:border-b' : '' ?>"
+                    class="mission-col flex-1 flex flex-col h-full justify-center p-6 max-xl:p-6 max-md:p-5 relative<?= $i < count($items) - 1 ? ' border-r border-white/20 max-md:border-r-0 max-md:border-b' : '' ?>"
                     data-index="<?= $i ?>">
 
                     <div class="mission-col-overlay absolute inset-0  bg-[#1a1a1a]/40 pointer-events-none opacity-0"></div>
