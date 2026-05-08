@@ -145,21 +145,6 @@ add_filter('script_loader_tag', function ($tag, $handle) {
    return $tag;
 }, 10, 2);
 
-// Tailwind CDN — load cùng tailwind.output.css
-add_action('wp_head', function () {
-   echo '<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>' . "\n";
-}, 1);
-
-// Tailwind @theme — khai báo inline để CDN nhận custom token (text-pri, text-sec, bg-pri...)
-add_action('wp_head', function () {
-   echo '<style type="text/tailwindcss">
-@theme {
-  --color-pri: #283377;
-  --color-sec: #ed1c24;
-}
-</style>' . "\n";
-}, 2);
-
 // Preconnect google font
 add_action('wp_head', function () {
 ?>
